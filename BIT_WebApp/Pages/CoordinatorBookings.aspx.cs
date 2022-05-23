@@ -31,8 +31,7 @@ namespace BIT_WebApp.Pages
                     gvBookings.DataBind();
 
 
-                    // WORK IN PROGRESS
-                    // Bind available contractor's to the drop down list in order for coordinator to assign the job
+                    // TODO bind available contractor's to the drop down list in order for coordinator to assign the job
                     //int rowIndex = Convert.ToInt32(e.CommandArgument);
                     //GridViewRow row = gvBookings.Rows[rowIndex];
                 }

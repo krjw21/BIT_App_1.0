@@ -14,10 +14,12 @@ namespace BIT_DesktopApp.ViewModels
         private ObservableCollection<ServiceRequest> _allServiceRequests;
         private ObservableCollection<ServiceRequest> _completedServiceRequests;
         private ObservableCollection<ServiceRequest> _unassignedServiceRequests;
+        private ObservableCollection<ServiceRequest> _assignedServiceRequests;
         private ObservableCollection<JobState> _jobStates;
         private ObservableCollection<PaymentState> _paymentStates;
         private ObservableCollection<PriorityState> _priorityStates;
         private ObservableCollection<Skill> _skills;
+        private ObservableCollection<Contractor> _availableContractors;
         private ServiceRequest _selectedServiceRequest;
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
@@ -56,6 +58,15 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("UnassignedServiceRequests");
             }
         }
+        public ObservableCollection<ServiceRequest> AssignedServiceRequests
+        {
+            get { return _assignedServiceRequests; }
+            set
+            {
+                _assignedServiceRequests = value;
+                OnPropertyChanged("AssignedServiceRequests");
+            }
+        }
         public ObservableCollection <JobState> JobStates
         {
             get { return _jobStates; }
@@ -92,6 +103,15 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("Skills");
             }
         }
+        public ObservableCollection<Contractor> AvailableContractors
+        {
+            get { return _availableContractors; }
+            set
+            {
+                _availableContractors = value;
+                OnPropertyChanged("AvailableContractors");
+            }
+        }
         public ServiceRequest SelectedServiceRequest
         {
             get { return _selectedServiceRequest; }
@@ -99,8 +119,14 @@ namespace BIT_DesktopApp.ViewModels
             { 
                 _selectedServiceRequest = value;
                 OnPropertyChanged("SelectedServiceRequest");
+
+                // TODO list of contractors is not appearing in the combobox
+                Contractors availableContractors = new Contractors(SelectedServiceRequest.SkillCategory, SelectedServiceRequest.Suburb, SelectedServiceRequest.DateCreated);
+                this.AvailableContractors = new ObservableCollection<Contractor>(availableContractors);
             }
         }
+        public string UnassignedTabHeader { get; set; }
+        public string CompletedTabHeader { get; set; }
 
 
         public ServiceRequestViewModel()
@@ -110,9 +136,16 @@ namespace BIT_DesktopApp.ViewModels
 
             ServiceRequests completedServiceRequests = new ServiceRequests("Completed");
             this.CompletedServiceRequests = new ObservableCollection<ServiceRequest>(completedServiceRequests);
+            int completedCount = CompletedServiceRequests.Count;
+            CompletedTabHeader = $"Completed *{completedCount}";
 
             ServiceRequests unassignedServiceRequests = new ServiceRequests("Requested", "Rejected");
             this.UnassignedServiceRequests = new ObservableCollection<ServiceRequest>(unassignedServiceRequests);
+            int unassignedCount = UnassignedServiceRequests.Count;
+            UnassignedTabHeader = $"Requested/Rejected *{unassignedCount}";
+
+            ServiceRequests assignedServiceRequests = new ServiceRequests("Assigned", "Accepted");
+            this.AssignedServiceRequests = new ObservableCollection<ServiceRequest>(assignedServiceRequests);
 
             JobStates jobStates = new JobStates();
             this.JobStates = new ObservableCollection<JobState>(jobStates);

@@ -222,6 +222,7 @@ namespace BIT_DesktopApp.Models
             {
                 this.CoordinatorID = null;
             }
+            this.ContractorName = dr["Contractor_Name"].ToString();
             this.BusinessName = dr["Business_Name"].ToString();
             this.ContactName = $"{dr["First_Name"]} {dr["Last_Name"]}";
             this.SkillCategory = dr["Skill_Category"].ToString();
@@ -260,16 +261,6 @@ namespace BIT_DesktopApp.Models
             {
                 this.DistanceTravelled = null;
             }
-            //bool success6 = int.TryParse(dr["Contractor_First"].ToString(), out int contractorFirst);
-            //bool success7 = int.TryParse(dr["Contractor_Last"].ToString(), out int contractorLast);
-            //if (success6 && success7)
-            //{
-            //    this.ContractorName = $"{contractorFirst} {contractorLast}";
-            //}
-            //else
-            //{
-            //    this.ContractorName = null;
-            //}
         }
     }
 }

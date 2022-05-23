@@ -113,7 +113,7 @@ namespace BIT_WebApp.BLL
         }
 
 
-        // WORK IN PROGRESS
+        // TODO write sql to find available contractors for a job
         public DataTable AvailableContractors(int contractorID, string suburb, string skill, DateTime date, int serviceRequestID)
         {
             string sql = "";

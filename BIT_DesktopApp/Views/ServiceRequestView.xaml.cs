@@ -40,7 +40,7 @@ namespace BIT_DesktopApp.Views
             dpDateCompleted.IsEnabled = true;
             cmbJobStatus.IsEnabled = true;
             cmbPaymentStatus.IsEnabled = true;
-            txtAssignedContractor.IsEnabled = true;
+            cmbAssignedContractor.IsEnabled = true;
             txtStreet.IsEnabled = true;
             txtSuburb.IsEnabled = true;
             txtState.IsEnabled = true;
@@ -60,7 +60,7 @@ namespace BIT_DesktopApp.Views
             dpDateCompleted.IsEnabled = false;
             cmbJobStatus.IsEnabled = false;
             cmbPaymentStatus.IsEnabled = false;
-            txtAssignedContractor.IsEnabled = false;
+            cmbAssignedContractor.IsEnabled = false;
             txtStreet.IsEnabled = false;
             txtSuburb.IsEnabled = false;
             txtState.IsEnabled = false;
