@@ -1,0 +1,30 @@
+﻿<Page x:Class="BIT_DesktopApp.Views.DefaultView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BIT_DesktopApp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DefaultView" FontFamily="Calibri Light" Background="#192231">
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,50">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label FontSize="22" Foreground="#B8A5AE" Margin="0,0,0,30">Welcome to the BIT Field Support Services Management Application!</Label>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="../Images/clipboard_solid.png" Height="150" Width="150"/>
+            <TextBlock Grid.Column="1" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" FontSize="18" Foreground="#B8A5AE" Margin="0,0,30,0">Service Requests can be managed here. You can create, update, delete, and assign job tasks.</TextBlock>
+            <Image Grid.Column="2" Source="../Images/id_badge_solid.png" Height="150" Width="150"/>
+            <TextBlock Grid.Column="3" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" FontSize="18" Foreground="#B8A5AE" Margin="0,0,30,0">Manage BIT Services current roster of field contractors. Manage job tasks, skills, rosters, and payroll.</TextBlock>
+        </Grid>
+    </Grid>
+</Page>

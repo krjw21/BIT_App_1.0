@@ -1,0 +1,116 @@
+﻿<Page x:Class="BIT_DesktopApp.Views.ClientView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BIT_DesktopApp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClientView" FontFamily="Calibri Light" Background="#192231">
+    <Page.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Control.Foreground" Value="#B8A5AE"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid Margin="0,0,5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="1.3*"/>
+                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Label FontSize="22" Margin="14,7,7,7">Client Management</Label>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <ComboBox x:Name="cmbSearchClient" Width="100" Margin="12,14,0,12">
+                    <ComboBoxItem Content="ID"/>
+                </ComboBox>
+                <TextBox x:Name="txtSearchClient" Width="300" Margin="11,11,5,11"/>
+                <Button x:Name="btnSearchClient" Background="Transparent" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="5" Click="btnSearchClient_Click">
+                    <Image Source="../Images/magnifying_glass.png" Height="30" Width="30"/>
+                </Button>
+            </StackPanel>
+            <DataGrid Grid.Row="1" x:Name="dgClient" ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#D0D2DB" Margin="14,7,7,7">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ClientID}" Header="ID"/>
+                    <DataGridTextColumn Binding="{Binding BusinessName}" Header="Business Name"/>
+                    <DataGridTextColumn Binding="{Binding ABN}" Header="ABN"/>
+                    <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name"/>
+                    <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name"/>
+                    <DataGridTextColumn Binding="{Binding Email}" Header="Email"/>
+                    <DataGridTextColumn Binding="{Binding Phone}" Header="Phone"/>
+                    <DataGridTextColumn Binding="{Binding Street}" Header="Street"/>
+                    <DataGridTextColumn Binding="{Binding Suburb}" Header="Suburb"/>
+                    <DataGridTextColumn Binding="{Binding State}" Header="State"/>
+                    <DataGridTextColumn Binding="{Binding Postcode}" Header="Postcode"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="2" Margin="0,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <!-- First Two Columns data -->
+                <Label Content="ID: " Grid.Row="0" Grid.Column="0" Margin="0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtClientID" Text="{Binding SelectedClient.ClientID}" Grid.Row="0" Grid.Column="1" Margin="5,5,250,5" IsEnabled="False"/>
+                <Label Content="Business Name: " Grid.Row="1" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtBusinessName" Text="{Binding SelectedClient.BusinessName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedClient.ErrorCollection[BusinessName]}" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                <Label Content="ABN: " Grid.Row="2" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtABN" Text="{Binding SelectedClient.ABN, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedClient.ErrorCollection[ABN]}" Grid.Row="2" Grid.Column="1" Margin="5,5,150,5" IsEnabled="{Binding EnableFields}"/>
+                <Label Content="First Name: " Grid.Row="3" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtFirstName" Text="{Binding SelectedClient.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedClient.ErrorCollection[FirstName]}" Grid.Row="3" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                <Label Content="Last Name: " Grid.Row="4" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtLastName" Text="{Binding SelectedClient.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedClient.ErrorCollection[LastName]}" Grid.Row="4" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                <Border Grid.Column="2" Grid.RowSpan="6" BorderBrush="#B8A5AE" BorderThickness="1,0,0,0" Margin="2"/>
+                <!-- Last Two Columns data -->
+                <Label Content="Email Address: " Grid.Row="0" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtEmail" Text="{Binding SelectedClient.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedClient.ErrorCollection[Email]}" Grid.Row="0" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                <Label Content="Phone Number: " Grid.Row="1" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtPhone" Text="{Binding SelectedClient.Phone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedClient.ErrorCollection[Phone]}" Grid.Row="1" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                <Label Content="Street:" Grid.Row="2" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtStreet" Text="{Binding SelectedClient.Street, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedClient.ErrorCollection[Street]}" Grid.Row="2" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                <Label Content="Suburb:" Grid.Row="3" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtSuburb" Text="{Binding SelectedClient.Suburb, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedClient.ErrorCollection[Suburb]}" Grid.Row="3" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="State:" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="txtState" Text="{Binding SelectedClient.State, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedClient.ErrorCollection[State]}" Grid.Column="1" Margin="5,5,35,5" IsEnabled="{Binding EnableFields}"/>
+                    <Label Content="Postcode:" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="txtPostcode" Text="{Binding SelectedClient.Postcode, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedClient.ErrorCollection[Postcode]}" Grid.Column="3" Margin="5,5,50,5" IsEnabled="{Binding EnableFields}"/>
+                </Grid>
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5" Grid.ColumnSpan="4">
+                <ToggleButton x:Name="btnUpdate" IsChecked="{Binding EnableUpdate}" Width="150" Margin="10,6" IsEnabled="{Binding EnableButtons}">
+                    <ToggleButton.Style>
+                        <Style TargetType="ToggleButton">
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="Content" Value="Edit"/>
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Content" Value="Save"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+                <Button x:Name="btnDelete" Command="{Binding DeleteCommand}" Content="Delete" Width="150" Margin="10,6" IsEnabled="{Binding EnableButtons}"/>
+                <Button x:Name="btnAdd" Content="Add"  Width="150" Margin="10,6" Click="btnAdd_Click" IsEnabled="{Binding EnableAdd}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

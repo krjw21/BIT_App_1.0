@@ -1,0 +1,265 @@
+﻿<Page x:Class="BIT_DesktopApp.Views.ContractorView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BIT_DesktopApp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ContractorView" FontFamily="Calibri Light" Background="#192231">
+    <Page.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Control.Foreground" Value="#B8A5AE"/>
+        </Style>
+    </Page.Resources>
+    <Grid Margin="0,0,5,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="1.1*"/>
+        </Grid.RowDefinitions>
+        <Label FontSize="22" Margin="14,7,7,7">Contractor Management</Label>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <ComboBox x:Name="cmbSearchContractor" Width="100" Margin="12,14,0,12">
+                <ComboBoxItem Content="ID"/>
+            </ComboBox>
+            <TextBox x:Name="txtSearchContractor" Width="300" Margin="11,11,5,11"/>
+            <Button x:Name="btnSearchContractor" Background="Transparent" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="5" >
+                <Image Source="../Images/magnifying_glass.png" Height="30" Width="30"/>
+            </Button>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="dgContractor" ItemsSource="{Binding Contractors}" SelectedItem="{Binding SelectedContractor}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#D0D2DB" Grid.Column="0" Grid.RowSpan="2" Margin="14,7,7,7">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ContractorID}" Header="ID"/>
+                    <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name"/>
+                    <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name"/>
+                    <DataGridTextColumn Binding="{Binding DOB, StringFormat=dd/MM/yyyy}" Header="Date Of Birth"/>
+                    <DataGridTextColumn Binding="{Binding Email}" Header="Email"/>
+                    <DataGridTextColumn Binding="{Binding Phone}" Header="Phone"/>
+                    <DataGridTextColumn Binding="{Binding Street}" Header="Street"/>
+                    <DataGridTextColumn Binding="{Binding Suburb}" Header="Suburb"/>
+                    <DataGridTextColumn Binding="{Binding State}" Header="State"/>
+                    <DataGridTextColumn Binding="{Binding Postcode}" Header="Postcode"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <TabControl Grid.Row="2" Margin="14,7,7,7" Background="#273245">
+            <TabItem Header="Details" IsEnabled="{Binding EnableButtons}">
+                <Grid Grid.Row="2" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1.3*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- First Two Columns data -->
+                    <Label Content="ID: " Grid.Row="0" Grid.Column="0" Margin="0,2" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="txtContractorID" Text="{Binding SelectedContractor.ContractorID}" Grid.Row="0" Grid.Column="1" Margin="5,5,250,5" IsEnabled="False"/>
+                    <Label Content="First Name: " Grid.Row="1" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="txtFirstName" Text="{Binding SelectedContractor.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[FirstName]}" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <Label Content="Last Name: " Grid.Row="2" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="txtLastName" Text="{Binding SelectedContractor.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[LastName]}" Grid.Row="2" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <Label Content="Email Address: " Grid.Row="3" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="txtEmail" Text="{Binding SelectedContractor.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[Email]}" Grid.Row="3" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <Label Content="Phone Number: " Grid.Row="4" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="txtPhone" Text="{Binding SelectedContractor.Phone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[Phone]}" Grid.Row="4" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <Border Grid.Column="2" Grid.RowSpan="5" BorderBrush="#B8A5AE" BorderThickness="1,0,0,0" Margin="2"/>
+                    <!-- Last Two Columns data -->
+                    <Label Content="Date of Birth: " Grid.Row="0" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                    <DatePicker x:Name="dpDOB" SelectedDate="{Binding SelectedContractor.DOB, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[DOB]}" Grid.Row="0" Grid.Column="3" Margin="5,2,100,2" IsEnabled="{Binding EnableFields}"/>
+                    <Label Content="Street:" Grid.Row="1" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="txtStreet" Text="{Binding SelectedContractor.Street, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[Street]}" Grid.Row="1" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <Label Content="Suburb:" Grid.Row="2" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="txtSuburb" Text="{Binding SelectedContractor.Suburb, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[Suburb]}" Grid.Row="2" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.3*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="State:" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                        <TextBox x:Name="txtState" Text="{Binding SelectedContractor.State, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[State]}" Grid.Column="1" Margin="5,5,35,5" IsEnabled="{Binding EnableFields}"/>
+                        <Label Content="Postcode:" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                        <TextBox x:Name="txtPostcode" Text="{Binding SelectedContractor.Postcode, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[Postcode]}" Grid.Column="3" Margin="5,5,50,5" IsEnabled="{Binding EnableFields}"/>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5" Grid.ColumnSpan="4" Margin="0,3,0,0">
+                        <ToggleButton x:Name="btnUpdate" IsChecked="{Binding EnableUpdate}" Width="140" Margin="10,1" IsEnabled="{Binding EnableButtons}">
+                            <ToggleButton.Style>
+                                <Style TargetType="ToggleButton">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsChecked" Value="False">
+                                            <Setter Property="Content" Value="Edit"/>
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter Property="Content" Value="Save"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ToggleButton.Style>
+                        </ToggleButton>
+                        <Button x:Name="btnDelete" Command="{Binding DeleteCommand}" Content="Delete" Width="140" Margin="10,1" IsEnabled="{Binding EnableButtons}"/>
+                        <Button x:Name="btnAdd" Content="Add" Width="140" Margin="10,1" Click="btnAdd_Click" IsEnabled="{Binding EnableAdd}"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Skills" IsEnabled="{Binding EnableButtons}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="dgAllSkills" ItemsSource="{Binding AllSkills}" SelectedItem="{Binding SelectedSkill}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#D0D2DB" Grid.Column="0" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding SkillCategory}" Header="All Skills"/>
+                            <DataGridTextColumn Binding="{Binding SkillDescription}" Header="Skill Description"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <Button x:Name="btnAddSkill" Command="{Binding AddSkillCommand}" Content="Add >" Width="60" Margin="10" IsEnabled="{Binding EnableButtons}"/>
+                        <Button x:Name="btnRemoveSskill" Command="{Binding RemoveSkillCommand}" Content="&lt; Remove" Width="60" Margin="10" IsEnabled="{Binding EnableButtons}"/>
+                    </StackPanel>
+                    <DataGrid x:Name="dgSkills" ItemsSource="{Binding ContractorSkills}" SelectedItem="{Binding SelectedContractorSkill}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#D0D2DB" Grid.Column="2" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding SkillCategory}" Header="Contractor's Skills"/>
+                            <DataGridTextColumn Binding="{Binding SkillDescription}" Header="Skill Description"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Border Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="#B8A5AE" BorderThickness="0,1,0,0" Margin="4"/>
+                    <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,14,5,0" >
+                        <Label x:Name="lblNewSkillName" Content="New Skill Name:" IsEnabled="{Binding EnableFields}" />
+                        <TextBox x:Name="txtNewSkillName" Text="{Binding NewSkill.SkillCategory}" Width="100px" Height="20px" IsEnabled="{Binding EnableFields}" Margin="0,0,20,0"/>
+                        <Label x:Name="lblNewSkillDescription" Content="New Skill Description:" IsEnabled="{Binding EnableFields}" />
+                        <TextBox x:Name="txtNewSkillDescription" Text="{Binding NewSkill.SkillDescription}" Width="300px" Height="20px" IsEnabled="{Binding EnableFields}" Margin="0,0,20,0"/>
+                        <ToggleButton x:Name="btnNewSkill" IsChecked="{Binding EnableNewSkill}" Width="60" Height="20">
+                            <ToggleButton.Style>
+                                <Style TargetType="ToggleButton">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsChecked" Value="False">
+                                            <Setter Property="Content" Value="New Skill"/>
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter Property="Content" Value="Save Skill"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ToggleButton.Style>
+                        </ToggleButton>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Preferred Suburbs" IsEnabled="{Binding EnableButtons}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dgAllSuburbs" ItemsSource="{Binding ContractorSuburbs}" SelectedItem="{Binding SelectedContractorSuburb}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#D0D2DB" Grid.Column="0" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding SuburbName}" Header="Suburb"/>
+                            <DataGridTextColumn Binding="{Binding Postcode}" Header="Postcode"/>
+                            <DataGridTextColumn Binding="{Binding Region}" Header="Region"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Name: " Grid.Column="0" Grid.Row="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                        <TextBox x:Name="txtcontractorNameSuburbs" Text="{Binding SelectedContractor.FullName}" Grid.Column="1" Grid.Row="0" Height="20px" Margin="5" VerticalAlignment="Bottom" IsEnabled="False"/>
+                        <Label Content="Suburb: " Grid.Column="0" Grid.Row="1" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtSuburbName" Text="{Binding SelectedContractorSuburb.SuburbName}" Grid.Column="1" Grid.Row="1" Height="20px" Margin="5" VerticalAlignment="Center" IsEnabled="{Binding EnableSuburbFields}"/>
+                        <Label Content="Postcode: " Grid.Column="0" Grid.Row="2" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtSuburbPostcode" Text="{Binding SelectedContractorSuburb.Postcode}" Grid.Column="1" Grid.Row="2" Height="20px" Width="40px" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top"  IsEnabled="{Binding EnableSuburbFields}"/>
+                        <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <ToggleButton x:Name="btnAddSuburb" IsChecked="{Binding EnableSuburbUpdate}" Width="80" Margin="8" IsEnabled="{Binding EnableButtons}">
+                                <ToggleButton.Style>
+                                    <Style TargetType="ToggleButton">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked" Value="False">
+                                                <Setter Property="Content" Value="Add"/>
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter Property="Content" Value="Save"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
+                            <Button x:Name="btnRemoveSuburb" Command="{Binding RemoveSuburbCommand}" Content="Remove" Width="80" Grid.Row="3" Margin="8" IsEnabled="{Binding EnableSuburbRemove}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Availability" IsEnabled="{Binding EnableButtons}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dgAvailability" ItemsSource="{Binding ContractorAvailabilities}" AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="0" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding DayName}" Header="Day Name"/>
+                            <DataGridTextColumn Binding="{Binding StartTime}" Header="Start Time"/>
+                            <DataGridTextColumn Binding="{Binding FinishTime}" Header="Finish Time"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Name: " Grid.Column="0" Grid.Row="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                        <TextBox x:Name="txtcontractorNameAvailabilitites" Text="{Binding SelectedContractor.FullName}"  Grid.Column="1" Grid.Row="0" Height="20px" Margin="5" VerticalAlignment="Bottom" IsEnabled="False"/>
+                        <Label Content="Day Name: " Grid.Column="0" Grid.Row="1" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cmbDayName" SelectedValue="{Binding SelectedAvailability.DayName}" SelectedValuePath="Content" Grid.Column="1" Grid.Row="1" Height="20px" Margin="5" VerticalAlignment="Center">
+                            <ComboBoxItem Content="Monday"/>
+                            <ComboBoxItem Content="Tuesday"/>
+                            <ComboBoxItem Content="Wednesday"/>
+                            <ComboBoxItem Content="Thursday"/>
+                            <ComboBoxItem Content="Friday"/>
+                            <ComboBoxItem Content="Saturday"/>
+                            <ComboBoxItem Content="Sunday"/>
+                        </ComboBox>
+                        <Label Content="Shift Type: " Grid.Column="0" Grid.Row="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                        <ComboBox x:Name="cmbShiftType" SelectedValue="{Binding SelectedAvailability.ShiftType}" SelectedValuePath="Content" Grid.Column="1" Grid.Row="2" Height="20px" Margin="5" VerticalAlignment="Top">
+                            <ComboBoxItem Content="Full Day Shift"/>
+                            <ComboBoxItem Content="Morning Shift"/>
+                            <ComboBoxItem Content="Afternoon Shift"/>
+                            <ComboBoxItem Content="Not Available"/>
+                        </ComboBox>
+                        <Button x:Name="btnSaveAvailability" Command="{Binding AvailabilityCommand}" Content="Save" Grid.Row="3" Grid.ColumnSpan="2" Width="80" Margin="8" IsEnabled="{Binding EnableButtons}"/>
+                    </Grid>
+                    
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

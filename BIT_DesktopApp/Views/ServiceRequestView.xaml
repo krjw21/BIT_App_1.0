@@ -1,0 +1,189 @@
+﻿<Page x:Class="BIT_DesktopApp.Views.ServiceRequestView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BIT_DesktopApp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ServiceRequestView" FontFamily="Calibri Light" Background="#192231">
+    <Page.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Control.Foreground" Value="#B8A5AE"/>
+        </Style>
+    </Page.Resources>
+    <Grid Margin="0,0,5,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1.1*"/>
+            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Label FontSize="22" Margin="14,7,7,7">Service Request Management</Label>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <ComboBox x:Name="cmbSearchServiceRequest" Width="100" Margin="12,14,0,12">
+                <ComboBoxItem Content="ID"/>
+            </ComboBox>
+            <TextBox x:Name="txtSearchServiceRequest" Width="300" Margin="11,11,5,11"/>
+            <Button x:Name="btnSearchServiceRequest" Background="Transparent" BorderThickness="0"  
+    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="5" Click="btnSearchServiceRequest_Click">
+                <Image Source="../Images/magnifying_glass.png" Height="30" Width="30"/>
+            </Button>
+        </StackPanel>
+        <TabControl Grid.Row="1" Margin="14,2,7,7" Background="#273245">
+            <TabItem Header="Requested/Rejected">
+                <DataGrid Grid.Row="1" x:Name="dgUnassignedServiceRequests" ItemsSource="{Binding UnassignedServiceRequests}" SelectedItem="{Binding SelectedServiceRequest}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#D0D2DB" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ServiceRequestID}" Header="ID"/>
+                        <DataGridTextColumn Binding="{Binding BusinessName}" Header="Business Name"/>
+                        <DataGridTextColumn Binding="{Binding ContactName}" Header="Contact Name"/>
+                        <DataGridTextColumn Binding="{Binding SkillCategory}" Header="Category"/>
+                        <DataGridTextColumn Binding="{Binding Priority}" Header="Priority"/>
+                        <DataGridTextColumn Binding="{Binding JobStatus}" Header="Job Status"/>
+                        <DataGridTextColumn Binding="{Binding PaymentStatus}" Header="Payment Status"/>
+                        <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=dd/MM/yyyy}" Header="Date Created"/>
+                        <DataGridTextColumn Binding="{Binding DateCompleted, StringFormat=dd/MM/yyyy}" Header="Date Completed"/>
+                        <DataGridTextColumn Binding="{Binding ContractorID}" Header="Contractor"/>
+                        <DataGridTextColumn Binding="{Binding Street}" Header="Street"/>
+                        <DataGridTextColumn Binding="{Binding State}" Header="State"/>
+                        <DataGridTextColumn Binding="{Binding Suburb}" Header="Suburb"/>
+                        <DataGridTextColumn Binding="{Binding Postcode}" Header="Postcode"/>
+                        <DataGridTextColumn Binding="{Binding HoursWorked}" Header="Hours"/>
+                        <DataGridTextColumn Binding="{Binding DistanceTravelled}" Header="KMs"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Completed">
+                <DataGrid Grid.Row="1" x:Name="dgCompletedServiceRequests" ItemsSource="{Binding CompletedServiceRequests}" SelectedItem="{Binding SelectedServiceRequest}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#D0D2DB" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ServiceRequestID}" Header="ID"/>
+                        <DataGridTextColumn Binding="{Binding BusinessName}" Header="Business Name"/>
+                        <DataGridTextColumn Binding="{Binding ContactName}" Header="Contact Name"/>
+                        <DataGridTextColumn Binding="{Binding SkillCategory}" Header="Category"/>
+                        <DataGridTextColumn Binding="{Binding Priority}" Header="Priority"/>
+                        <DataGridTextColumn Binding="{Binding JobStatus}" Header="Job Status"/>
+                        <DataGridTextColumn Binding="{Binding PaymentStatus}" Header="Payment Status"/>
+                        <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=dd/MM/yyyy}" Header="Date Created"/>
+                        <DataGridTextColumn Binding="{Binding DateCompleted, StringFormat=dd/MM/yyyy}" Header="Date Completed"/>
+                        <DataGridTextColumn Binding="{Binding ContractorID}" Header="Contractor"/>
+                        <DataGridTextColumn Binding="{Binding Street}" Header="Street"/>
+                        <DataGridTextColumn Binding="{Binding State}" Header="State"/>
+                        <DataGridTextColumn Binding="{Binding Suburb}" Header="Suburb"/>
+                        <DataGridTextColumn Binding="{Binding Postcode}" Header="Postcode"/>
+                        <DataGridTextColumn Binding="{Binding HoursWorked}" Header="Hours"/>
+                        <DataGridTextColumn Binding="{Binding DistanceTravelled}" Header="KMs"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="All Service Requests">
+                <DataGrid Grid.Row="1" x:Name="dgAllServiceRequests" ItemsSource="{Binding AllServiceRequests}" SelectedItem="{Binding SelectedServiceRequest}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#D0D2DB" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ServiceRequestID}" Header="ID"/>
+                        <DataGridTextColumn Binding="{Binding BusinessName}" Header="Business Name"/>
+                        <DataGridTextColumn Binding="{Binding ContactName}" Header="Contact Name"/>
+                        <DataGridTextColumn Binding="{Binding SkillCategory}" Header="Category"/>
+                        <DataGridTextColumn Binding="{Binding Priority}" Header="Priority"/>
+                        <DataGridTextColumn Binding="{Binding JobStatus}" Header="Job Status"/>
+                        <DataGridTextColumn Binding="{Binding PaymentStatus}" Header="Payment Status"/>
+                        <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=dd/MM/yyyy}" Header="Date Created"/>
+                        <DataGridTextColumn Binding="{Binding DateCompleted, StringFormat=dd/MM/yyyy}" Header="Date Completed"/>
+                        <DataGridTextColumn Binding="{Binding ContractorID}" Header="Contractor"/>
+                        <DataGridTextColumn Binding="{Binding Street}" Header="Street"/>
+                        <DataGridTextColumn Binding="{Binding State}" Header="State"/>
+                        <DataGridTextColumn Binding="{Binding Suburb}" Header="Suburb"/>
+                        <DataGridTextColumn Binding="{Binding Postcode}" Header="Postcode"/>
+                        <DataGridTextColumn Binding="{Binding HoursWorked}" Header="Hours"/>
+                        <DataGridTextColumn Binding="{Binding DistanceTravelled}" Header="KMs"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+        <Grid x:Name="gServiceRequest" Grid.Row="2" Margin="0,0,5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <!-- First Two Columns data -->
+            <Label Content="Request ID:" Grid.Row="0" Grid.Column="0" Margin="0,2" HorizontalAlignment="Right"/>
+            <TextBox x:Name="txtServiceRequestID" Text="{Binding SelectedServiceRequest.ServiceRequestID}" Grid.Row="0" Grid.Column="1" Margin="5,5,200,5" IsEnabled="False"/>
+            <Label Content="Business Name:" Grid.Row="1" Grid.Column="0" Margin="0,2" HorizontalAlignment="Right"/>
+            <TextBox x:Name="txtBusinessName" Text="{Binding SelectedServiceRequest.BusinessName}" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="False"/>
+            <Label Content="Contact Name:" Grid.Row="2" Grid.Column="0" Margin="0,2" HorizontalAlignment="Right"/>
+            <TextBox x:Name="txtContactName" Text="{Binding SelectedServiceRequest.ContactName}" Grid.Row="2" Grid.Column="1" Margin="5" IsEnabled="False"/>
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Date Created:" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <DatePicker x:Name="dpDateCreated" SelectedDate="{Binding SelectedServiceRequest.DateCreated}" Grid.Column="1" Margin="5,2,0,2" IsEnabled="False"/>
+                <Label Content="Date Completed:" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <DatePicker x:Name="dpDateCompleted" SelectedDate="{Binding SelectedServiceRequest.DateCompleted}" Grid.Column="3" Margin="5,2,0,2" IsEnabled="False"/>
+            </Grid>
+            <Label Content="Job Status:" Grid.Row="4" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+            <ComboBox x:Name="cmbJobStatus" ItemsSource="{Binding JobStates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="JobStatus" Text="{Binding SelectedServiceRequest.JobStatus}" Grid.Row="4" Grid.Column="1" Margin="5,5,150,5" IsEnabled="False"/>
+            <Label Content="Payment Status:" Grid.Row="5" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+            <ComboBox x:Name="cmbPaymentStatus" ItemsSource="{Binding PaymentStates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="PaymentStatus" Text="{Binding SelectedServiceRequest.PaymentStatus}" Grid.Row="5" Grid.Column="1" Margin="5,5,150,5" IsEnabled="False"/>
+            <Border Grid.Column="2" Grid.RowSpan="6" BorderBrush="#B8A5AE" BorderThickness="1,0,0,0" Margin="2"/>
+            <!-- Last Two Columns data -->
+            <Label Content="Assigned Contractor:" Grid.Row="0" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+            <TextBox x:Name="txtAssignedContractor" Text="{Binding SelectedServiceRequest.ContractorID}" Grid.Row="0" Grid.Column="3" Margin="5" IsEnabled="False"/>
+            <Label Content="Street:" Grid.Row="1" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+            <TextBox x:Name="txtStreet" Text="{Binding SelectedServiceRequest.Street}" Grid.Row="1" Grid.Column="3" Margin="5" IsEnabled="False"/>
+            <Label Content="Suburb:" Grid.Row="2" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+            <TextBox x:Name="txtSuburb" Text="{Binding SelectedServiceRequest.Suburb}" Grid.Row="2" Grid.Column="3" Margin="5" IsEnabled="False"/>
+            <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="State:" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtState" Text="{Binding SelectedServiceRequest.State}" Grid.Column="1" Margin="5,5,35,5" IsEnabled="False"/>
+                <Label Content="Postcode:" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtPostcode" Text="{Binding SelectedServiceRequest.Postcode}" Grid.Column="3" Margin="5,5,50,5" IsEnabled="False"/>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Priority:" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <ComboBox x:Name="cmbPriority" ItemsSource="{Binding PriorityStates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Priority" Text="{Binding SelectedServiceRequest.Priority}" Grid.Column="1" Margin="5,5,20,5" IsEnabled="False"/>
+                <Label Content="Hours:" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtHoursWorked" Text="{Binding SelectedServiceRequest.HoursWorked}" Grid.Column="3" Margin="5,5,60,5" IsEnabled="False"/>
+            </Grid>
+            <Grid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="124*"/>
+                    <ColumnDefinition Width="147*"/>
+                    <ColumnDefinition Width="43*"/>
+                    <ColumnDefinition Width="95*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Skill Category:" Grid.Column="0" Margin="47,2,0,2" HorizontalAlignment="Left" Width="77"/>
+                <ComboBox x:Name="cmbSkillCategory" ItemsSource="{Binding Skills, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="SkillCategory" Text="{Binding SelectedServiceRequest.SkillCategory}" Grid.Column="1" Margin="5,5,0,5" IsEnabled="False"/>
+                <Label Content="KMs:" Grid.Column="2" Margin="5,2,0,2" HorizontalAlignment="Right" Width="34"/>
+                <TextBox x:Name="txtDistanceTravelled" Text="{Binding SelectedServiceRequest.DistanceTravelled}" Grid.Column="3" Margin="5,5,60,5" IsEnabled="False"/>
+            </Grid>
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3">
+            <ToggleButton x:Name="btnUpdate" Checked="btnUpdate_Checked" Unchecked="btnUpdate_Unchecked" Content="Edit" Width="150" Margin="10,6"/>
+            <Button x:Name="btnAdd" Content="Add" Width="150" Margin="10,6"/>
+        </StackPanel>
+    </Grid>
+</Page>

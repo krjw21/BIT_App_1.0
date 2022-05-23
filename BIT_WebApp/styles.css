@@ -1,0 +1,205 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background-color: #192231 !important;
+}
+
+.bg-dark {
+    background-color: #192231 !important;
+}
+
+.navbar-dark .navbar-nav .show > .nav-link,
+.navbar-dark .navbar-nav .active > .nav-link,
+.navbar-dark .navbar-nav .nav-link.show,
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-brand {
+    color: #B8A5AE !important;
+}
+
+    .navbar-dark .navbar-nav .nav-link:hover {
+        color: #98878F;
+    }
+
+.nav-item {
+    padding: 10px 0 7px 0;
+}
+
+.hp-bg-image {
+    background-image: url(Images/fibre_optic_cables.jpg);
+    background-color: #192231;
+    background-size: 100% 1100px;
+    width: 100%;
+    height: 1000px;
+    display: inline-block;
+}
+
+.hp-header {
+    padding: 70px 70px 0 70px;
+    color: #B8A5AE;
+    font-size: 42px;
+    font-weight: lighter;
+    font-style: italic;
+}
+
+.hp-content {
+    padding: 0 90px 5px 90px;
+    color: #B8A5AE;
+    font-size: 30px;
+    font-weight: lighter;
+    font-style: italic;
+}
+
+.hp-link {
+    padding: 0 150px;
+    color: #626785;
+    font-size: 24px;
+    font-weight: lighter;
+}
+
+    .hp-link:hover {
+        color: #494E6B;
+    }
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    color: #B8A5AE;
+    padding: 30px;
+}
+.footer-list {
+    display: flex;
+    flex-direction: column;
+}
+.footer-list a, .footer-list img {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: #B8A5AE;
+}
+
+    a:hover {
+        color: #98878F;
+        text-decoration: none;
+    }
+
+.navbar-nav .nav-link {
+    color: #B8A5AE;
+}
+
+.ab-bg-image {
+    background-image: url(Images/office_monitors.jpg);
+    background-color: #192231;
+    background-size: 100% 1200px;
+    width: 100%;
+    height: 900px;
+    display: inline-block;
+}
+
+.banner {
+    background-color: rgba(25, 34, 49, 0.8);
+    border-radius: 15px;
+    margin: 30px 20px 0 20px;
+}
+
+    .banner div {
+        margin: 30px 0;
+    }
+
+.col-9 p {
+    color: #B8A5AE;
+}
+
+.terms-header {
+    padding: 40px 40px 0 40px;
+    color: #B8A5AE;
+    font-size: 36px;
+}
+
+.terms-sub-header {
+    padding: 40px 40px 0 40px;
+    color: #B8A5AE;
+    font-size: 28px;
+    font-weight: lighter;
+}
+
+.terms-content {
+    padding: 40px 40px 0 40px;
+    color: #B8A5AE;
+    font-size: 22px;
+    font-weight: lighter;
+}
+
+#bottom-content {
+    padding: 40px 40px 100px 40px;
+}
+
+.os-bg-image {
+    background-image: url(Images/servers_cables.jpg);
+    background-color: #192231;
+    background-size: 100% 1000px;
+    width: 100%;
+    height: 950px;
+    display: inline-block;
+}
+
+.os-header {
+    padding: 30px 30px 0 30px;
+    color: #B8A5AE;
+    font-size: 36px;
+}
+
+.os-sub-header {
+    padding: 10px 30px 0 30px;
+    color: #B8A5AE;
+    font-size: 28px;
+    font-weight: lighter;
+}
+
+.os-content {
+    padding: 10px 30px 0 30px;
+    color: #B8A5AE;
+    font-size: 22px;
+    font-weight: lighter;
+}
+
+#os-bottom-content {
+    padding: 10px 30px 40px 30px;
+}
+
+#contact {
+    border-left-style: solid;
+    border-color: #B8A5AE;
+    border-width: 1px;
+}
+
+#enquiry h3, #enquiry label {
+    color: #B8A5AE;
+}
+
+#enquiryform {
+    padding: 40px 20px 40px 20px;
+}
+
+.login-container {
+    padding:  40px;
+}
+
+    .login-container .card {
+        background-color: #494E6B;
+    }
+
+.login-labels {
+    color: #B8A5AE;
+}
+
+.login-line {
+    border: 1px solid #626785;
+}

@@ -1,0 +1,120 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="BIT_WebApp.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BIT Services Web Application</title>
+
+    <% //bootstrap %>
+    <link href="BootStrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="FontAwesome/css/all.css" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet" />
+    <script src="BootStrap/js/bootstrap.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
+    <%-- STYLESHEET COLOURS
+        Background:         #192231
+        Background Light:   #273245
+        Text Dark:          #98878F
+        Text Light:         #B8A5AE
+        Red:                #985E6D
+        Blue:               #494E6B
+        Medium Blue:        #626785
+        Light Blue:         #D0D2DB   --%>
+</head>
+<body>
+    <form runat="server">
+        <div>
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <a class="navbar-brand" href="HomePage.aspx">
+                    <img src="../Images/BIT_Logo_NoText_Transparent.png" width="45" />
+                </a>
+                <div class="navbar-brand">BIT Field Support Services</div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="HomePage.aspx">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="About.aspx">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Services.aspx">Our Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Contact.aspx">Contact Us</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnLogin" runat="server" OnClick="lbtnLogin_Click">Login</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnNewBooking" runat="server" Visible="false" OnClick="lbtnNewBooking_Click">New Booking</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnCurrentBookings" runat="server" Visible="false" OnClick="lbtnCurrentBookings_Click">Current Jobs</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnAssignedBookings" runat="server" Visible="false" OnClick="lbtnAssignedBookings_Click">Assigned Jobs</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnAcceptedBookings" runat="server" Visible="false" OnClick="lbtnAcceptedBookings_Click">Accepted Jobs</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnUnassignedBookings" runat="server" Visible="false" OnClick="lbtnUnassignedBookings_Click">Unassigned Jobs</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnCompletedBookings" runat="server" Visible="false" OnClick="lbtnCompletedBookings_Click">Completed Jobs</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnAllBookings" runat="server" Visible="false" OnClick="lbtnAllBookings_Click">History</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnLogout" runat="server" Visible="false" OnClick="lbtnLogout_Click">Logout</asp:LinkButton>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+
+        <div class="footer">
+            <div style="display: flex; flex-direction: column; align-items: center">
+                <img src="../Images/BIT_Logo_Extended_Transparent.png" width="400" style="margin: -150px 0 -150px 0;"/>
+                <p><em>Supporting local businesses all over Australia.</em></p>
+                <p>© 2022 BIT Services Pty Ltd.</p>
+            </div>
+            <div class="footer-list">
+                <h5>OVERVIEW</h5>
+                <a href="Terms.aspx">Terms & Conditions</a>
+                <a href="Privacy.aspx">Privacy Policy</a>
+                <a href="About.aspx">About Us</a>
+                <a href="Services.aspx">Our Services</a>
+                <a href="Contact.aspx">Contact Information</a>
+            </div>
+            <div class="footer-list">
+                <h5>FOLLOW US</h5>
+                <div>
+                    <img src="../Images/facebook-pastel.png" width="40" /><em>facebook.com/BIT_Services</em>
+                </div>
+                <div>
+                    <img src="../Images/instagram-pastel.png" width="40" /><em>@BIT_Services</em>
+                </div>
+                <div>
+                    <img src="../Images/twitter-pastel.png" width="40" /><em>@BITSupportServices</em>
+                </div>
+                <div>
+                    <img src="../Images/linkedin.png" width="40" /><em>linkedin.com/BIT_Pty_Ltd</em>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

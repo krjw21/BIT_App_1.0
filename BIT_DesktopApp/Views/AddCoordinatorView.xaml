@@ -1,0 +1,67 @@
+﻿<Window x:Class="BIT_DesktopApp.Views.AddCoordinatorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BIT_DesktopApp.Views"
+        mc:Ignorable="d"
+        Title="AddCoordinatorView" Height="280" Width="700" FontFamily="Calibri Light" Background="#192231">
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Control.Foreground" Value="#B8A5AE"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="../Images/BIT_Logo_Transparent.png" Height="60px" Margin="40,-13,0,0"/>
+            <Label Content="New Co-ordinator Form" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" FontSize="20" FontFamily="Calibri"/>
+            <!-- First Two Columns data -->
+            <Label Content="First Name: " Grid.Row="1" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtFirstName" Text="{Binding NewCoordinator.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewCoordinator.ErrorCollection[FirstName]}" Grid.Row="1" Grid.Column="1" Margin="5,10"/>
+            <Label Content="Last Name: " Grid.Row="2" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtLastName" Text="{Binding NewCoordinator.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewCoordinator.ErrorCollection[LastName]}" Grid.Row="2" Grid.Column="1" Margin="5,10"/>
+            <Label Content="Email Address: " Grid.Row="3" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtEmail" Text="{Binding NewCoordinator.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewCoordinator.ErrorCollection[Email]}" Grid.Row="3" Grid.Column="1" Margin="5,10"/>
+            <Label Content="Phone Number: " Grid.Row="4" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtPhone" Text="{Binding NewCoordinator.Phone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewCoordinator.ErrorCollection[Phone]}" Grid.Row="4" Grid.Column="1" Margin="5,10,100,10"/>
+            <Border Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" BorderBrush="#B8A5AE" BorderThickness="1,0,0,0" Margin="8,12,2,12"/>
+            <!-- Last Two Columns data -->
+            <Label Content="Date of Birth: " Grid.Row="1" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <DatePicker x:Name="dpDOB" SelectedDate="{Binding NewCoordinator.DOB, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewCoordinator.ErrorCollection[DOB]}" Grid.Row="1" Grid.Column="3" Margin="5,9,100,9"/>
+            <Label Content="Street:" Grid.Row="2" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtStreet" Text="{Binding NewCoordinator.Street, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewCoordinator.ErrorCollection[Street]}" Grid.Row="2" Grid.Column="3" Margin="5,10"/>
+            <Label Content="Suburb:" Grid.Row="3" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtSuburb" Text="{Binding NewCoordinator.Suburb, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewCoordinator.ErrorCollection[Suburb]}" Grid.Row="3" Grid.Column="3" Margin="5,10,50,10"/>
+            <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="State:" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtState" Text="{Binding NewCoordinator.State, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewCoordinator.ErrorCollection[State]}" Grid.Column="1" Margin="5,10,40,10"/>
+                <Label Content="Postcode:" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtPostcode" Text="{Binding NewCoordinator.Postcode, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewCoordinator.ErrorCollection[Postcode]}" Grid.Column="3" Margin="5,10,30,10"/>
+            </Grid>
+            <StackPanel Grid.Row="5" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="btnClear" Content="Clear" Width="150" Margin="10,6" Click="btnClear_Click"/>
+                <Button x:Name="btnSave" Command="{Binding AddCommand}" Content="Save" Width="150" Margin="10,6" Click="btnSave_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

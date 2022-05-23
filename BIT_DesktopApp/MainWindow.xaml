@@ -1,0 +1,87 @@
+﻿<Window x:Class="BIT_DesktopApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BIT_DesktopApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1100" MinWidth="1100" MaxWidth="1100" MinHeight="600" MaxHeight="600" FontFamily="Calibri Light" Background="#192231">
+    <Window.Resources>
+        <Style x:Key="MainWindowButton" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="#B39EA8"/>
+            <Setter Property="Padding" Value="15,0,0,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#192231"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#273245"/>
+                                <Setter Property="Background" TargetName="Bd" Value="#273245"/>
+                                <Setter Property="Padding" TargetName="Bd" Value="15,0,15,0"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#222C3E"/>
+                                <Setter Property="Background" TargetName="Bd" Value="#222C3E"/>
+                                <Setter Property="Padding" TargetName="Bd" Value="15,0,15,0"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#222C3E"/>
+                                <Setter Property="Background" TargetName="Bd" Value="#222C3E"/>
+                                <Setter Property="Padding" TargetName="Bd" Value="15,0,15,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#222C3E"/>
+                                <Setter Property="Padding" TargetName="Bd" Value="15,0,15,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0,7,7,0" />
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Button x:Name="btnLogo" Height="70" Width="200" Click="btnLogo_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="./Images/BIT_Logo_Transparent.png" Margin="0,-15"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+        <Border Grid.Row="1" BorderBrush="#98878F" BorderThickness="0,0,1,0" Margin="0,0,0,10">
+            <Grid Grid.Row="1">
+                <StackPanel Grid.Row="1">
+                    <Button x:Name="btnServiceRequest" Height="50" Content="Service Requests" FontSize="20" Style="{DynamicResource MainWindowButton}" Click="btnServiceRequest_Click"></Button>
+                    <Button x:Name="btnClient" Height="50" Content="Clients" FontSize="20" Style="{DynamicResource MainWindowButton}" Click="btnClient_Click"></Button>
+                    <Button x:Name="btnContractor" Height="50" Content="Contractors" FontSize="20" Style="{DynamicResource MainWindowButton}" Click="btnContractor_Click"></Button>
+                    <Button x:Name="btnCoordinator" Height="50" Content="Co-ordinators" FontSize="20" Style="{DynamicResource MainWindowButton}" Click="btnCoordinator_Click" ></Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Label Grid.Row="1" VerticalAlignment="Bottom" Foreground="#B39EA8" Margin="10,0,0,5" FontSize="14">BIT Pty Ltd. © 2022</Label>
+        <Grid Grid.Row="0" Grid.Column="1" Background="#192231">
+            <TextBlock x:Name="tbCompanyName" Text="BIT Field Support Services" TextAlignment="Center" Foreground="#B39EA8" FontSize="38" Margin="10,15,10,10" TextDecorations="{x:Null}" FontFamily="Goudy Old Style"/>
+        </Grid>
+        <Frame x:Name="contentFrame" Grid.Row="1" Grid.Column="1" Background="#192231" NavigationUIVisibility="Hidden" Navigated="contentFrame_Navigated"/>
+    </Grid>
+</Window>
