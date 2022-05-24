@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BIT_DesktopApp.ViewModels
 {
@@ -21,6 +22,11 @@ namespace BIT_DesktopApp.ViewModels
         private ObservableCollection<Skill> _skills;
         private ObservableCollection<Contractor> _availableContractors;
         private ServiceRequest _selectedServiceRequest;
+        private RelayCommand _updateServiceRequest;
+        private bool _enableUpdate;
+        private bool _enableFields;
+        private bool _enableButtons;
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
         {
@@ -119,17 +125,84 @@ namespace BIT_DesktopApp.ViewModels
             { 
                 _selectedServiceRequest = value;
                 OnPropertyChanged("SelectedServiceRequest");
+                EnableButtons = true;
 
                 // TODO list of contractors is not appearing in the combobox
                 Contractors availableContractors = new Contractors(SelectedServiceRequest.SkillCategory, SelectedServiceRequest.Suburb, SelectedServiceRequest.DateCreated);
+                if(availableContractors.Count == 0)
+                {
+                    Contractor empty = new Contractor();
+                    empty.FullName = "There are no available contractors for this job.";
+                    this.AvailableContractors = new ObservableCollection<Contractor>();
+                    AvailableContractors.Add(empty);
+                }
                 this.AvailableContractors = new ObservableCollection<Contractor>(availableContractors);
+            }
+        }
+        public RelayCommand UpdateServiceRequest
+        {
+            get
+            {
+                if (_updateServiceRequest == null)
+                {
+                    _updateServiceRequest = new RelayCommand(this.UpdateServiceRequestMethod, true);
+                }
+                return _updateServiceRequest;
+            }
+            set { _updateServiceRequest = value; }
+        }
+        public bool EnableUpdate
+        {
+            get { return _enableUpdate; }
+            set
+            {
+                _enableUpdate = value;
+                OnPropertyChanged("EnableUpdate");
+
+                if (SelectedServiceRequest.ServiceRequestID != null)
+                {
+                    if (value)
+                    {
+                        MessageBox.Show($"Updating details for Service Request ID: \"{SelectedServiceRequest.ServiceRequestID}\".");
+                        EnableFields = true;
+                    }
+                    else
+                    {
+                        UpdateServiceRequest.Execute(this);
+                        EnableFields = false;
+                        EnableButtons = false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You must select a Service Request record before editing.");
+                }
+
+            }
+        }
+        public bool EnableFields
+        {
+            get { return _enableFields; }
+            set
+            {
+                _enableFields = value;
+                OnPropertyChanged("EnableFields");
+            }
+        }
+        public bool EnableButtons
+        {
+            get { return _enableButtons; }
+            set
+            {
+                _enableButtons = value;
+                OnPropertyChanged("EnableButtons");
             }
         }
         public string UnassignedTabHeader { get; set; }
         public string CompletedTabHeader { get; set; }
 
 
-        public ServiceRequestViewModel()
+        public void RefreshGrid()
         {
             ServiceRequests allServiceRequests = new ServiceRequests();
             this.AllServiceRequests = new ObservableCollection<ServiceRequest>(allServiceRequests);
@@ -146,6 +219,25 @@ namespace BIT_DesktopApp.ViewModels
 
             ServiceRequests assignedServiceRequests = new ServiceRequests("Assigned", "Accepted");
             this.AssignedServiceRequests = new ObservableCollection<ServiceRequest>(assignedServiceRequests);
+        }
+        public void UpdateServiceRequestMethod()
+        {
+            try
+            {
+                string message = SelectedServiceRequest.UpdateServiceRequest();
+                MessageBox.Show(message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"There was a problem with updating Service Request ID: \"{SelectedServiceRequest.ServiceRequestID}\". Please try again or contact an Administrator.");
+            }
+            RefreshGrid();
+        }
+
+
+        public ServiceRequestViewModel()
+        {
+            RefreshGrid();
 
             JobStates jobStates = new JobStates();
             this.JobStates = new ObservableCollection<JobState>(jobStates);

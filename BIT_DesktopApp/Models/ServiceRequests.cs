@@ -16,7 +16,7 @@ namespace BIT_DesktopApp.Models
         public ServiceRequests()
         {
             _db = new SQLHelper();
-            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS [Contractor_Name], c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
+            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS ContractorName, c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
                 "FROM Service_Request AS sr " +
                 "INNER JOIN Client AS c ON sr.Client_ID = c.Client_ID " +
                 "INNER JOIN Payment_State AS ps ON sr.Payment_Status = ps.Payment_Status " +
@@ -33,7 +33,7 @@ namespace BIT_DesktopApp.Models
         public ServiceRequests(string jobStatus)
         {
             _db = new SQLHelper();
-            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS [Contractor_Name], c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
+            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS ContractorName, c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
                 "FROM Service_Request AS sr " +
                 "INNER JOIN Client AS c ON sr.Client_ID = c.Client_ID " +
                 "INNER JOIN Payment_State AS ps ON sr.Payment_Status = ps.Payment_Status " +
@@ -54,7 +54,7 @@ namespace BIT_DesktopApp.Models
         public ServiceRequests(string jobStatus1, string jobStatus2)
         {
             _db = new SQLHelper();
-            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS [Contractor_Name], c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
+            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS ContractorName, c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
                 "FROM Service_Request AS sr " +
                 "INNER JOIN Client AS c ON sr.Client_ID = c.Client_ID " +
                 "INNER JOIN Payment_State AS ps ON sr.Payment_Status = ps.Payment_Status " +

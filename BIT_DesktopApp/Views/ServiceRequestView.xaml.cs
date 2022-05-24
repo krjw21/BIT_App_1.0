@@ -31,45 +31,5 @@ namespace BIT_DesktopApp.Views
         {
 
         }
-
-        private void btnUpdate_Checked(object sender, RoutedEventArgs e)
-        {
-            txtBusinessName.IsEnabled = true;
-            txtContactName.IsEnabled = true;
-            dpDateCreated.IsEnabled = true;
-            dpDateCompleted.IsEnabled = true;
-            cmbJobStatus.IsEnabled = true;
-            cmbPaymentStatus.IsEnabled = true;
-            cmbAssignedContractor.IsEnabled = true;
-            txtStreet.IsEnabled = true;
-            txtSuburb.IsEnabled = true;
-            txtState.IsEnabled = true;
-            txtPostcode.IsEnabled = true;
-            cmbPriority.IsEnabled = true;
-            cmbSkillCategory.IsEnabled = true;
-            txtHoursWorked.IsEnabled = true;
-            txtDistanceTravelled.IsEnabled = true;
-            btnUpdate.Content = "Save";
-        }
-
-        private void btnUpdate_Unchecked(object sender, RoutedEventArgs e)
-        {
-            txtBusinessName.IsEnabled = false;
-            txtContactName.IsEnabled = false;
-            dpDateCreated.IsEnabled = false;
-            dpDateCompleted.IsEnabled = false;
-            cmbJobStatus.IsEnabled = false;
-            cmbPaymentStatus.IsEnabled = false;
-            cmbAssignedContractor.IsEnabled = false;
-            txtStreet.IsEnabled = false;
-            txtSuburb.IsEnabled = false;
-            txtState.IsEnabled = false;
-            txtPostcode.IsEnabled = false;
-            cmbPriority.IsEnabled = false;
-            cmbSkillCategory.IsEnabled = false;
-            txtHoursWorked.IsEnabled = false;
-            txtDistanceTravelled.IsEnabled = false;
-            btnUpdate.Content = "Edit";
-        }
     }
 }
