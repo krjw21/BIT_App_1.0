@@ -45,14 +45,11 @@
                         <DataGridTextColumn Binding="{Binding JobStatus}" Header="Job Status"/>
                         <DataGridTextColumn Binding="{Binding PaymentStatus}" Header="Payment Status"/>
                         <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=dd/MM/yyyy}" Header="Date Created"/>
-                        <DataGridTextColumn Binding="{Binding DateCompleted, StringFormat=dd/MM/yyyy}" Header="Date Completed"/>
-                        <DataGridTextColumn Binding="{Binding ContractorName}" Header="Contractor"/>
+                        <DataGridTextColumn Binding="{Binding FullName}" Header="Contractor"/>
                         <DataGridTextColumn Binding="{Binding Street}" Header="Street"/>
                         <DataGridTextColumn Binding="{Binding State}" Header="State"/>
                         <DataGridTextColumn Binding="{Binding Suburb}" Header="Suburb"/>
                         <DataGridTextColumn Binding="{Binding Postcode}" Header="Postcode"/>
-                        <DataGridTextColumn Binding="{Binding HoursWorked}" Header="Hours"/>
-                        <DataGridTextColumn Binding="{Binding DistanceTravelled}" Header="KMs"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
@@ -67,14 +64,11 @@
                         <DataGridTextColumn Binding="{Binding JobStatus}" Header="Job Status"/>
                         <DataGridTextColumn Binding="{Binding PaymentStatus}" Header="Payment Status"/>
                         <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=dd/MM/yyyy}" Header="Date Created"/>
-                        <DataGridTextColumn Binding="{Binding DateCompleted, StringFormat=dd/MM/yyyy}" Header="Date Completed"/>
-                        <DataGridTextColumn Binding="{Binding ContractorName}" Header="Contractor"/>
+                        <DataGridTextColumn Binding="{Binding FullName}" Header="Contractor"/>
                         <DataGridTextColumn Binding="{Binding Street}" Header="Street"/>
                         <DataGridTextColumn Binding="{Binding State}" Header="State"/>
                         <DataGridTextColumn Binding="{Binding Suburb}" Header="Suburb"/>
                         <DataGridTextColumn Binding="{Binding Postcode}" Header="Postcode"/>
-                        <DataGridTextColumn Binding="{Binding HoursWorked}" Header="Hours"/>
-                        <DataGridTextColumn Binding="{Binding DistanceTravelled}" Header="KMs"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
@@ -93,7 +87,7 @@
                         <DataGridTextColumn Binding="{Binding PaymentStatus}" Header="Payment Status"/>
                         <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=dd/MM/yyyy}" Header="Date Created"/>
                         <DataGridTextColumn Binding="{Binding DateCompleted, StringFormat=dd/MM/yyyy}" Header="Date Completed"/>
-                        <DataGridTextColumn Binding="{Binding ContractorName}" Header="Contractor"/>
+                        <DataGridTextColumn Binding="{Binding FullName}" Header="Contractor"/>
                         <DataGridTextColumn Binding="{Binding Street}" Header="Street"/>
                         <DataGridTextColumn Binding="{Binding State}" Header="State"/>
                         <DataGridTextColumn Binding="{Binding Suburb}" Header="Suburb"/>
@@ -115,7 +109,7 @@
                         <DataGridTextColumn Binding="{Binding PaymentStatus}" Header="Payment Status"/>
                         <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=dd/MM/yyyy}" Header="Date Created"/>
                         <DataGridTextColumn Binding="{Binding DateCompleted, StringFormat=dd/MM/yyyy}" Header="Date Completed"/>
-                        <DataGridTextColumn Binding="{Binding ContractorName}" Header="Contractor"/>
+                        <DataGridTextColumn Binding="{Binding FullName}" Header="Contractor"/>
                         <DataGridTextColumn Binding="{Binding Street}" Header="Street"/>
                         <DataGridTextColumn Binding="{Binding State}" Header="State"/>
                         <DataGridTextColumn Binding="{Binding Suburb}" Header="Suburb"/>
@@ -167,8 +161,7 @@
             <Border Grid.Column="2" Grid.RowSpan="6" BorderBrush="#B8A5AE" BorderThickness="1,0,0,0" Margin="2"/>
             <!-- Last Two Columns data -->
             <Label Content="Assigned Contractor:" Grid.Row="0" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-            <!-- TODO selected service requests contractor is not appearing -->
-            <ComboBox x:Name="cmbAssignedContractor" ItemsSource="{Binding AvailableContractors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" Text="{Binding SelectedServiceRequest.ContractorName}" Grid.Row="0" Grid.Column="3" Margin="5,5,50,5" IsEnabled="{Binding EnableFields}"/>
+            <ComboBox x:Name="cmbAssignedContractor" ItemsSource="{Binding AvailableContractors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" Text="{Binding SelectedServiceRequest.FullName}" Grid.Row="0" Grid.Column="3" Margin="5,5,50,5" IsEnabled="{Binding EnableFields}" IsEditable="True"/>
             <Label Content="Street:" Grid.Row="1" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
             <TextBox x:Name="txtStreet" Text="{Binding SelectedServiceRequest.Street}" Grid.Row="1" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
             <Label Content="Suburb:" Grid.Row="2" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>

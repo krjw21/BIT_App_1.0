@@ -119,6 +119,8 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("SelectedContractor");
                 EnableButtons = true;
                 EnableSuburbRemove = false;
+                EnableFields = false;
+                EnableUpdate = false;
             }
         }
         public Skill SelectedSkill
@@ -271,28 +273,33 @@ namespace BIT_DesktopApp.ViewModels
                 _enableUpdate = value;
                 OnPropertyChanged("EnableUpdate");
 
-                if (SelectedContractor.ContractorID != null)
+                if(SelectedContractor != null)
                 {
-                    if (value)
+                    if (SelectedContractor.ContractorID != null)
                     {
-                        MessageBox.Show($"Updating details for the Contractor: \"{SelectedContractor.FirstName} {SelectedContractor.LastName}\".");
-                        EnableFields = true;
-                        EnableAdd = false;
+                        if (value)
+                        {
+                            MessageBox.Show($"Updating details for the Contractor: \"{SelectedContractor.FirstName} {SelectedContractor.LastName}\".");
+                            EnableFields = true;
+                            EnableAdd = false;
+                        }
+                        else
+                        {
+                            if (EnableFields == true)
+                            {
+                                UpdateContractorCommand.Execute(this);
+                            }
+                            EnableFields = false;
+                            EnableAdd = true;
+                            this.ContractorSkills.Clear();
+                            this.ContractorSuburbs.Clear();
+                            this.ContractorAvailabilities.Clear();
+                        }
                     }
                     else
                     {
-                        UpdateContractorCommand.Execute(this);
-                        EnableFields = false;
-                        EnableButtons = false;
-                        EnableAdd = true;
-                        this.ContractorSkills.Clear();
-                        this.ContractorSuburbs.Clear();
-                        this.ContractorAvailabilities.Clear();
+                        MessageBox.Show("You must select a Contractor record before editing.");
                     }
-                }
-                else
-                {
-                    MessageBox.Show("You must select a Contractor record before editing.");
                 }
             }
         }
@@ -414,6 +421,7 @@ namespace BIT_DesktopApp.ViewModels
                 MessageBox.Show($"There was a problem with updating Contractor: \"{SelectedContractor.FirstName} {SelectedContractor.LastName}\". Please try again or contact an Administrator.");
             }
             RefreshGrid();
+            EnableButtons = false;
         }
         public void DeleteContractorMethod()
         {

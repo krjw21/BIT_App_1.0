@@ -40,8 +40,8 @@ namespace BIT_DesktopApp.ViewModels
         public ObservableCollection<ServiceRequest> AllServiceRequests
         {
             get { return _allServiceRequests; }
-            set 
-            { 
+            set
+            {
                 _allServiceRequests = value;
                 OnPropertyChanged("AllServiceRequests");
             }
@@ -73,7 +73,7 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("AssignedServiceRequests");
             }
         }
-        public ObservableCollection <JobState> JobStates
+        public ObservableCollection<JobState> JobStates
         {
             get { return _jobStates; }
             set
@@ -121,22 +121,24 @@ namespace BIT_DesktopApp.ViewModels
         public ServiceRequest SelectedServiceRequest
         {
             get { return _selectedServiceRequest; }
-            set 
-            { 
+            set
+            {
                 _selectedServiceRequest = value;
                 OnPropertyChanged("SelectedServiceRequest");
                 EnableButtons = true;
+                EnableFields = false;
+                EnableUpdate = false;
 
-                // TODO list of contractors is not appearing in the combobox
-                Contractors availableContractors = new Contractors(SelectedServiceRequest.SkillCategory, SelectedServiceRequest.Suburb, SelectedServiceRequest.DateCreated);
-                if(availableContractors.Count == 0)
+                // TODO 1. No contractors available message display in datagrid AND 2. after updating, when switching tabs and clicking again, updated data dissapears
+                if (SelectedServiceRequest != null)
                 {
-                    Contractor empty = new Contractor();
-                    empty.FullName = "There are no available contractors for this job.";
-                    this.AvailableContractors = new ObservableCollection<Contractor>();
-                    AvailableContractors.Add(empty);
+                    Contractors availableContractors = new Contractors(SelectedServiceRequest.SkillCategory, SelectedServiceRequest.Suburb, SelectedServiceRequest.DateCreated);
+                    if (availableContractors.Count == 0 || availableContractors == null)
+                    {
+                        MessageBox.Show("There are no available Contractors for this job.");
+                    }
+                    this.AvailableContractors = new ObservableCollection<Contractor>(availableContractors);
                 }
-                this.AvailableContractors = new ObservableCollection<Contractor>(availableContractors);
             }
         }
         public RelayCommand UpdateServiceRequest
@@ -159,25 +161,29 @@ namespace BIT_DesktopApp.ViewModels
                 _enableUpdate = value;
                 OnPropertyChanged("EnableUpdate");
 
-                if (SelectedServiceRequest.ServiceRequestID != null)
+                if (SelectedServiceRequest != null)
                 {
-                    if (value)
+                    if (SelectedServiceRequest.ServiceRequestID != null)
                     {
-                        MessageBox.Show($"Updating details for Service Request ID: \"{SelectedServiceRequest.ServiceRequestID}\".");
-                        EnableFields = true;
+                        if (value)
+                        {
+                            MessageBox.Show($"Updating details for Service Request ID: \"{SelectedServiceRequest.ServiceRequestID}\".");
+                            EnableFields = true;
+                        }
+                        else
+                        {
+                            if (EnableFields == true)
+                            {
+                                UpdateServiceRequest.Execute(this);
+                            }
+                            EnableFields = false;
+                        }
                     }
                     else
                     {
-                        UpdateServiceRequest.Execute(this);
-                        EnableFields = false;
-                        EnableButtons = false;
+                        MessageBox.Show("You must select a Service Request record before editing.");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("You must select a Service Request record before editing.");
-                }
-
             }
         }
         public bool EnableFields
@@ -232,6 +238,7 @@ namespace BIT_DesktopApp.ViewModels
                 MessageBox.Show($"There was a problem with updating Service Request ID: \"{SelectedServiceRequest.ServiceRequestID}\". Please try again or contact an Administrator.");
             }
             RefreshGrid();
+            EnableButtons = false;
         }
 
 

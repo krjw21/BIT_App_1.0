@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace BIT_DesktopApp.Models
         public ServiceRequests()
         {
             _db = new SQLHelper();
-            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS ContractorName, c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
+            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS FullName, c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
                 "FROM Service_Request AS sr " +
                 "INNER JOIN Client AS c ON sr.Client_ID = c.Client_ID " +
                 "INNER JOIN Payment_State AS ps ON sr.Payment_Status = ps.Payment_Status " +
@@ -30,17 +30,18 @@ namespace BIT_DesktopApp.Models
                 this.Add(newServiceRequest);
             }
         }
-        public ServiceRequests(string jobStatus)
+        public ServiceRequests(string jobStatus) // query for retrieving list of "Completed" Service Requests with a Payment Status of "Unpaid" or "Declined".
         {
             _db = new SQLHelper();
-            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS ContractorName, c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
+            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS FullName, c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
                 "FROM Service_Request AS sr " +
                 "INNER JOIN Client AS c ON sr.Client_ID = c.Client_ID " +
                 "INNER JOIN Payment_State AS ps ON sr.Payment_Status = ps.Payment_Status " +
                 "INNER JOIN Job_State AS js ON sr.Job_Status = js.Job_Status " +
                 "INNER JOIN Priority_State AS prs ON sr.Priority = prs.Priority " +
                 "LEFT JOIN Contractor AS ct ON sr.Contractor_ID = ct.Contractor_ID " +
-                "WHERE sr.Job_Status = @JobStatus";
+                "WHERE sr.Job_Status = @JobStatus " +
+                "AND sr.Payment_Status IN ('Unpaid', 'Declined')";
             SqlParameter[] objParameters = new SqlParameter[1];
             objParameters[0] = new SqlParameter("@JobStatus", DbType.String);
             objParameters[0].Value = jobStatus;
@@ -54,7 +55,7 @@ namespace BIT_DesktopApp.Models
         public ServiceRequests(string jobStatus1, string jobStatus2)
         {
             _db = new SQLHelper();
-            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS ContractorName, c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
+            string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS FullName, c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
                 "FROM Service_Request AS sr " +
                 "INNER JOIN Client AS c ON sr.Client_ID = c.Client_ID " +
                 "INNER JOIN Payment_State AS ps ON sr.Payment_Status = ps.Payment_Status " +

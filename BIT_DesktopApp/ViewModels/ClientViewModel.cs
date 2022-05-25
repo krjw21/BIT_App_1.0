@@ -47,6 +47,8 @@ namespace BIT_DesktopApp.ViewModels
                 _selectedClient = value;
                 OnPropertyChanged("SelectedClient");
                 EnableButtons = true;
+                EnableFields = false;
+                EnableUpdate = false;
             }
         }
         public RelayCommand UpdateClient
@@ -81,27 +83,31 @@ namespace BIT_DesktopApp.ViewModels
                 _enableUpdate = value;
                 OnPropertyChanged("EnableUpdate");
 
-                if (SelectedClient.ClientID != null)
+                if (SelectedClient != null)
                 {
-                    if (value)
+                    if(SelectedClient.ClientID != null)
                     {
-                        MessageBox.Show($"Updating details for the Client: \"{SelectedClient.BusinessName}\".");
-                        EnableFields = true;
-                        EnableAdd = false;
+                        if (value)
+                        {
+                            MessageBox.Show($"Updating details for the Client: \"{SelectedClient.BusinessName}\".");
+                            EnableFields = true;
+                            EnableAdd = false;
+                        }
+                        else
+                        {
+                            if (EnableFields == true)
+                            {
+                                UpdateClient.Execute(this);
+                            }
+                            EnableFields = false;
+                            EnableAdd = true;
+                        }
                     }
                     else
                     {
-                        UpdateClient.Execute(this);
-                        EnableFields = false;
-                        EnableButtons = false;
-                        EnableAdd = true;
+                        MessageBox.Show("You must select a Client record before editing.");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("You must select a Client record before editing.");
-                }
-
             }
         }
         public bool EnableFields
@@ -150,6 +156,7 @@ namespace BIT_DesktopApp.ViewModels
                 MessageBox.Show($"There was a problem with updating Client: \"{SelectedClient.BusinessName}\". Please try again or contact an Administrator.");
             }
             RefreshGrid();
+            EnableButtons = false;
         }
         public void DeleteClientMethod()
         {
@@ -177,11 +184,6 @@ namespace BIT_DesktopApp.ViewModels
 
         public ClientViewModel()
         {
-            SelectedClient = new Client();
-            if (SelectedClient.ClientID == 0)
-            {
-                SelectedClient.ClientID = null;
-            }
             EnableButtons = false;
             EnableAdd = true;
             RefreshGrid();

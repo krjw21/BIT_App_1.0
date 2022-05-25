@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +70,10 @@ namespace BIT_DesktopApp.DAL
         {
             for (int i = 0; i < parameters.Length; i++)
             {
+                if(parameters[i].Value == null)
+                {
+                    parameters[i].Value = DBNull.Value;
+                }
                 objCommand.Parameters.Add(parameters[i]);
             }
         }

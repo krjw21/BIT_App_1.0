@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,10 +36,14 @@ namespace BIT_DesktopApp.Models
         }
 
 
-        public int? ContractorID
-        {
-            get { return _contractorID; }
-            set { _contractorID = value; }
+        public int? ContractorID 
+        { 
+            get => _contractorID;
+            set
+            {
+                _contractorID = value;
+                OnPropertyChanged("ContractorID");
+            }
         }
         public string FirstName
         {
@@ -226,7 +230,7 @@ namespace BIT_DesktopApp.Models
             this.ContractorID = Convert.ToInt32(dr["Contractor_ID"].ToString());
             this.FirstName = dr["First_Name"].ToString();
             this.LastName = dr["Last_Name"].ToString();
-            this.FullName = this.FirstName + " " + this.LastName;
+            this.FullName = dr["FullName"].ToString();
             this.DOB = Convert.ToDateTime(dr["DOB"].ToString());
             this.Email = dr["Email"].ToString();
             this.Phone = dr["Phone"].ToString();

@@ -47,6 +47,8 @@ namespace BIT_DesktopApp.ViewModels
                 _selectedCoordinator = value;
                 OnPropertyChanged("SelectedCoordinator");
                 EnableButtons = true;
+                EnableFields = false;
+                EnableUpdate = false;
             }
         }
         public RelayCommand UpdateCoordinator
@@ -81,25 +83,30 @@ namespace BIT_DesktopApp.ViewModels
                 _enableUpdate = value;
                 OnPropertyChanged("EnableUpdate");
 
-                if (SelectedCoordinator.CoordinatorID != null)
+                if(SelectedCoordinator != null)
                 {
-                    if (value)
+                    if (SelectedCoordinator.CoordinatorID != null)
                     {
-                        MessageBox.Show($"Updating details for the Co-ordinator: \"{SelectedCoordinator.FirstName} {SelectedCoordinator.LastName}\".");
-                        EnableFields = true;
-                        EnableAdd = false;
+                        if (value)
+                        {
+                            MessageBox.Show($"Updating details for the Co-ordinator: \"{SelectedCoordinator.FirstName} {SelectedCoordinator.LastName}\".");
+                            EnableFields = true;
+                            EnableAdd = false;
+                        }
+                        else
+                        {
+                            if (EnableFields == true)
+                            {
+                                UpdateCoordinator.Execute(this);
+                            }
+                            EnableFields = false;
+                            EnableAdd = true;
+                        }
                     }
                     else
                     {
-                        UpdateCoordinator.Execute(this);
-                        EnableFields = false;
-                        EnableButtons = false;
-                        EnableAdd = true;
+                        MessageBox.Show("You must select a Co-ordinator record before editing.");
                     }
-                }
-                else
-                {
-                    MessageBox.Show("You must select a Co-ordinator record before editing.");
                 }
             }
         }
@@ -149,6 +156,7 @@ namespace BIT_DesktopApp.ViewModels
                 MessageBox.Show($"There was a problem with updating Co-ordinator: \"{SelectedCoordinator.FirstName} {SelectedCoordinator.LastName}\". Please try again or contact an Administrator.");
             }
             RefreshGrid();
+            EnableButtons = false;
         }
         public void DeleteCoordinatorMethod()
         {
@@ -175,11 +183,6 @@ namespace BIT_DesktopApp.ViewModels
 
         public CoordinatorViewModel()
         {
-            SelectedCoordinator = new Coordinator();
-            if (SelectedCoordinator.CoordinatorID == 0)
-            {
-                SelectedCoordinator.CoordinatorID = null;
-            }
             EnableButtons = false;
             EnableAdd = true;
             RefreshGrid();

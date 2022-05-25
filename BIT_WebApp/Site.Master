@@ -81,40 +81,38 @@
                 </div>
             </nav>
         </div>
-
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
         </asp:ContentPlaceHolder>
-
-        <div class="footer">
-            <div style="display: flex; flex-direction: column; align-items: center">
-                <img src="../Images/BIT_Logo_Extended_Transparent.png" width="400" style="margin: -150px 0 -150px 0;"/>
-                <p><em>Supporting local businesses all over Australia.</em></p>
-                <p>© 2022 BIT Services Pty Ltd.</p>
+            <div class="footer">
+                <div style="display: flex; flex-direction: column; align-items: center">
+                    <img src="../Images/BIT_Logo_Extended_Transparent.png" width="400" style="margin: -150px 0 -150px 0;" />
+                    <p><em>Supporting local businesses all over Australia.</em></p>
+                    <p>© 2022 BIT Services Pty Ltd.</p>
+                </div>
+                <div class="footer-list">
+                    <h5>OVERVIEW</h5>
+                    <a href="Terms.aspx">Terms & Conditions</a>
+                    <a href="Privacy.aspx">Privacy Policy</a>
+                    <a href="About.aspx">About Us</a>
+                    <a href="Services.aspx">Our Services</a>
+                    <a href="Contact.aspx">Contact Information</a>
+                </div>
+                <div class="footer-list">
+                    <h5>FOLLOW US</h5>
+                    <div>
+                        <img src="../Images/facebook-pastel.png" width="40" /><em>facebook.com/BIT_Services</em>
+                    </div>
+                    <div>
+                        <img src="../Images/instagram-pastel.png" width="40" /><em>@BIT_Services</em>
+                    </div>
+                    <div>
+                        <img src="../Images/twitter-pastel.png" width="40" /><em>@BITSupportServices</em>
+                    </div>
+                    <div>
+                        <img src="../Images/linkedin.png" width="40" /><em>linkedin.com/BIT_Pty_Ltd</em>
+                    </div>
+                </div>
             </div>
-            <div class="footer-list">
-                <h5>OVERVIEW</h5>
-                <a href="Terms.aspx">Terms & Conditions</a>
-                <a href="Privacy.aspx">Privacy Policy</a>
-                <a href="About.aspx">About Us</a>
-                <a href="Services.aspx">Our Services</a>
-                <a href="Contact.aspx">Contact Information</a>
-            </div>
-            <div class="footer-list">
-                <h5>FOLLOW US</h5>
-                <div>
-                    <img src="../Images/facebook-pastel.png" width="40" /><em>facebook.com/BIT_Services</em>
-                </div>
-                <div>
-                    <img src="../Images/instagram-pastel.png" width="40" /><em>@BIT_Services</em>
-                </div>
-                <div>
-                    <img src="../Images/twitter-pastel.png" width="40" /><em>@BITSupportServices</em>
-                </div>
-                <div>
-                    <img src="../Images/linkedin.png" width="40" /><em>linkedin.com/BIT_Pty_Ltd</em>
-                </div>
-            </div>
-        </div>
     </form>
 </body>
 </html>

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace BIT_DesktopApp.Models
         private int _clientID;
         private int? _contractorID;
         private int? _coordinatorID;
-        private string _contractorName;
+        private string _fullName;
         private string _businessName;
         private string _contactName;
         private string _skillCategory;
@@ -55,21 +55,29 @@ namespace BIT_DesktopApp.Models
         }
         public int? ContractorID 
         { 
-            get => _contractorID; 
-            set => _contractorID = value; 
+            get => _contractorID;
+            set
+            {
+                _contractorID = value;
+                OnPropertyChanged("ContractorID");
+            }
         }
         public int? CoordinatorID 
         { 
-            get => _coordinatorID; 
-            set => _coordinatorID = value; 
-        }
-        public string ContractorName
-        {
-            get => _contractorName;
+            get => _coordinatorID;
             set
             {
-                _contractorName = value;
-                OnPropertyChanged("ContractorName");
+                _coordinatorID = value;
+                OnPropertyChanged("CoordinatorID");
+            }
+        }
+        public string FullName
+        {
+            get => _fullName;
+            set
+            {
+                _fullName = value;
+                OnPropertyChanged("FullName");
             }
         }
         public string BusinessName
@@ -202,39 +210,59 @@ namespace BIT_DesktopApp.Models
 
         public string UpdateServiceRequest()
         {
-            string sql = "UPDATE Service_Request SET Contractor_ID = (SELECT Contractor_ID FROM Contractor WHERE First_Name = @FirstName AND Last_Name = @LastName), Skill_Category = @SkillCategory, Priority = @Priority, Job_Status = @JobStatus, Payment_Status = @PaymentStatus, Date_Created = @DateCreated, Date_Completed = @DateCompleted, Street = @Street, Suburb = @Suburb, [State] = @State, Postcode = @Postcode, Hours_Worked = @HoursWorked, Distance_Travelled = @DistanceTravelled WHERE Service_Request_ID = @ServiceRequestID";
-            string[] contractorName = ContractorName.Split(' ');
-            SqlParameter[] objParameters = new SqlParameter[11];
-            objParameters[2] = new SqlParameter("@FirstName", DbType.String);
-            objParameters[2].Value = contractorName[0];
-            objParameters[3] = new SqlParameter("@LastName", DbType.String);
-            objParameters[3].Value = contractorName[1];
-            objParameters[4] = new SqlParameter("@SkillCategory", DbType.String);
-            objParameters[4].Value = this.SkillCategory;
-            objParameters[5] = new SqlParameter("@Priority", DbType.String);
-            objParameters[5].Value = this.Priority;
+            string sql = "UPDATE Service_Request " +
+                "SET Contractor_ID = (SELECT Contractor_ID FROM Contractor WHERE First_Name = @FirstName AND Last_Name = @LastName), " +
+                "Skill_Category = @SkillCategory, " +
+                "Priority = @Priority, " +
+                "Job_Status = @JobStatus, " +
+                "Payment_Status = @PaymentStatus, " +
+                "Date_Created = @DateCreated, " +
+                "Date_Completed = @DateCompleted, " +
+                "Street = @Street, Suburb = @Suburb, " +
+                "[State] = @State, Postcode = @Postcode, " +
+                "Hours_Worked = @HoursWorked, " +
+                "Distance_Travelled = @DistanceTravelled " +
+                "WHERE Service_Request_ID = @ServiceRequestID";
+            string[] contractorName = FullName.Split(' ');
+            SqlParameter[] objParameters = new SqlParameter[15];
+            objParameters[0] = new SqlParameter("@FirstName", DbType.String);
+            objParameters[0].Value = contractorName[0];
+            if(contractorName.Length < 2)
+            {
+                objParameters[1] = new SqlParameter("@LastName", DbType.String);
+                objParameters[1].Value = ' ';
+            }
+            else
+            {
+                objParameters[1] = new SqlParameter("@LastName", DbType.String);
+                objParameters[1].Value = contractorName[1];
+            }
+            objParameters[2] = new SqlParameter("@SkillCategory", DbType.String);
+            objParameters[2].Value = this.SkillCategory;
+            objParameters[3] = new SqlParameter("@Priority", DbType.String);
+            objParameters[3].Value = this.Priority;
             objParameters[4] = new SqlParameter("@JobStatus", DbType.String);
             objParameters[4].Value = this.JobStatus;
             objParameters[5] = new SqlParameter("@PaymentStatus", DbType.String);
             objParameters[5].Value = this.PaymentStatus;
-            objParameters[5] = new SqlParameter("@DateCreated", DbType.String);
-            objParameters[5].Value = this.DateCreated;
-            objParameters[5] = new SqlParameter("@DateCompleted", DbType.String);
-            objParameters[5].Value = this.DateCompleted;
-            objParameters[6] = new SqlParameter("@Street", DbType.String);
-            objParameters[6].Value = this.Street;
-            objParameters[7] = new SqlParameter("@Suburb", DbType.String);
-            objParameters[7].Value = this.Suburb;
-            objParameters[8] = new SqlParameter("@State", DbType.String);
-            objParameters[8].Value = this.State;
-            objParameters[9] = new SqlParameter("@Postcode", DbType.String);
-            objParameters[9].Value = this.Postcode;
-            objParameters[8] = new SqlParameter("@HoursWorked", DbType.String);
-            objParameters[8].Value = this.HoursWorked;
-            objParameters[9] = new SqlParameter("@DistanceTravelled", DbType.String);
-            objParameters[9].Value = this.DistanceTravelled;
-            objParameters[10] = new SqlParameter("@ServiceRequestID", DbType.String);
-            objParameters[10].Value = this.ServiceRequestID;
+            objParameters[6] = new SqlParameter("@DateCreated", DbType.String);
+            objParameters[6].Value = this.DateCreated;
+            objParameters[7] = new SqlParameter("@DateCompleted", DbType.String);
+            objParameters[7].Value = this.DateCompleted;
+            objParameters[8] = new SqlParameter("@Street", DbType.String);
+            objParameters[8].Value = this.Street;
+            objParameters[9] = new SqlParameter("@Suburb", DbType.String);
+            objParameters[9].Value = this.Suburb;
+            objParameters[10] = new SqlParameter("@State", DbType.String);
+            objParameters[10].Value = this.State;
+            objParameters[11] = new SqlParameter("@Postcode", DbType.String);
+            objParameters[11].Value = this.Postcode;
+            objParameters[12] = new SqlParameter("@HoursWorked", DbType.String);
+            objParameters[12].Value = this.HoursWorked;
+            objParameters[13] = new SqlParameter("@DistanceTravelled", DbType.String);
+            objParameters[13].Value = this.DistanceTravelled;
+            objParameters[14] = new SqlParameter("@ServiceRequestID", DbType.String);
+            objParameters[14].Value = this.ServiceRequestID;
 
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
@@ -272,7 +300,7 @@ namespace BIT_DesktopApp.Models
             {
                 this.CoordinatorID = null;
             }
-            this.ContractorName = dr["ContractorName"].ToString();
+            this.FullName = dr["FullName"].ToString();
             this.BusinessName = dr["Business_Name"].ToString();
             this.ContactName = $"{dr["First_Name"]} {dr["Last_Name"]}";
             this.SkillCategory = dr["Skill_Category"].ToString();

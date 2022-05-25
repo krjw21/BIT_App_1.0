@@ -33,6 +33,7 @@
     width: 100%;
     height: 1000px;
     display: inline-block;
+    top: -200px;
 }
 
 .hp-header {

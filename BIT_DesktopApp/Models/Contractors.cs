@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace BIT_DesktopApp.Models
         public Contractors()
         {
             _db = new SQLHelper();
-            string sql = "SELECT Contractor_ID, First_Name, Last_Name, DOB, Email, Phone, Street, Suburb, [State], Postcode, Password FROM Contractor WHERE [Status] = 1";
+            string sql = "SELECT Contractor_ID, First_Name, Last_Name, First_Name + ' ' + Last_Name AS FullName, DOB, Email, Phone, Street, Suburb, [State], Postcode, Password FROM Contractor WHERE [Status] = 1";
             DataTable dataTable = _db.ExecuteSQL(sql);
 
             foreach (DataRow dr in dataTable.Rows)
@@ -26,11 +26,11 @@ namespace BIT_DesktopApp.Models
             }
         }
 
-        // TODO WPF implement contractor assignment for service requests
+        // SQL query to list all available Contractors for a specific Service Sequest
         public Contractors(string skill, string suburb, DateTime date)
         {
             _db = new SQLHelper();
-            string sql = "SELECT * " +
+            string sql = "SELECT c.Contractor_ID, c.First_Name, c.Last_Name, c.First_Name + ' ' + c.Last_Name AS FullName, c.DOB, c.Email, c.Phone, c.Street, c.Suburb, c.[State], c.Postcode, c.Password " +
                 "FROM Contractor AS c " +
                 "INNER JOIN Contractor_Skill AS csk ON c.Contractor_ID = csk.Contractor_ID AND (csk.Skill_Category = @Skill AND csk.Status = 1) " +
                 "INNER JOIN Contractor_Suburb AS csb ON c.Contractor_ID = csb.Contractor_ID AND csb.Suburb_Name = @Suburb " +
