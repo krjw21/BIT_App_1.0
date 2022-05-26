@@ -210,6 +210,7 @@
     <Compile Include="ViewModels\AddClientViewModel.cs" />
     <Compile Include="ViewModels\AddContractorViewModel.cs" />
     <Compile Include="ViewModels\AddCoordinatorViewModel.cs" />
+    <Compile Include="ViewModels\AddServiceRequestViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
     <Compile Include="ViewModels\ContractorViewModel.cs" />
     <Compile Include="ViewModels\CoordinatorViewModel.cs" />
@@ -222,6 +223,9 @@
     </Compile>
     <Compile Include="Views\AddCoordinatorView.xaml.cs">
       <DependentUpon>AddCoordinatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddServiceRequestView.xaml.cs">
+      <DependentUpon>AddServiceRequestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ClientView.xaml.cs">
       <DependentUpon>ClientView.xaml</DependentUpon>
@@ -261,6 +265,10 @@
     <Page Include="Views\AddCoordinatorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AddServiceRequestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ClientView.xaml">
       <Generator>MSBuild:Compile</Generator>

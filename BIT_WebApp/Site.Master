@@ -80,9 +80,11 @@
                     </ul>
                 </div>
             </nav>
+            <div class="spacer1 layer1"></div>
         </div>
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
         </asp:ContentPlaceHolder>
+        <div class="spacer2 layer2">
             <div class="footer">
                 <div style="display: flex; flex-direction: column; align-items: center">
                     <img src="../Images/BIT_Logo_Extended_Transparent.png" width="400" style="margin: -150px 0 -150px 0;" />
@@ -113,6 +115,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </form>
 </body>
 </html>

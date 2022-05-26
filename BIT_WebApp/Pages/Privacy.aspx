@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-        <div style="background-color: #192231">
+        <div style="background-color: #040315">
         <p class="terms-header">BIT Field Support Services Privacy Policy</p>
         <p class="terms-content">Effective February 12, 2022</p>
         <p class="terms-header">When you use our services, you’re trusting us with your information. We understand this is a big responsibility and work hard to protect your information and put you in control.</p>

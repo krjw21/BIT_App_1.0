@@ -31,5 +31,11 @@ namespace BIT_DesktopApp.Views
         {
 
         }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new AddServiceRequestView();
+            newWindow.ShowDialog();
+        }
     }
 }

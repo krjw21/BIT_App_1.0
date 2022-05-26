@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="background-color: #192231">
+    <div style="background-color: #040315">
         <p class="terms-header">BIT Field Support Services Terms & Conditions</p>
         <p class="terms-content">Effective March 13, 2022</p>
         <p class="terms-header">What you can expect from us</p>

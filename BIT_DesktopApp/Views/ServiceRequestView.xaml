@@ -218,7 +218,7 @@
                     </Style>
                 </ToggleButton.Style>
             </ToggleButton>
-            <Button x:Name="btnAdd" Content="Add" Width="150" Margin="10,6"/>
+            <Button x:Name="btnAdd" Content="Add" Width="150" Margin="10,6" Click="btnAdd_Click" IsEnabled="{Binding EnableAdd}"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace BIT_DesktopApp.Models
 {
-    public class ServiceRequest : INotifyPropertyChanged
+    public class ServiceRequest : INotifyPropertyChanged, IDataErrorInfo
     {
         private int? _serviceRequestID;
         private int _clientID;
+        private string _clientBusiness;
         private int? _contractorID;
         private int? _coordinatorID;
         private string _fullName;
@@ -208,69 +209,78 @@ namespace BIT_DesktopApp.Models
         }
 
 
-        public string UpdateServiceRequest()
+        public string Error { get { return null; } }
+        public string this[string propertyName]
         {
-            string sql = "UPDATE Service_Request " +
-                "SET Contractor_ID = (SELECT Contractor_ID FROM Contractor WHERE First_Name = @FirstName AND Last_Name = @LastName), " +
-                "Skill_Category = @SkillCategory, " +
-                "Priority = @Priority, " +
-                "Job_Status = @JobStatus, " +
-                "Payment_Status = @PaymentStatus, " +
-                "Date_Created = @DateCreated, " +
-                "Date_Completed = @DateCompleted, " +
-                "Street = @Street, Suburb = @Suburb, " +
-                "[State] = @State, Postcode = @Postcode, " +
-                "Hours_Worked = @HoursWorked, " +
-                "Distance_Travelled = @DistanceTravelled " +
-                "WHERE Service_Request_ID = @ServiceRequestID";
-            string[] contractorName = FullName.Split(' ');
-            SqlParameter[] objParameters = new SqlParameter[15];
-            objParameters[0] = new SqlParameter("@FirstName", DbType.String);
-            objParameters[0].Value = contractorName[0];
-            if(contractorName.Length < 2)
+            get
             {
-                objParameters[1] = new SqlParameter("@LastName", DbType.String);
-                objParameters[1].Value = ' ';
+                string result = null;
+                switch (propertyName)
+                {
+                    case "ClientID":
+                        if (string.IsNullOrEmpty(ClientID.ToString()))
+                        {
+                            result = "Client ID field cannot be left empty.";
+                        }
+                        break;
+                    case "BusinessName":
+                        if (string.IsNullOrEmpty(BusinessName))
+                        {
+                            result = "Client's Business field cannot be left empty.";
+                        }
+                        break;
+                    case "SkillCategory":
+                        if (string.IsNullOrEmpty(SkillCategory))
+                        {
+                            result = "Skill Category field cannot be left empty.";
+                        }
+                        break;
+                    case "Priority":
+                        if (string.IsNullOrEmpty(Priority))
+                        {
+                            result = "Priority field cannot be left empty.";
+                        }
+                        break;
+                    case "DateCreated":
+                        if (DateCreated > DateTime.Now || DateCreated.Year < 1900)
+                        {
+                            result = "Date Requested field must be a valid date.";
+                        }
+                        break;
+                    case "Street":
+                        if (string.IsNullOrEmpty(Street))
+                        {
+                            result = "Street field cannot be left empty.";
+                        }
+                        break;
+                    case "Suburb":
+                        if (string.IsNullOrEmpty(Suburb))
+                        {
+                            result = "Suburb field cannot be left empty.";
+                        }
+                        break;
+                    case "State":
+                        if (string.IsNullOrEmpty(State))
+                        {
+                            result = "State field cannot be left empty.";
+                        }
+                        break;
+                    case "Postcode":
+                        if (string.IsNullOrEmpty(Postcode))
+                        {
+                            result = "Postcode field cannot be left empty.";
+                        }
+                        break;
+                }
+                if (result != null && !ErrorCollection.ContainsKey(propertyName))
+                {
+                    ErrorCollection.Add(propertyName, result);
+                    OnPropertyChanged("ErrorCollection");
+                }
+                return result;
             }
-            else
-            {
-                objParameters[1] = new SqlParameter("@LastName", DbType.String);
-                objParameters[1].Value = contractorName[1];
-            }
-            objParameters[2] = new SqlParameter("@SkillCategory", DbType.String);
-            objParameters[2].Value = this.SkillCategory;
-            objParameters[3] = new SqlParameter("@Priority", DbType.String);
-            objParameters[3].Value = this.Priority;
-            objParameters[4] = new SqlParameter("@JobStatus", DbType.String);
-            objParameters[4].Value = this.JobStatus;
-            objParameters[5] = new SqlParameter("@PaymentStatus", DbType.String);
-            objParameters[5].Value = this.PaymentStatus;
-            objParameters[6] = new SqlParameter("@DateCreated", DbType.String);
-            objParameters[6].Value = this.DateCreated;
-            objParameters[7] = new SqlParameter("@DateCompleted", DbType.String);
-            objParameters[7].Value = this.DateCompleted;
-            objParameters[8] = new SqlParameter("@Street", DbType.String);
-            objParameters[8].Value = this.Street;
-            objParameters[9] = new SqlParameter("@Suburb", DbType.String);
-            objParameters[9].Value = this.Suburb;
-            objParameters[10] = new SqlParameter("@State", DbType.String);
-            objParameters[10].Value = this.State;
-            objParameters[11] = new SqlParameter("@Postcode", DbType.String);
-            objParameters[11].Value = this.Postcode;
-            objParameters[12] = new SqlParameter("@HoursWorked", DbType.String);
-            objParameters[12].Value = this.HoursWorked;
-            objParameters[13] = new SqlParameter("@DistanceTravelled", DbType.String);
-            objParameters[13].Value = this.DistanceTravelled;
-            objParameters[14] = new SqlParameter("@ServiceRequestID", DbType.String);
-            objParameters[14].Value = this.ServiceRequestID;
-
-            int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
-            if (rowsAffected >= 1)
-            {
-                return $"Details were updated successfully for Service Request ID: \"{ServiceRequestID}\".";
-            }
-            return "Update of the Service Request's details was not successful, please try again.";
         }
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
 
 
         public ServiceRequest()
@@ -339,6 +349,99 @@ namespace BIT_DesktopApp.Models
             {
                 this.DistanceTravelled = null;
             }
+        }
+
+        
+        public string InsertServiceRequest()
+        {
+            string sql = "INSERT INTO Service_Request(Client_ID, Skill_Category, [Priority], Job_Status, Payment_Status, Date_Created, Street, Suburb, [State], Postcode) VALUES((SELECT Client_ID FROM Client WHERE Business_Name = @BusinessName), @SkillCategory, @Priority, 'Requested', 'Unpaid', @DateCreated, @Street, @Suburb, @State, @Postcode)";
+            SqlParameter[] objParameters = new SqlParameter[8];
+            objParameters[0] = new SqlParameter("@BusinessName", DbType.String);
+            objParameters[0].Value = this.BusinessName;
+            objParameters[1] = new SqlParameter("@SkillCategory", DbType.String);
+            objParameters[1].Value = this.SkillCategory;
+            objParameters[2] = new SqlParameter("@Priority", DbType.String);
+            objParameters[2].Value = this.Priority;
+            objParameters[3] = new SqlParameter("@DateCreated", DbType.DateTime);
+            objParameters[3].Value = this.DateCreated;
+            objParameters[4] = new SqlParameter("@Street", DbType.String);
+            objParameters[4].Value = this.Street;
+            objParameters[5] = new SqlParameter("@Suburb", DbType.String);
+            objParameters[5].Value = this.Suburb;
+            objParameters[6] = new SqlParameter("@State", DbType.String);
+            objParameters[6].Value = this.State;
+            objParameters[7] = new SqlParameter("@Postcode", DbType.String);
+            objParameters[7].Value = this.Postcode;
+
+            int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
+            if (rowsAffected >= 1)
+            {
+                return $"New Service Request for the Client: \"{BusinessName}\" was requested successfully.";
+            }
+            return "New Service Request was not successful, please try again.";
+        }
+        public string UpdateServiceRequest()
+        {
+            string sql = "UPDATE Service_Request " +
+                "SET Contractor_ID = (SELECT Contractor_ID FROM Contractor WHERE First_Name = @FirstName AND Last_Name = @LastName), " +
+                "Skill_Category = @SkillCategory, " +
+                "Priority = @Priority, " +
+                "Job_Status = @JobStatus, " +
+                "Payment_Status = @PaymentStatus, " +
+                "Date_Created = @DateCreated, " +
+                "Date_Completed = @DateCompleted, " +
+                "Street = @Street, Suburb = @Suburb, " +
+                "[State] = @State, Postcode = @Postcode, " +
+                "Hours_Worked = @HoursWorked, " +
+                "Distance_Travelled = @DistanceTravelled " +
+                "WHERE Service_Request_ID = @ServiceRequestID";
+            string[] contractorName = FullName.Split(' ');
+            SqlParameter[] objParameters = new SqlParameter[15];
+            objParameters[0] = new SqlParameter("@FirstName", DbType.String);
+            objParameters[0].Value = contractorName[0];
+            if (contractorName.Length < 2)
+            {
+                objParameters[1] = new SqlParameter("@LastName", DbType.String);
+                objParameters[1].Value = ' ';
+            }
+            else
+            {
+                objParameters[1] = new SqlParameter("@LastName", DbType.String);
+                objParameters[1].Value = contractorName[1];
+            }
+            objParameters[2] = new SqlParameter("@SkillCategory", DbType.String);
+            objParameters[2].Value = this.SkillCategory;
+            objParameters[3] = new SqlParameter("@Priority", DbType.String);
+            objParameters[3].Value = this.Priority;
+            objParameters[4] = new SqlParameter("@JobStatus", DbType.String);
+            objParameters[4].Value = this.JobStatus;
+            objParameters[5] = new SqlParameter("@PaymentStatus", DbType.String);
+            objParameters[5].Value = this.PaymentStatus;
+            objParameters[6] = new SqlParameter("@DateCreated", DbType.String);
+            objParameters[6].Value = this.DateCreated;
+            objParameters[7] = new SqlParameter("@DateCompleted", DbType.String);
+            objParameters[7].Value = this.DateCompleted;
+            objParameters[8] = new SqlParameter("@Street", DbType.String);
+            objParameters[8].Value = this.Street;
+            objParameters[9] = new SqlParameter("@Suburb", DbType.String);
+            objParameters[9].Value = this.Suburb;
+            objParameters[10] = new SqlParameter("@State", DbType.String);
+            objParameters[10].Value = this.State;
+            objParameters[11] = new SqlParameter("@Postcode", DbType.String);
+            objParameters[11].Value = this.Postcode;
+            objParameters[12] = new SqlParameter("@HoursWorked", DbType.String);
+            objParameters[12].Value = this.HoursWorked;
+            objParameters[13] = new SqlParameter("@DistanceTravelled", DbType.String);
+            objParameters[13].Value = this.DistanceTravelled;
+            objParameters[14] = new SqlParameter("@ServiceRequestID", DbType.String);
+            objParameters[14].Value = this.ServiceRequestID;
+
+            int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
+            if (rowsAffected >= 1)
+            {
+                return $"Details were updated successfully for Service Request ID: \"{ServiceRequestID}\".";
+            }
+            return "Update of the Service Request's details was not successful, please try again.";
         }
     }
 }

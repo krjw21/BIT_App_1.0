@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="BIT_WebApp.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="background-color: #273245">
+    <div style="background-color: #040315">
         <div class="container" id="enquiryform">
             <div class="row">
                 <div class="col-md-6 mx-auto" style="padding-right: 45px;">

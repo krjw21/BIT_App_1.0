@@ -1,0 +1,69 @@
+﻿<Window x:Class="BIT_DesktopApp.Views.AddServiceRequestView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BIT_DesktopApp.Views"
+        mc:Ignorable="d"
+        Title="AddServiceRequestView" Height="290" Width="700" FontFamily="Calibri Light" Background="#192231">
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Control.Foreground" Value="#B8A5AE"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid>
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="../Images/BIT_Logo_Transparent.png" Height="60px" Margin="40,-13,0,0"/>
+                <Label Content="New Service Request Form" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" FontSize="20" FontFamily="Calibri"/>
+                <!-- First Two Columns data -->
+                <Label Content="Co-ordinator: " Grid.Row="1" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtCoordinator" Grid.Row="1" Grid.Column="1" Margin="5,10"/>
+                <Label Content="Client: " Grid.Row="2" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cmbClientBusiness" ItemsSource="{Binding Clients, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="BusinessName" Text="{Binding NewServiceRequest.BusinessName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewServiceRequest.ErrorCollection[BusinessName]}" Grid.Row="2" Grid.Column="1" Margin="5,9"/>
+                <Label Content="Skill Category: " Grid.Row="3" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cmbSkillCategory" ItemsSource="{Binding Skills, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="SkillCategory" Text="{Binding NewServiceRequest.SkillCategory, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewServiceRequest.ErrorCollection[SkillCategory]}" Grid.Row="3" Grid.Column="1" Margin="5,9"/>
+                <Label Content="Priority: " Grid.Row="4" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cmbPriority" ItemsSource="{Binding PriorityStates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Priority" Text="{Binding NewServiceRequest.Priority, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewServiceRequest.ErrorCollection[Priority]}" Grid.Row="4" Grid.Column="1" Margin="5,9,100,9"/>
+                <Border Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" BorderBrush="#B8A5AE" BorderThickness="1,0,0,0" Margin="8,12,2,12"/>
+                <!-- Last Two Columns data -->
+                <Label Content="Date Requested: " Grid.Row="1" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <DatePicker x:Name="dpDateCreated" SelectedDate="{Binding NewServiceRequest.DateCreated, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewServiceRequest.ErrorCollection[DateCreated]}" Grid.Row="1" Grid.Column="3" Margin="5,9,100,9"/>
+                <Label Content="Street:" Grid.Row="2" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtStreet" Text="{Binding NewServiceRequest.Street, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewServiceRequest.ErrorCollection[Street]}" Grid.Row="2" Grid.Column="3" Margin="5,10"/>
+                <Label Content="Suburb:" Grid.Row="3" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtSuburb" Text="{Binding NewServiceRequest.Suburb, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewServiceRequest.ErrorCollection[Suburb]}" Grid.Row="3" Grid.Column="3" Margin="5,10,50,10"/>
+                <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="State:" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtState" Text="{Binding NewServiceRequest.State, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewServiceRequest.ErrorCollection[State]}" Grid.Column="1" Margin="5,10,40,10"/>
+                    <Label Content="Postcode:" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtPostcode" Text="{Binding NewServiceRequest.Postcode, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewServiceRequest.ErrorCollection[Postcode]}" Grid.Column="3" Margin="5,10,30,10"/>
+                </Grid>
+                <StackPanel Grid.Row="5" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="btnClear" Content="Clear" Width="150" Margin="10,6" Click="btnClear_Click"/>
+                    <Button x:Name="btnSave" Command="{Binding AddCommand}" Content="Save" Width="150" Margin="10,6" Click="btnSave_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

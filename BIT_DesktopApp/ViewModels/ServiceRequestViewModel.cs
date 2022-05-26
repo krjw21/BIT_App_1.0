@@ -26,6 +26,7 @@ namespace BIT_DesktopApp.ViewModels
         private bool _enableUpdate;
         private bool _enableFields;
         private bool _enableButtons;
+        private bool _enableAdd;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
@@ -169,6 +170,7 @@ namespace BIT_DesktopApp.ViewModels
                         {
                             MessageBox.Show($"Updating details for Service Request ID: \"{SelectedServiceRequest.ServiceRequestID}\".");
                             EnableFields = true;
+                            EnableAdd = false;
                         }
                         else
                         {
@@ -177,6 +179,7 @@ namespace BIT_DesktopApp.ViewModels
                                 UpdateServiceRequest.Execute(this);
                             }
                             EnableFields = false;
+                            EnableAdd = true;
                         }
                     }
                     else
@@ -202,6 +205,15 @@ namespace BIT_DesktopApp.ViewModels
             {
                 _enableButtons = value;
                 OnPropertyChanged("EnableButtons");
+            }
+        }
+        public bool EnableAdd
+        {
+            get { return _enableAdd; }
+            set
+            {
+                _enableAdd = value;
+                OnPropertyChanged("EnableAdd");
             }
         }
         public string UnassignedTabHeader { get; set; }
@@ -245,6 +257,7 @@ namespace BIT_DesktopApp.ViewModels
         public ServiceRequestViewModel()
         {
             RefreshGrid();
+            EnableAdd = true;
 
             JobStates jobStates = new JobStates();
             this.JobStates = new ObservableCollection<JobState>(jobStates);
