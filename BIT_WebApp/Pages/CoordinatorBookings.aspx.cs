@@ -1,6 +1,7 @@
 ﻿using BIT_WebApp.BLL;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -27,9 +28,12 @@ namespace BIT_WebApp.Pages
 
                     Coordinator currentCoordinator = new Coordinator();
                     currentCoordinator.CoordinatorID = Convert.ToInt32(Session["CoordinatorID"].ToString());
-                    gvBookings.DataSource = currentCoordinator.UnassignedBookings().DefaultView;
+                    DataView unassignedServiceRequests = currentCoordinator.UnassignedBookings().DefaultView;
+                    gvBookings.DataSource = unassignedServiceRequests;
                     gvBookings.DataBind();
 
+                    // GET THE INDEX[0] FROM THIS DATAVIEW TO GET THE SERVICE REQUEST ID
+                    //unassignedServiceRequests.
 
                     // TODO bind available contractor's to the drop down list in order for coordinator to assign the job
                     //int rowIndex = Convert.ToInt32(e.CommandArgument);

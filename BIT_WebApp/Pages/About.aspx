@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="ab-bg-image">
-        <div class="container">
+        <div class="container" style="padding-top: 50px;">
             <div class="row banner">
                 <div class="col-9 text-center">
                     <p>BIT Field Support Services is a division of Business Information Technology Pty Ltd. that provides IT Support Services to approximately 2,500 clients across Australia.</p>
@@ -12,7 +12,7 @@
                     <p>Aenean pellentesque, leo eu imperdiet posuere, orci leo commodo libero, non rhoncus arcu magna id quam. Phasellus dignissim aliquam elit, non mollis quam maximus ac. Vivamus ut mattis turpis, sed vulputate lacus. Aliquam pellentesque sit amet odio et pharetra. Curabitur eu lectus et magna tempus mollis sit amet a elit. Praesent vitae nibh ex. In hac habitasse platea dictumst. Sed sit amet libero vitae velit vehicula sodales.</p>
                 </div>
                 <div class="col-3">
-                    <img src="../Images/BIT_Logo_NoText_Transparent.png" width="300px" />
+                    <img src="../Images/BIT_Logo_NoText_Transparent.png" width="280px" />
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin: 100px 0 100px 0; background-color: #040315">
         <div class="row">
             <div class="col-12">
                 <div class="card">

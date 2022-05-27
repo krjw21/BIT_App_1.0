@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     position: relative;
-    background-color: #192231 !important;
+    background-color: #040315 !important;
 }
 
 .bg-dark {
@@ -21,7 +21,7 @@
     top: 50px;
 }
 .spacer2 {
-    aspect-ratio: 900/300;
+    aspect-ratio: 900/250;
     width: 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -48,14 +48,15 @@
     padding: 5px 15px 0 15px;
 }
 
-.hp-bg {
-    /*background-image: url(Images/fibre_optic_cables.jpg);*/
-    background-color: #040315;
+.hp-image {
+    aspect-ratio: 3417/2278;
+    background-image: url(Images/fibre_optic_cables.jpg);
     background-size: 100% 1100px;
     width: 100%;
-    height: 1000px;
-    display: inline-block;
-    top: -200px;
+    height: contain;
+    -webkit-box-shadow: 0 0 500px 150px #040315 inset;
+    -moz-box-shadow: 0 0 500px 150px #040315 inset;
+    box-shadow: 0 0 500px 150px #040315 inset;
 }
 
 .hp-header {
@@ -118,18 +119,20 @@ a {
 }
 
 .ab-bg-image {
-    /*background-image: url(Images/office_monitors.jpg);*/
-    background-color: #040315;
-    background-size: 100% 1200px;
+    background-image: url(Images/office_monitors.jpg);
+    aspect-ratio: 5184/3456;
+    background-size: 100% 1100px;
     width: 100%;
-    height: 900px;
-    display: inline-block;
+    height: contain;
+    -webkit-box-shadow: 0 0 100px 220px #040315 inset;
+    -moz-box-shadow: 0 0 100px 220px #040315 inset;
+    box-shadow: 0 0 100px 220px #040315 inset;
 }
 
 .banner {
-    background-color: rgba(25, 34, 49, 0.8);
+    background-color: rgba(25, 34, 49, 0.9);
     border-radius: 15px;
-    margin: 30px 20px 0 20px;
+    margin: 50px 20px 0 20px;
 }
 
     .banner div {
@@ -165,12 +168,14 @@ a {
 }
 
 .os-bg-image {
-    /*background-image: url(Images/servers_cables.jpg);*/
-    background-color: #040315;
-    background-size: 100% 1000px;
+    background-image: url(Images/servers_cables.jpg);
+    aspect-ratio: 5184/3456;
+    background-size: 100% 1100px;
     width: 100%;
-    height: 950px;
-    display: inline-block;
+    height: contain;
+    -webkit-box-shadow: 0 0 100px 220px #040315 inset;
+    -moz-box-shadow: 0 0 100px 220px #040315 inset;
+    box-shadow: 0 0 100px 220px #040315 inset;
 }
 
 .os-header {
@@ -202,6 +207,16 @@ a {
     border-color: #B8A5AE;
     border-width: 1px;
 }
+.gradient-bg {
+    background-image: url(Images/gradient-background.png);
+    aspect-ratio: 3600/1800;
+    background-size: 100% 1100px;
+    width: 100%;
+    height: fit-content;
+    -webkit-box-shadow: 0 0 100px 220px #040315 inset;
+    -moz-box-shadow: 0 0 100px 220px #040315 inset;
+    box-shadow: 0 0 100px 220px #040315 inset;
+}
 
 #enquiry h3, #enquiry label {
     color: #B8A5AE;
@@ -211,18 +226,14 @@ a {
     padding: 40px 20px 40px 20px;
 }
 
-.login-container {
-    padding:  40px;
-}
-
-    .login-container .card {
-        background-color: #494E6B;
-    }
-
 .login-labels {
     color: #B8A5AE;
 }
 
 .login-line {
     border: 1px solid #626785;
+}
+
+.card {
+    background-color: #D0D2DB;
 }

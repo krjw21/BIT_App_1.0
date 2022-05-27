@@ -32,7 +32,7 @@ namespace BIT_WebApp.BLL
 
         public DataTable UnassignedBookings() // SQL query to select all unassigned and rejected service requests
         {
-            string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, c.Phone, sr.Skill_Category AS Category, sr.Priority, sr.Job_Status AS [Job Status], sr.Payment_Status AS [Payment Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address " +
+            string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, c.Phone, sr.Skill_Category AS Category, sr.Priority, sr.Job_Status AS [Job Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address " +
                 "FROM Service_Request AS sr " +
                 "INNER JOIN Client AS c ON sr.Client_ID = c.Client_ID " +
                 "WHERE sr.Job_Status IN ('Requested', 'Rejected')";
@@ -41,7 +41,7 @@ namespace BIT_WebApp.BLL
         }
         public DataTable CompletedBookings() // SQL query to select all completed service requests to approve for payment
         {
-            string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, cd.First_Name + ' ' + cd.Last_Name AS Coordinator, ct.First_Name + ' ' + ct.Last_Name AS Contractor, c.Phone, sr.Skill_Category AS Category, sr.Priority, sr.Job_Status AS [Job Status], sr.Payment_Status AS [Payment Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], CONVERT(NVARCHAR, sr.Date_Completed, 103) AS [Date Completed], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address, sr.Hours_Worked AS Hours, sr.Distance_Travelled AS KMs " +
+            string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, ct.First_Name + ' ' + ct.Last_Name AS Contractor, c.Phone, sr.Skill_Category AS Category, sr.Job_Status AS [Job Status], sr.Payment_Status AS [Payment Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], CONVERT(NVARCHAR, sr.Date_Completed, 103) AS [Date Completed], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address, sr.Hours_Worked AS Hours, sr.Distance_Travelled AS KMs " +
                 "FROM Service_Request AS sr " +
                 "INNER JOIN  Client AS c ON sr.Client_ID = c.Client_ID " +
                 "INNER JOIN Contractor AS ct ON sr.Contractor_ID = ct.Contractor_ID " +
@@ -53,7 +53,7 @@ namespace BIT_WebApp.BLL
         }
         public DataTable AllBookings() // SQL query to select all service requests
         {
-            string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, cd.First_Name + ' ' + cd.Last_Name AS Coordinator, ct.First_Name + ' ' + ct.Last_Name AS Contractor, c.Phone, sr.Skill_Category AS Category, sr.Priority, sr.Job_Status AS [Job Status], sr.Payment_Status AS [Payment Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], CONVERT(NVARCHAR, sr.Date_Completed, 103) AS [Date Completed], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address, sr.Hours_Worked AS Hours, sr.Distance_Travelled AS KMs " +
+            string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, cd.First_Name + ' ' + cd.Last_Name AS Coordinator, ct.First_Name + ' ' + ct.Last_Name AS Contractor, c.Phone, sr.Skill_Category AS Category, sr.Job_Status AS [Job Status], sr.Payment_Status AS [Payment Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], CONVERT(NVARCHAR, sr.Date_Completed, 103) AS [Date Completed], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address, sr.Hours_Worked AS Hours, sr.Distance_Travelled AS KMs " +
                 "FROM Service_Request AS sr " +
                 "INNER JOIN Client AS c ON sr.Client_ID = c.Client_ID " +
                 "LEFT JOIN Contractor AS ct ON sr.Contractor_ID = ct.Contractor_ID " +

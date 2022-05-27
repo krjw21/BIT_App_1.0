@@ -3,11 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="login-container" style="background-color: #192231">
+    <div class="login-container"  style="margin: 80px 0 60px 0; background-color: #040315">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 mx-auto">
-                    <div class="card">
+                    <div class="card" style="background-color: #494E6B !important;">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
