@@ -81,9 +81,9 @@ namespace BIT_WebApp.BLL
             objParameters[0].Value = serviceRequestID;
             objParameters[1] = new SqlParameter("@CoordinatorID", DbType.Int32);
             objParameters[1].Value = coordinatorID;
-            objParameters[2] = new SqlParameter("@FirstName", DbType.Int32);
+            objParameters[2] = new SqlParameter("@FirstName", DbType.String);
             objParameters[2].Value = contractorFName;
-            objParameters[3] = new SqlParameter("@LastName", DbType.Int32);
+            objParameters[3] = new SqlParameter("@LastName", DbType.String);
             objParameters[3].Value = contractorLName;
             
             returnValue = _db.ExecuteNonQuery(sql, objParameters);

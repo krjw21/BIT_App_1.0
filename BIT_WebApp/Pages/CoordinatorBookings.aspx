@@ -28,7 +28,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Contractor">
                                                 <ItemTemplate>
-                                                    <asp:DropDownList CssClass="ddl" ID="ddlContractors" runat="server" Height="30px" Width="150px" DataTextField="FullName" DataValueField="Contractor_ID" AutoPostBack="True" ></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="ddl" ID="ddlContractors" runat="server" Height="30px" Width="150px" DataTextField="FullName" DataValueField="FullName" AutoPostBack="True" ></asp:DropDownList>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Assign">

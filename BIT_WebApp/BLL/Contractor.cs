@@ -115,7 +115,7 @@ namespace BIT_WebApp.BLL
 
         public DataTable AvailableContractors(string skill, string suburb, DateTime date)
         {
-            string sql = "SELECT c.Contractor_ID, c.First_Name + ' ' + c.Last_Name AS FullName FROM Contractor AS c INNER JOIN Contractor_Skill AS csk ON c.Contractor_ID = csk.Contractor_ID AND (csk.Skill_Category = @Skill AND csk.Status = 1) INNER JOIN Contractor_Suburb AS csb ON c.Contractor_ID = csb.Contractor_ID AND csb.Suburb_Name = @Suburb INNER JOIN Contractor_Availability AS ca ON c.Contractor_ID = ca.Contractor_ID AND(ca.Day_Name = @Date AND ca.Start_Time IS NOT NULL)";
+            string sql = "SELECT c.First_Name + ' ' + c.Last_Name AS FullName FROM Contractor AS c INNER JOIN Contractor_Skill AS csk ON c.Contractor_ID = csk.Contractor_ID AND (csk.Skill_Category = @Skill AND csk.Status = 1) INNER JOIN Contractor_Suburb AS csb ON c.Contractor_ID = csb.Contractor_ID AND csb.Suburb_Name = @Suburb INNER JOIN Contractor_Availability AS ca ON c.Contractor_ID = ca.Contractor_ID AND(ca.Day_Name = @Date AND ca.Start_Time IS NOT NULL)";
             SqlParameter[] objParameters = new SqlParameter[3];
             objParameters[0] = new SqlParameter("@Skill", DbType.String);
             objParameters[0].Value = skill;

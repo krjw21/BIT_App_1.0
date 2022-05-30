@@ -45,12 +45,13 @@ namespace BIT_WebApp.Pages
             currentCoordinator.CoordinatorID = Convert.ToInt32(Session["CoordinatorID"].ToString());
             int rowIndex = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = gvBookings.Rows[rowIndex];
+            DropDownList ddlContractors = (DropDownList)row.FindControl("ddlContractors");
 
             if (e.CommandName == "Assign")
             {
-                string[] contractorName = row.Cells[1].Text.Split(' ');
-                currentCoordinator.AssignBooking(Convert.ToInt32(row.Cells[1].Text), currentCoordinator.CoordinatorID, contractorName[0], contractorName[1]);
-
+                // TODO message boxes to notify user
+                string[] contractorName = ddlContractors.SelectedValue.Split(' ');
+                currentCoordinator.AssignBooking(Convert.ToInt32(row.Cells[3].Text), currentCoordinator.CoordinatorID, contractorName[0], contractorName[1]);
                 gvBookings.DataSource = currentCoordinator.UnassignedBookings().DefaultView;
                 gvBookings.DataBind();
             }
@@ -60,7 +61,6 @@ namespace BIT_WebApp.Pages
                 string skill = row.Cells[7].Text;
                 string suburb = row.Cells[11].Text.ToString().Split(',')[1].Trim();
                 DateTime date = Convert.ToDateTime(row.Cells[10].Text);
-                DropDownList ddlContractors = (DropDownList)row.FindControl("ddlContractors");
                 ddlContractors.DataSource = availableContractors.AvailableContractors(skill, suburb, date);
                 ddlContractors.DataBind();
                 if(ddlContractors.Items.Count == 0)
