@@ -35,7 +35,7 @@
                 <Label Content="New Service Request Form" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" FontSize="20" FontFamily="Calibri"/>
                 <!-- First Two Columns data -->
                 <Label Content="Co-ordinator: " Grid.Row="1" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtCoordinator" Grid.Row="1" Grid.Column="1" Margin="5,10"/>
+                <TextBox x:Name="txtCoordinator" Text="{Binding CoordinatorName}" Grid.Row="1" Grid.Column="1" Margin="5,10" IsEnabled="False"/>
                 <Label Content="Client: " Grid.Row="2" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <ComboBox x:Name="cmbClientBusiness" ItemsSource="{Binding Clients, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="BusinessName" Text="{Binding NewServiceRequest.BusinessName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding NewServiceRequest.ErrorCollection[BusinessName]}" Grid.Row="2" Grid.Column="1" Margin="5,9"/>
                 <Label Content="Skill Category: " Grid.Row="3" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>

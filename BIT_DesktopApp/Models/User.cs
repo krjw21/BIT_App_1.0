@@ -14,6 +14,7 @@ namespace BIT_DesktopApp.Models
         public static string Email { get; set; }
         public static string Password { get; set; }
         public static int ID { get; set; }
+        public static string Name { get; set; }
         private static SQLHelper _db;
 
         public User()
@@ -23,7 +24,7 @@ namespace BIT_DesktopApp.Models
 
         public int CheckUser() // Method to check user (Coordinator/Administrator) login details
         {
-            string sql = "SELECT Coordinator_ID FROM Coordinator WHERE Email = @Email AND [Password] = @Password";
+            string sql = "SELECT Coordinator_ID, First_Name, Last_Name FROM Coordinator WHERE Email = @Email AND [Password] = @Password";
             SqlParameter[] objParameters = new SqlParameter[2];
             objParameters[0] = new SqlParameter("@Email", DbType.String);
             objParameters[0].Value = Email;
@@ -35,6 +36,9 @@ namespace BIT_DesktopApp.Models
             if (dataTable.Rows.Count > 0)
             {
                 id = Convert.ToInt32(dataTable.Rows[0][0]);
+                string firstName = (string)dataTable.Rows[0][1];
+                string lastName = (string)dataTable.Rows[0][2];
+                Name = $"{firstName} {lastName}";
             }
 
             return id;

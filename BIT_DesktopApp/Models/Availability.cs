@@ -7,11 +7,15 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BIT_DesktopApp.Logs;
+using static BIT_DesktopApp.Logs.LogHelper;
 
 namespace BIT_DesktopApp.Models
 {
     public class Availability : INotifyPropertyChanged
     {
+        public static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         private int? _contractorID;
         private string _dayName;
         private string _startTime;
@@ -140,18 +144,30 @@ namespace BIT_DesktopApp.Models
                 int rowsAffected = _db.ExecuteNonQuery(nullsql, nullParameters);
                 if (rowsAffected >= 1)
                 {
+                    Log(LogTarget.File, $"SUCCESS: Availability updated for Contractor ID: {ContractorID}");
+                    logger.Info($"SUCCESS: Availability updated for Contractor ID: {ContractorID}");
+
                     return $"Availability was updated for \"{DayName}\".";
                 }
-                return "Availability update was unsuccessful. Please try again.";
+                Log(LogTarget.File, $"FAILURE: Availability update for Contractor ID: {ContractorID} unsuccessful.");
+                logger.Debug($"FAILURE: Availability update for Contractor ID: {ContractorID} unsuccessful.");
+
+                return "FAILURE: Availability update was unsuccessful. Please try again.";
             }
             else
             {
                 int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
                 if (rowsAffected >= 1)
                 {
+                    Log(LogTarget.File, $"SUCCESS: Availability updated for Contractor ID: {ContractorID}");
+                    logger.Info($"SUCCESS: Availability updated for Contractor ID: {ContractorID}");
+
                     return $"Availability was updated for \"{DayName}\".";
                 }
-                return "Availability update was unsuccessful. Please try again.";
+                Log(LogTarget.File, $"FAILURE: Availability update for Contractor ID: {ContractorID} unsuccessful.");
+                logger.Debug($"FAILURE: Availability update for Contractor ID: {ContractorID} unsuccessful.");
+
+                return "FAILURE: Availability update was unsuccessful. Please try again.";
             }
         }
     }

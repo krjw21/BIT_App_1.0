@@ -16,6 +16,7 @@ namespace BIT_DesktopApp.ViewModels
         private ObservableCollection<Skill> _skills;
         private ServiceRequest _newServiceRequest;
         private RelayCommand _addCommand;
+        private string _coordinatorName;
 
 
         public ObservableCollection<Client> Clients
@@ -59,6 +60,14 @@ namespace BIT_DesktopApp.ViewModels
             }
             set { _addCommand = value; }
         }
+        public string CoordinatorName
+        {
+            get { return _coordinatorName; }
+            set
+            {
+                _coordinatorName = value;
+            }
+        }
 
 
         public void AddServiceRequestMethod()
@@ -77,6 +86,8 @@ namespace BIT_DesktopApp.ViewModels
 
         public AddServiceRequestViewModel()
         {
+            CoordinatorName = User.Name;
+
             NewServiceRequest = new ServiceRequest();
 
             Clients allClients = new Clients();

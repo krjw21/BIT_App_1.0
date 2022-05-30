@@ -23,7 +23,7 @@
                                         <Columns>
                                             <asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
-                                                    <asp:DropDownList ID="ddlContractor" runat="server" Height="30px" Width="150px" />
+                                                    <asp:DropDownList ID="ddlContractors" runat="server" Height="30px" Width="150px" />
                                                     <asp:Button ID="btnAssign" runat="server" Height="30px" Width="70px" Text="Assign" CommandName="Assign" CommandArgument="<% #Container.DataItemIndex %>" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>

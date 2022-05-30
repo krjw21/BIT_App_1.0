@@ -12,7 +12,6 @@ namespace BIT_DesktopApp.ViewModels
 {
     public class ContractorViewModel : INotifyPropertyChanged
     {
-        #region private variables
         private ObservableCollection<Contractor> _contractors;
         private ObservableCollection<Skill> _allSkills;
         private ObservableCollection<Skill> _contractorSkills;
@@ -40,7 +39,6 @@ namespace BIT_DesktopApp.ViewModels
         private bool _enableButtons;
         private bool _enableSuburbRemove;
         private bool _enableAdd;
-        #endregion private variables
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
@@ -108,6 +106,7 @@ namespace BIT_DesktopApp.ViewModels
                 {
                     Skills skills = new Skills(SelectedContractor.ContractorID);
                     this.ContractorSkills = new ObservableCollection<Skill>(skills);
+
 
                     Availabilities availabilities = new Availabilities(SelectedContractor.ContractorID);
                     this.ContractorAvailabilities = new ObservableCollection<Availability>(availabilities);
@@ -291,9 +290,9 @@ namespace BIT_DesktopApp.ViewModels
                             }
                             EnableFields = false;
                             EnableAdd = true;
-                            this.ContractorSkills.Clear();
-                            this.ContractorSuburbs.Clear();
-                            this.ContractorAvailabilities.Clear();
+                            //this.ContractorSkills.Clear();
+                            //this.ContractorSuburbs.Clear();
+                            //this.ContractorAvailabilities.Clear();
                         }
                     }
                     else
@@ -619,9 +618,11 @@ namespace BIT_DesktopApp.ViewModels
             SelectedContractorSuburb = new Suburb();
             SelectedAvailability = new Availability();
             NewSkill = new Skill();
+
             EnableButtons = false;
             EnableAdd = true;
             EnableSuburbRemove = false;
+
             RefreshGrid();
 
             Skills allSkills = new Skills();

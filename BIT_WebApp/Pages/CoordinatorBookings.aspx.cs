@@ -32,8 +32,23 @@ namespace BIT_WebApp.Pages
                     gvBookings.DataSource = unassignedServiceRequests;
                     gvBookings.DataBind();
 
-                    // GET THE INDEX[0] FROM THIS DATAVIEW TO GET THE SERVICE REQUEST ID
-                    //unassignedServiceRequests.
+                    //// GET THE INDEX[0] FROM THIS DATAVIEW TO GET THE SERVICE REQUEST ID
+                    //List<int> serviceRequestIDs = new List<int>();
+                    //List<string> skills = new List<string>();
+                    //List<string> suburbs = new List<string>();
+                    //List<DateTime> dates = new List<DateTime>();
+                    //for (int i = 0; i < unassignedServiceRequests.Count; i++)
+                    //{
+                    //    serviceRequestIDs.Add((int)unassignedServiceRequests[i]["ID"]);
+                    //    skills.Add((string)unassignedServiceRequests[i]["Category"]);
+                    //    suburbs.Add((string)unassignedServiceRequests[i]["ID"]); // DO THIS FOR SUBURB
+                    //    dates.Add((DateTime)unassignedServiceRequests[i]["Date Created"]);
+                    //}
+                    //DropDownList ddlContractors = (DropDownList)Master.FindControl("ddlContractors");
+                    //Contractor availableContractors = new Contractor();
+                    //DataView contractors = availableContractors.AvailableContractors().DefaultView;
+                    //ddlContractors.DataSource = serviceRequestIDs;
+                    //ddlContractors.DataBind();
 
                     // TODO bind available contractor's to the drop down list in order for coordinator to assign the job
                     //int rowIndex = Convert.ToInt32(e.CommandArgument);

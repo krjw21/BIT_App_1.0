@@ -7,11 +7,14 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BIT_DesktopApp.Logs.LogHelper;
 
 namespace BIT_DesktopApp.Models
 {
     public class Client : INotifyPropertyChanged, IDataErrorInfo
     {
+        public static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         private int? _clientID;
         private string _businessName;
         private string _abn;
@@ -287,8 +290,14 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: New Client: {BusinessName} was inserted successfully.");
+                logger.Info($"SUCCESS: New Client: {BusinessName} was inserted successfully.");
+
                 return $"New Client: \"{BusinessName}\" was registered successfully.";
             }
+            Log(LogTarget.File, $"FAILURE: New Client: {BusinessName} insertion was unsuccessful.");
+            logger.Info($"FAILURE: New Client: {BusinessName} insertion was unsuccessful.");
+
             return "Registration was not successful, please try again.";
         }
         public string UpdateClient()
@@ -322,8 +331,14 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: Updated details for Client: {BusinessName}.");
+                logger.Info($"SUCCESS: Updated details for Client: {BusinessName}.");
+
                 return $"Details were updated successfully for the Client: \"{BusinessName}\".";
             }
+            Log(LogTarget.File, $"FAILURE: Update details for Client: {BusinessName} unsuccessful.");
+            logger.Debug($"FAILURE: Update details for Client: {BusinessName} unsuccessful.");
+
             return "Update of the Client's details was not successful, please try again.";
         }
         public string DeleteClient()
@@ -336,8 +351,14 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: Client: {BusinessName} record deactivated.");
+                logger.Info($"SUCCESS: Client: {BusinessName} record deactivated.");
+
                 return $"Record has been deactivated for the Client: \"{BusinessName}\". Please contact an Administrator to revert or reinstate this record.";
             }
+            Log(LogTarget.File, $"FAILURE: Record deactivation for Client: {BusinessName} unsuccessful.");
+            logger.Debug($"FAILURE: Record deactivation for Client: {BusinessName} unsuccessful.");
+
             return "Co-ordinator deactivation was not successful, please try again.";
         }
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BIT_DesktopApp"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="600" Width="400" FontFamily="Calibri Light">
+        Title="LoginWindow" Height="650" Width="400" FontFamily="Calibri Light">
     <Window.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Control.Foreground" Value="#B8A5AE"/>
@@ -15,10 +15,10 @@
         <ImageBrush ImageSource="\Images\gradient-background.png"></ImageBrush>
     </Window.Background>
     <Grid>
-        <Image Source="\Images\space_network.jpg" Width="900" Margin="20" />
-        <Image Source="\Images\BIT_Logo_Extended_Transparent.png" Width="260" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,-63"/>
-        <Label Content="Inspire &amp; Innovate" HorizontalAlignment="Center" Margin="0,90" FontSize="15" FontFamily="Goudy Old Style" Foreground="#98878F"></Label>
-        <Border Grid.Column="1" Background="#040315" Margin="50,150,50,50" CornerRadius="10">
+        <Image Source="\Images\space_network.jpg" Width="900" Margin="15" />
+        <Image Source="\Images\BIT_Logo_Extended_Transparent.png" Width="290" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,-73"/>
+        <Label Content="Inspire &amp; Innovate" HorizontalAlignment="Center" Margin="0,100" FontSize="16" FontFamily="Goudy Old Style" Foreground="#98878F"></Label>
+        <Border Grid.Column="1" Background="#040315" Margin="50,200,50,50" CornerRadius="10">
             <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1.5*"/>

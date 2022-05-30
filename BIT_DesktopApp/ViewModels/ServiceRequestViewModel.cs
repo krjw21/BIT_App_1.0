@@ -130,7 +130,6 @@ namespace BIT_DesktopApp.ViewModels
                 EnableFields = false;
                 EnableUpdate = false;
 
-                // TODO 1. No contractors available message display in datagrid AND 2. after updating, when switching tabs and clicking again, updated data dissapears
                 if (SelectedServiceRequest != null)
                 {
                     Contractors availableContractors = new Contractors(SelectedServiceRequest.SkillCategory, SelectedServiceRequest.Suburb, SelectedServiceRequest.DateCreated);
