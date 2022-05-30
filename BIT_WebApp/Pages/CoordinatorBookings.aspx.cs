@@ -31,28 +31,6 @@ namespace BIT_WebApp.Pages
                     DataView unassignedServiceRequests = currentCoordinator.UnassignedBookings().DefaultView;
                     gvBookings.DataSource = unassignedServiceRequests;
                     gvBookings.DataBind();
-
-                    //// GET THE INDEX[0] FROM THIS DATAVIEW TO GET THE SERVICE REQUEST ID
-                    //List<int> serviceRequestIDs = new List<int>();
-                    //List<string> skills = new List<string>();
-                    //List<string> suburbs = new List<string>();
-                    //List<DateTime> dates = new List<DateTime>();
-                    //for (int i = 0; i < unassignedServiceRequests.Count; i++)
-                    //{
-                    //    serviceRequestIDs.Add((int)unassignedServiceRequests[i]["ID"]);
-                    //    skills.Add((string)unassignedServiceRequests[i]["Category"]);
-                    //    suburbs.Add((string)unassignedServiceRequests[i]["ID"]); // DO THIS FOR SUBURB
-                    //    dates.Add((DateTime)unassignedServiceRequests[i]["Date Created"]);
-                    //}
-                    //DropDownList ddlContractors = (DropDownList)Master.FindControl("ddlContractors");
-                    //Contractor availableContractors = new Contractor();
-                    //DataView contractors = availableContractors.AvailableContractors().DefaultView;
-                    //ddlContractors.DataSource = serviceRequestIDs;
-                    //ddlContractors.DataBind();
-
-                    // TODO bind available contractor's to the drop down list in order for coordinator to assign the job
-                    //int rowIndex = Convert.ToInt32(e.CommandArgument);
-                    //GridViewRow row = gvBookings.Rows[rowIndex];
                 }
                 else
                 {
@@ -68,15 +46,32 @@ namespace BIT_WebApp.Pages
             int rowIndex = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = gvBookings.Rows[rowIndex];
 
-            string[] contractorName = row.Cells[0].Text.Split(' ');
-
             if (e.CommandName == "Assign")
             {
+                string[] contractorName = row.Cells[1].Text.Split(' ');
                 currentCoordinator.AssignBooking(Convert.ToInt32(row.Cells[1].Text), currentCoordinator.CoordinatorID, contractorName[0], contractorName[1]);
-            }
 
-            gvBookings.DataSource = currentCoordinator.UnassignedBookings().DefaultView;
-            gvBookings.DataBind();
+                gvBookings.DataSource = currentCoordinator.UnassignedBookings().DefaultView;
+                gvBookings.DataBind();
+            }
+            else if (e.CommandName == "Find")
+            {
+                Contractor availableContractors = new Contractor();
+                string skill = row.Cells[7].Text;
+                string suburb = row.Cells[11].Text.ToString().Split(',')[1].Trim();
+                DateTime date = Convert.ToDateTime(row.Cells[10].Text);
+                DropDownList ddlContractors = (DropDownList)row.FindControl("ddlContractors");
+                ddlContractors.DataSource = availableContractors.AvailableContractors(skill, suburb, date);
+                ddlContractors.DataBind();
+                if(ddlContractors.Items.Count == 0)
+                {
+                    ddlContractors.Items.Insert(0, new ListItem("None available."));
+                }
+                else
+                {
+                    ddlContractors.Items.Insert(0, new ListItem("- Select -"));
+                }
+            }
         }
     }
 }

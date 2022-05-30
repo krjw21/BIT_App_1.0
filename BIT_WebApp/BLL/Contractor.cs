@@ -113,20 +113,15 @@ namespace BIT_WebApp.BLL
         }
 
 
-        // TODO write sql to find available contractors for a job
         public DataTable AvailableContractors(string skill, string suburb, DateTime date)
         {
-            string sql = "SELECT c.Contractor_ID, c.First_Name, c.Last_Name, c.First_Name + ' ' + c.Last_Name AS FullName, c.DOB, c.Email, c.Phone, c.Street, c.Suburb, c.[State], c.Postcode, c.Password " +
-                "FROM Contractor AS c " +
-                "INNER JOIN Contractor_Skill AS csk ON c.Contractor_ID = csk.Contractor_ID AND (csk.Skill_Category = @Skill AND csk.Status = 1) " +
-                "INNER JOIN Contractor_Suburb AS csb ON c.Contractor_ID = csb.Contractor_ID AND csb.Suburb_Name = @Suburb " +
-                "INNER JOIN Contractor_Availability AS ca ON c.Contractor_ID = ca.Contractor_ID AND(ca.Day_Name = @Date AND ca.Start_Time IS NOT NULL)";
+            string sql = "SELECT c.Contractor_ID, c.First_Name + ' ' + c.Last_Name AS FullName FROM Contractor AS c INNER JOIN Contractor_Skill AS csk ON c.Contractor_ID = csk.Contractor_ID AND (csk.Skill_Category = @Skill AND csk.Status = 1) INNER JOIN Contractor_Suburb AS csb ON c.Contractor_ID = csb.Contractor_ID AND csb.Suburb_Name = @Suburb INNER JOIN Contractor_Availability AS ca ON c.Contractor_ID = ca.Contractor_ID AND(ca.Day_Name = @Date AND ca.Start_Time IS NOT NULL)";
             SqlParameter[] objParameters = new SqlParameter[3];
-            objParameters[0] = new SqlParameter("@Skill", DbType.Int32);
+            objParameters[0] = new SqlParameter("@Skill", DbType.String);
             objParameters[0].Value = skill;
-            objParameters[1] = new SqlParameter("@Suburb", DbType.Int32);
+            objParameters[1] = new SqlParameter("@Suburb", DbType.String);
             objParameters[1].Value = suburb;
-            objParameters[2] = new SqlParameter("@Availability", DbType.Int32);
+            objParameters[2] = new SqlParameter("@Date", DbType.String);
             objParameters[2].Value = date.ToString("dddd");
             DataTable serviceRequests = _db.ExecuteSQL(sql, objParameters);
             return serviceRequests;
