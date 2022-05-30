@@ -83,7 +83,7 @@ namespace BIT_DesktopApp.ViewModels
                 _enableUpdate = value;
                 OnPropertyChanged("EnableUpdate");
 
-                if(SelectedCoordinator != null)
+                if (SelectedCoordinator != null)
                 {
                     if (SelectedCoordinator.CoordinatorID != null)
                     {
@@ -138,6 +138,52 @@ namespace BIT_DesktopApp.ViewModels
             }
         }
 
+
+        private string _searchText;
+        private string _searchFilter;
+        private RelayCommand _searchCommand;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged("SearchText");
+            }
+        }
+        public string SearchFilter
+        {
+            get { return _searchFilter; }
+            set
+            {
+                _searchFilter = value;
+                OnPropertyChanged("SearchFilter");
+            }
+        }
+        public RelayCommand SearchCommand
+        {
+            get
+            {
+                if (_searchCommand == null)
+                {
+                    _searchCommand = new RelayCommand(this.SearchMethod, true);
+                }
+                return _searchCommand;
+            }
+            set { _searchCommand = value; }
+        }
+        public void SearchMethod()
+        {
+            if (SearchFilter != null)
+            {
+                Coordinators allCoordinators = new Coordinators(SearchText, SearchFilter);
+                this.Coordinators = new ObservableCollection<Coordinator>(allCoordinators);
+            }
+            else
+            {
+                MessageBox.Show("Please select a filter before searching for a record.");
+            }
+        }
 
         public void RefreshGrid()
         {

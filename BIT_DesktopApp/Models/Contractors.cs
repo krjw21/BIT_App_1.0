@@ -50,5 +50,25 @@ namespace BIT_DesktopApp.Models
                 this.Add(availableContractor);
             }
         }
+
+        // SQL query for filter results using the search bar
+        public Contractors(string searchText, string searchFilter)
+        {
+            _db = new SQLHelper();
+
+            if (searchFilter == "ID") { searchFilter = "Contractor_ID"; }
+            if (searchFilter == "First Name") { searchFilter = "First_Name"; }
+            if (searchFilter == "Last Name") { searchFilter = "Last_Name"; }
+            // + Email, Phone as possible search filters
+
+            string sql = $"SELECT Contractor_ID, First_Name, Last_Name, First_Name + ' ' + Last_Name AS FullName, DOB, Email, Phone, Street, Suburb, [State], Postcode, Password FROM Contractor WHERE [Status] = 1 AND {searchFilter} LIKE '%{searchText}%'";
+            DataTable dataTable = _db.ExecuteSQL(sql);
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Contractor newContractor = new Contractor(dr);
+                this.Add(newContractor);
+            }
+        }
     }
 }

@@ -12,15 +12,6 @@ namespace BIT_DesktopApp.ViewModels
 {
     public class ClientViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Client> _clients;
-        private Client _selectedClient;
-        private RelayCommand _updateClient;
-        private RelayCommand _deleteCommand;
-        private bool _enableUpdate;
-        private bool _enableFields;
-        private bool _enableButtons;
-        private bool _enableAdd;
-
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
         {
@@ -30,6 +21,8 @@ namespace BIT_DesktopApp.ViewModels
             }
         }
 
+
+        private ObservableCollection<Client> _clients;
         public ObservableCollection<Client> Clients
         {
             get { return _clients; }
@@ -39,6 +32,9 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("Clients");
             }
         }
+
+
+        private Client _selectedClient;
         public Client SelectedClient
         {
             get { return _selectedClient; }
@@ -51,30 +47,10 @@ namespace BIT_DesktopApp.ViewModels
                 EnableUpdate = false;
             }
         }
-        public RelayCommand UpdateClient
-        {
-            get
-            {
-                if (_updateClient == null)
-                {
-                    _updateClient = new RelayCommand(this.UpdateClientMethod, true);
-                }
-                return _updateClient;
-            }
-            set { _updateClient = value; }
-        }
-        public RelayCommand DeleteCommand
-        {
-            get
-            {
-                if (_deleteCommand == null)
-                {
-                    _deleteCommand = new RelayCommand(this.DeleteClientMethod, true);
-                }
-                return _deleteCommand;
-            }
-            set { _deleteCommand = value; }
-        }
+
+
+        private bool _enableUpdate;
+        private RelayCommand _updateClient;
         public bool EnableUpdate
         {
             get { return _enableUpdate; }
@@ -85,7 +61,7 @@ namespace BIT_DesktopApp.ViewModels
 
                 if (SelectedClient != null)
                 {
-                    if(SelectedClient.ClientID != null)
+                    if (SelectedClient.ClientID != null)
                     {
                         if (value)
                         {
@@ -110,6 +86,74 @@ namespace BIT_DesktopApp.ViewModels
                 }
             }
         }
+        public RelayCommand UpdateClient
+        {
+            get
+            {
+                if (_updateClient == null)
+                {
+                    _updateClient = new RelayCommand(this.UpdateClientMethod, true);
+                }
+                return _updateClient;
+            }
+            set { _updateClient = value; }
+        }
+        public void UpdateClientMethod()
+        {
+            try
+            {
+                string message = SelectedClient.UpdateClient();
+                MessageBox.Show(message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"There was a problem with updating Client: \"{SelectedClient.BusinessName}\". Please try again or contact an Administrator.");
+            }
+            RefreshGrid();
+            EnableButtons = false;
+        }
+
+
+        private RelayCommand _deleteCommand;
+        public RelayCommand DeleteCommand
+        {
+            get
+            {
+                if (_deleteCommand == null)
+                {
+                    _deleteCommand = new RelayCommand(this.DeleteClientMethod, true);
+                }
+                return _deleteCommand;
+            }
+            set { _deleteCommand = value; }
+        }
+        public void DeleteClientMethod()
+        {
+
+            MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete this Client: \"{SelectedClient.BusinessName}\"?", "Delete Confirmation", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    try
+                    {
+                        string message = SelectedClient.DeleteClient();
+                        MessageBox.Show(message);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show($"There was a problem with deleting this Client: \"{SelectedClient.BusinessName}\". Please try again or contact an Administrator.");
+                    }
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+            RefreshGrid();
+        }
+
+
+        private bool _enableFields;
+        private bool _enableButtons;
+        private bool _enableAdd;
         public bool EnableFields
         {
             get { return _enableFields; }
@@ -139,46 +183,58 @@ namespace BIT_DesktopApp.ViewModels
         }
 
 
+        private string _searchText;
+        private string _searchFilter;
+        private RelayCommand _searchCommand;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged("SearchText");
+            }
+        }
+        public string SearchFilter
+        {
+            get { return _searchFilter; }
+            set
+            {
+                _searchFilter = value;
+                OnPropertyChanged("SearchFilter");
+            }
+        }
+        public RelayCommand SearchCommand
+        {
+            get
+            {
+                if (_searchCommand == null)
+                {
+                    _searchCommand = new RelayCommand(this.SearchMethod, true);
+                }
+                return _searchCommand;
+            }
+            set { _searchCommand = value; }
+        }
+        public void SearchMethod()
+        {
+            if(SearchFilter != null)
+            {
+                Clients allClients = new Clients(SearchText, SearchFilter);
+                this.Clients = new ObservableCollection<Client>(allClients);
+            }
+            else
+            {
+                MessageBox.Show("Please select a filter before searching for a record.");
+            }
+
+        }
+
+
         public void RefreshGrid()
         {
             Clients allClients = new Clients();
             this.Clients = new ObservableCollection<Client>(allClients);
-        }
-        public void UpdateClientMethod()
-        {
-            try
-            {
-                string message = SelectedClient.UpdateClient();
-                MessageBox.Show(message);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show($"There was a problem with updating Client: \"{SelectedClient.BusinessName}\". Please try again or contact an Administrator.");
-            }
-            RefreshGrid();
-            EnableButtons = false;
-        }
-        public void DeleteClientMethod()
-        {
-
-            MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete this Client: \"{SelectedClient.BusinessName}\"?", "Delete Confirmation", MessageBoxButton.YesNo);
-            switch (result)
-            {
-                case MessageBoxResult.Yes:
-                    try
-                    {
-                        string message = SelectedClient.DeleteClient();
-                        MessageBox.Show(message);
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show($"There was a problem with deleting this Client: \"{SelectedClient.BusinessName}\". Please try again or contact an Administrator.");
-                    }
-                    break;
-                case MessageBoxResult.No:
-                    break;
-            }
-            RefreshGrid();
         }
 
 

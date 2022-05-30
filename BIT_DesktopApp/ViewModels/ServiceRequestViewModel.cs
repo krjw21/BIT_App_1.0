@@ -220,6 +220,62 @@ namespace BIT_DesktopApp.ViewModels
         public string CompletedTabHeader { get; set; }
 
 
+        private string _searchText;
+        private string _searchFilter;
+        private RelayCommand _searchCommand;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged("SearchText");
+            }
+        }
+        public string SearchFilter
+        {
+            get { return _searchFilter; }
+            set
+            {
+                _searchFilter = value;
+                OnPropertyChanged("SearchFilter");
+            }
+        }
+        public RelayCommand SearchCommand
+        {
+            get
+            {
+                if (_searchCommand == null)
+                {
+                    _searchCommand = new RelayCommand(this.SearchMethod, true);
+                }
+                return _searchCommand;
+            }
+            set { _searchCommand = value; }
+        }
+        public void SearchMethod()
+        {
+            if(SearchFilter != null)
+            {
+                ServiceRequests allServiceRequests = new ServiceRequests(SearchText, SearchFilter, false);
+                this.AllServiceRequests = new ObservableCollection<ServiceRequest>(allServiceRequests);
+
+                ServiceRequests completedServiceRequests = new ServiceRequests("Completed", SearchText, SearchFilter);
+                this.CompletedServiceRequests = new ObservableCollection<ServiceRequest>(completedServiceRequests);
+
+                ServiceRequests unassignedServiceRequests = new ServiceRequests("Requested", "Rejected", SearchText, SearchFilter);
+                this.UnassignedServiceRequests = new ObservableCollection<ServiceRequest>(unassignedServiceRequests);
+
+                ServiceRequests assignedServiceRequests = new ServiceRequests("Assigned", "Accepted", SearchText, SearchFilter);
+                this.AssignedServiceRequests = new ObservableCollection<ServiceRequest>(assignedServiceRequests);
+            }
+            else
+            {
+                MessageBox.Show("Please select a filter before searching for a record.");
+            }
+        }
+
+
         public void RefreshGrid()
         {
             ServiceRequests allServiceRequests = new ServiceRequests();
@@ -230,12 +286,12 @@ namespace BIT_DesktopApp.ViewModels
             int completedCount = CompletedServiceRequests.Count;
             CompletedTabHeader = $"Completed *{completedCount}";
 
-            ServiceRequests unassignedServiceRequests = new ServiceRequests("Requested", "Rejected");
+            ServiceRequests unassignedServiceRequests = new ServiceRequests("Requested", "Rejected", true);
             this.UnassignedServiceRequests = new ObservableCollection<ServiceRequest>(unassignedServiceRequests);
             int unassignedCount = UnassignedServiceRequests.Count;
             UnassignedTabHeader = $"Requested/Rejected *{unassignedCount}";
 
-            ServiceRequests assignedServiceRequests = new ServiceRequests("Assigned", "Accepted");
+            ServiceRequests assignedServiceRequests = new ServiceRequests("Assigned", "Accepted", true);
             this.AssignedServiceRequests = new ObservableCollection<ServiceRequest>(assignedServiceRequests);
         }
         public void UpdateServiceRequestMethod()

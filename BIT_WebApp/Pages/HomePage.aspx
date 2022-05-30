@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="background-color: #040315;">
+    <div style="background-color: #040315; padding-top: 50px;">
         <div class="hp-image">
             <p class="hp-header">Australia's Premium IT Support Service Provider</p>
             <p class="hp-content">Servicing over 2,500 clients across the country!</p>

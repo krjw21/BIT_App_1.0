@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:BIT_DesktopApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="DefaultView" FontFamily="Calibri Light" Background="#192231">
+      Title="DefaultView" FontFamily="Calibri Light">
 
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,50">
         <Grid.RowDefinitions>

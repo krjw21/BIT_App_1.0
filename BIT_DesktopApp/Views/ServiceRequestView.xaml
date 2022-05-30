@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:BIT_DesktopApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ServiceRequestView" FontFamily="Calibri Light" Background="#192231">
+      Title="ServiceRequestView" FontFamily="Calibri Light">
     <Page.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Control.Foreground" Value="#B8A5AE"/>
@@ -21,11 +21,18 @@
         </Grid.RowDefinitions>
         <Label FontSize="22" Margin="14,7,7,7">Service Request Management</Label>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <ComboBox x:Name="cmbSearchServiceRequest" Width="100" Margin="12,14,0,12">
+            <ComboBox x:Name="cmbSearchServiceRequest" Width="105" Margin="12,14,0,12" SelectedValue="{Binding SearchFilter}" SelectedValuePath="Content" VerticalContentAlignment="Center">
                 <ComboBoxItem Content="ID"/>
+                <ComboBoxItem Content="Business Name"/>
+                <ComboBoxItem Content="Skill Category"/>
+                <ComboBoxItem Content="Priority"/>
+                <ComboBoxItem Content="Job Status"/>
+                <ComboBoxItem Content="Payment Status"/>
+                <ComboBoxItem Content="Date Created"/>
+                <ComboBoxItem Content="Contractor"/>
             </ComboBox>
-            <TextBox x:Name="txtSearchServiceRequest" Width="300" Margin="11,11,5,11"/>
-            <Button x:Name="btnSearchServiceRequest" Background="Transparent" BorderThickness="0"  
+            <TextBox x:Name="txtSearchServiceRequest" Text="{Binding SearchText}" Width="300" Margin="11,14,5,12" VerticalContentAlignment="Center"/>
+            <Button x:Name="btnSearchServiceRequest" Command="{Binding SearchCommand}" Background="Transparent" BorderThickness="0"  
     Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="5" Click="btnSearchServiceRequest_Click">
                 <Image Source="../Images/magnifying_glass.png" Height="30" Width="30"/>
             </Button>
@@ -192,12 +199,12 @@
             </Grid>
             <Grid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="124*"/>
-                    <ColumnDefinition Width="147*"/>
-                    <ColumnDefinition Width="43*"/>
-                    <ColumnDefinition Width="95*"/>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Skill Category:" Grid.Column="0" Margin="47,2,0,2" HorizontalAlignment="Left" Width="77"/>
+                <Label Content="Skill Category:" Grid.Column="0" Margin="47,2,0,2" HorizontalAlignment="Right" Width="77"/>
                 <ComboBox x:Name="cmbSkillCategory" ItemsSource="{Binding Skills, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="SkillCategory" Text="{Binding SelectedServiceRequest.SkillCategory}" Grid.Column="1" Margin="5,5,0,5" IsEnabled="{Binding EnableFields}"/>
                 <Label Content="KMs:" Grid.Column="2" Margin="5,2,0,2" HorizontalAlignment="Right" Width="34"/>
                 <TextBox x:Name="txtDistanceTravelled" Text="{Binding SelectedServiceRequest.DistanceTravelled}" Grid.Column="3" Margin="5,5,60,5" IsEnabled="{Binding EnableFields}"/>

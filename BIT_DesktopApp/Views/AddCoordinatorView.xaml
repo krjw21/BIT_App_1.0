@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BIT_DesktopApp.Views"
         mc:Ignorable="d"
-        Title="AddCoordinatorView" Height="280" Width="700" FontFamily="Calibri Light" Background="#192231">
+        Title="AddCoordinatorView" Height="280" Width="700" FontFamily="Calibri Light">
     <Window.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Control.Foreground" Value="#B8A5AE"/>
         </Style>
     </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="\Images\gradient-background.png"></ImageBrush>
+    </Window.Background>
     <Grid>
         <Grid Margin="10">
             <Grid.RowDefinitions>

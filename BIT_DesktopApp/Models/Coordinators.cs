@@ -24,5 +24,25 @@ namespace BIT_DesktopApp.Models
                 this.Add(newCoordinator);
             }
         }
+
+        // SQL query for filter results using the search bar
+        public Coordinators(string searchText, string searchFilter)
+        {
+            _db = new SQLHelper();
+
+            if (searchFilter == "ID") { searchFilter = "Coordinator_ID"; }
+            if (searchFilter == "First Name") { searchFilter = "First_Name"; }
+            if (searchFilter == "Last Name") { searchFilter = "Last_Name"; }
+            // + Email, Phone as possible search filters
+
+            string sql = $"SELECT Coordinator_ID, First_Name, Last_Name, DOB, Email, Phone, Street, Suburb, [State], Postcode, Password FROM Coordinator WHERE [Status] = 1 AND {searchFilter} LIKE '%{searchText}%'";
+            DataTable dataTable = _db.ExecuteSQL(sql);
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Coordinator newCoordinator = new Coordinator(dr);
+                this.Add(newCoordinator);
+            }
+        }
     }
 }

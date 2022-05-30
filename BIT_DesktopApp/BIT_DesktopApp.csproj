@@ -181,6 +181,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DAL\SQLHelper.cs" />
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Logs\DbLogger.cs" />
     <Compile Include="Logs\EventLogger.cs" />
     <Compile Include="Logs\FileLogger.cs" />
@@ -206,6 +209,7 @@
     <Compile Include="Models\Skills.cs" />
     <Compile Include="Models\Suburb.cs" />
     <Compile Include="Models\Suburbs.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\AddClientViewModel.cs" />
     <Compile Include="ViewModels\AddContractorViewModel.cs" />
@@ -242,6 +246,10 @@
     <Compile Include="Views\ServiceRequestView.xaml.cs">
       <DependentUpon>ServiceRequestView.xaml</DependentUpon>
     </Compile>
+    <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -309,6 +317,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Images\gradient-background.png" />
+    <Resource Include="Images\BIT_Logo_Extended_Solid.png" />
+    <Resource Include="Images\BIT_Logo_Extended_Transparent.png" />
+    <Resource Include="Images\login_icon.png" />
+    <Resource Include="Images\login_icon2.png" />
+    <Resource Include="Images\fibre_optic_cables.jpg" />
+    <Resource Include="Images\space_network.jpg" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:BIT_DesktopApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ContractorView" FontFamily="Calibri Light" Background="#192231">
+      Title="ContractorView" FontFamily="Calibri Light">
     <Page.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Control.Foreground" Value="#B8A5AE"/>
@@ -20,11 +20,15 @@
         </Grid.RowDefinitions>
         <Label FontSize="22" Margin="14,7,7,7">Contractor Management</Label>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <ComboBox x:Name="cmbSearchContractor" Width="100" Margin="12,14,0,12">
+            <ComboBox x:Name="cmbSearchContractor" Width="105" Margin="12,14,0,12" SelectedValue="{Binding SearchFilter}" SelectedValuePath="Content" VerticalContentAlignment="Center">
                 <ComboBoxItem Content="ID"/>
+                <ComboBoxItem Content="First Name"/>
+                <ComboBoxItem Content="Last Name"/>
+                <ComboBoxItem Content="Email"/>
+                <ComboBoxItem Content="Phone"/>
             </ComboBox>
-            <TextBox x:Name="txtSearchContractor" Width="300" Margin="11,11,5,11"/>
-            <Button x:Name="btnSearchContractor" Background="Transparent" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="5" >
+            <TextBox x:Name="txtSearchContractor" Text="{Binding SearchText}" Width="300" Margin="11,14,5,12" VerticalContentAlignment="Center"/>
+            <Button x:Name="btnSearchContractor" Command="{Binding SearchCommand}" Background="Transparent" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="5" >
                 <Image Source="../Images/magnifying_glass.png" Height="30" Width="30"/>
             </Button>
         </StackPanel>
@@ -44,7 +48,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <TabControl Grid.Row="2" Margin="14,7,7,7" Background="#273245">
+        <TabControl Grid.Row="2" Margin="14,7,7,7" Background="#192231">
             <TabItem Header="Details" IsEnabled="{Binding EnableButtons}">
                 <Grid Grid.Row="2" Margin="5">
                     <Grid.RowDefinitions>
@@ -65,21 +69,21 @@
                     <Label Content="ID: " Grid.Row="0" Grid.Column="0" Margin="0,2" HorizontalAlignment="Right"/>
                     <TextBox x:Name="txtContractorID" Text="{Binding SelectedContractor.ContractorID}" Grid.Row="0" Grid.Column="1" Margin="5,5,250,5" IsEnabled="False"/>
                     <Label Content="First Name: " Grid.Row="1" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                    <TextBox x:Name="txtFirstName" Text="{Binding SelectedContractor.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[FirstName]}" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <TextBox x:Name="txtFirstName" Text="{Binding SelectedContractor.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
                     <Label Content="Last Name: " Grid.Row="2" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                    <TextBox x:Name="txtLastName" Text="{Binding SelectedContractor.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[LastName]}" Grid.Row="2" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <TextBox x:Name="txtLastName" Text="{Binding SelectedContractor.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
                     <Label Content="Email Address: " Grid.Row="3" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                    <TextBox x:Name="txtEmail" Text="{Binding SelectedContractor.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[Email]}" Grid.Row="3" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <TextBox x:Name="txtEmail" Text="{Binding SelectedContractor.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="3" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
                     <Label Content="Phone Number: " Grid.Row="4" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                    <TextBox x:Name="txtPhone" Text="{Binding SelectedContractor.Phone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[Phone]}" Grid.Row="4" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <TextBox x:Name="txtPhone" Text="{Binding SelectedContractor.Phone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" Margin="5" IsEnabled="{Binding EnableFields}"/>
                     <Border Grid.Column="2" Grid.RowSpan="5" BorderBrush="#B8A5AE" BorderThickness="1,0,0,0" Margin="2"/>
                     <!-- Last Two Columns data -->
                     <Label Content="Date of Birth: " Grid.Row="0" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                    <DatePicker x:Name="dpDOB" SelectedDate="{Binding SelectedContractor.DOB, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[DOB]}" Grid.Row="0" Grid.Column="3" Margin="5,2,100,2" IsEnabled="{Binding EnableFields}"/>
+                    <DatePicker x:Name="dpDOB" SelectedDate="{Binding SelectedContractor.DOB, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0" Grid.Column="3" Margin="5,2,100,2" IsEnabled="{Binding EnableFields}"/>
                     <Label Content="Street:" Grid.Row="1" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                    <TextBox x:Name="txtStreet" Text="{Binding SelectedContractor.Street, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[Street]}" Grid.Row="1" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <TextBox x:Name="txtStreet" Text="{Binding SelectedContractor.Street, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
                     <Label Content="Suburb:" Grid.Row="2" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                    <TextBox x:Name="txtSuburb" Text="{Binding SelectedContractor.Suburb, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[Suburb]}" Grid.Row="2" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
+                    <TextBox x:Name="txtSuburb" Text="{Binding SelectedContractor.Suburb, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="2" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
                     <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1.3*"/>
@@ -88,9 +92,9 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="State:" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                        <TextBox x:Name="txtState" Text="{Binding SelectedContractor.State, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[State]}" Grid.Column="1" Margin="5,5,35,5" IsEnabled="{Binding EnableFields}"/>
+                        <TextBox x:Name="txtState" Text="{Binding SelectedContractor.State, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Margin="5,5,35,5" IsEnabled="{Binding EnableFields}"/>
                         <Label Content="Postcode:" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                        <TextBox x:Name="txtPostcode" Text="{Binding SelectedContractor.Postcode, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding SelectedContractor.ErrorCollection[Postcode]}" Grid.Column="3" Margin="5,5,50,5" IsEnabled="{Binding EnableFields}"/>
+                        <TextBox x:Name="txtPostcode" Text="{Binding SelectedContractor.Postcode, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="3" Margin="5,5,50,5" IsEnabled="{Binding EnableFields}"/>
                     </Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5" Grid.ColumnSpan="4" Margin="0,3,0,0">
                         <ToggleButton x:Name="btnUpdate" IsChecked="{Binding EnableUpdate}" Width="140" Margin="10,1" IsEnabled="{Binding EnableButtons}">

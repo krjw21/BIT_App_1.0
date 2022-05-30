@@ -273,7 +273,7 @@ namespace BIT_DesktopApp.ViewModels
                 _enableUpdate = value;
                 OnPropertyChanged("EnableUpdate");
 
-                if(SelectedContractor != null)
+                if (SelectedContractor != null)
                 {
                     if (SelectedContractor.ContractorID != null)
                     {
@@ -403,6 +403,52 @@ namespace BIT_DesktopApp.ViewModels
             }
         }
 
+
+        private string _searchText;
+        private string _searchFilter;
+        private RelayCommand _searchCommand;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged("SearchText");
+            }
+        }
+        public string SearchFilter
+        {
+            get { return _searchFilter; }
+            set
+            {
+                _searchFilter = value;
+                OnPropertyChanged("SearchFilter");
+            }
+        }
+        public RelayCommand SearchCommand
+        {
+            get
+            {
+                if (_searchCommand == null)
+                {
+                    _searchCommand = new RelayCommand(this.SearchMethod, true);
+                }
+                return _searchCommand;
+            }
+            set { _searchCommand = value; }
+        }
+        public void SearchMethod()
+        {
+            if (SearchFilter != null)
+            {
+                Contractors allContractors = new Contractors(SearchText, SearchFilter);
+                this.Contractors = new ObservableCollection<Contractor>(allContractors);
+            }
+            else
+            {
+                MessageBox.Show("Please select a filter before searching for a record.");
+            }
+        }
 
         public void RefreshGrid()
         {

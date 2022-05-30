@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using BIT_DesktopApp.Models;
 using BIT_DesktopApp.Views;
 
 namespace BIT_DesktopApp
@@ -37,6 +37,10 @@ namespace BIT_DesktopApp
         {
             InitializeComponent();
             contentFrame.Navigate(new DefaultView());
+            if(User.Email != "administrator@email.com")
+            {
+                btnCoordinator.Visibility = Visibility.Hidden;
+            }
         }
 
         private void contentFrame_Navigated(object sender, NavigationEventArgs e)
@@ -67,6 +71,16 @@ namespace BIT_DesktopApp
         private void btnClient_Click(object sender, RoutedEventArgs e)
         {
             contentFrame.Navigate(new ClientView());
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            User.Email = String.Empty;
+            User.Password = String.Empty;
+
+            this.Hide();
+            new LoginWindow().Show();
+            this.Close();
         }
     }
 }

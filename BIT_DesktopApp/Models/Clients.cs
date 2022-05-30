@@ -18,7 +18,24 @@ namespace BIT_DesktopApp.Models
             string sql = "SELECT Client_ID, Business_Name, ABN, First_Name, Last_Name, Email, Phone, Street, Suburb, [State], Postcode, Password FROM Client WHERE [Status] = 1";
             DataTable dataTable = _db.ExecuteSQL(sql);
 
-            foreach(DataRow dr in dataTable.Rows)
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Client newClient = new Client(dr);
+                this.Add(newClient);
+            }
+        }
+        public Clients(string searchText, string searchFilter)
+        {
+            _db = new SQLHelper();
+
+            if (searchFilter == "ID") { searchFilter = "Client_ID"; }
+            if (searchFilter == "Business Name") { searchFilter = "Business_Name"; }
+            // + ABN, Email, Phone as possible search filters
+
+            string sql = $"SELECT Client_ID, Business_Name, ABN, First_Name, Last_Name, Email, Phone, Street, Suburb, [State], Postcode, Password FROM Client WHERE [Status] = 1 AND {searchFilter} LIKE '%{searchText}%'";
+            DataTable dataTable = _db.ExecuteSQL(sql);
+
+            foreach (DataRow dr in dataTable.Rows)
             {
                 Client newClient = new Client(dr);
                 this.Add(newClient);
