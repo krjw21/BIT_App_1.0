@@ -32,7 +32,7 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <Image Source="../Images/BIT_Logo_Transparent.png" Height="60px" Margin="40,-13,0,0"/>
-                <Label Content="New Service Request Form" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" FontSize="20" FontFamily="Calibri"/>
+                <Label Content="New Service Request Form" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" FontSize="20" FontFamily="Goudy Old Style"/>
                 <!-- First Two Columns data -->
                 <Label Content="Co-ordinator: " Grid.Row="1" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtCoordinator" Text="{Binding CoordinatorName}" Grid.Row="1" Grid.Column="1" Margin="5,10" IsEnabled="False"/>

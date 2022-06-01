@@ -12,22 +12,6 @@ namespace BIT_DesktopApp.ViewModels
 {
     public class ServiceRequestViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<ServiceRequest> _allServiceRequests;
-        private ObservableCollection<ServiceRequest> _completedServiceRequests;
-        private ObservableCollection<ServiceRequest> _unassignedServiceRequests;
-        private ObservableCollection<ServiceRequest> _assignedServiceRequests;
-        private ObservableCollection<JobState> _jobStates;
-        private ObservableCollection<PaymentState> _paymentStates;
-        private ObservableCollection<PriorityState> _priorityStates;
-        private ObservableCollection<Skill> _skills;
-        private ObservableCollection<Contractor> _availableContractors;
-        private ServiceRequest _selectedServiceRequest;
-        private RelayCommand _updateServiceRequest;
-        private bool _enableUpdate;
-        private bool _enableFields;
-        private bool _enableButtons;
-        private bool _enableAdd;
-
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
         {
@@ -38,6 +22,7 @@ namespace BIT_DesktopApp.ViewModels
         }
 
 
+        private ObservableCollection<ServiceRequest> _allServiceRequests;
         public ObservableCollection<ServiceRequest> AllServiceRequests
         {
             get { return _allServiceRequests; }
@@ -47,6 +32,7 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("AllServiceRequests");
             }
         }
+        private ObservableCollection<ServiceRequest> _completedServiceRequests;
         public ObservableCollection<ServiceRequest> CompletedServiceRequests
         {
             get { return _completedServiceRequests; }
@@ -56,6 +42,7 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("CompletedServiceRequests");
             }
         }
+        private ObservableCollection<ServiceRequest> _unassignedServiceRequests;
         public ObservableCollection<ServiceRequest> UnassignedServiceRequests
         {
             get { return _unassignedServiceRequests; }
@@ -65,6 +52,7 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("UnassignedServiceRequests");
             }
         }
+        private ObservableCollection<ServiceRequest> _assignedServiceRequests;
         public ObservableCollection<ServiceRequest> AssignedServiceRequests
         {
             get { return _assignedServiceRequests; }
@@ -74,6 +62,7 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("AssignedServiceRequests");
             }
         }
+        private ObservableCollection<JobState> _jobStates;
         public ObservableCollection<JobState> JobStates
         {
             get { return _jobStates; }
@@ -83,6 +72,7 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("JobStates");
             }
         }
+        private ObservableCollection<PaymentState> _paymentStates;
         public ObservableCollection<PaymentState> PaymentStates
         {
             get { return _paymentStates; }
@@ -92,6 +82,7 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("PaymentStates");
             }
         }
+        private ObservableCollection<PriorityState> _priorityStates;
         public ObservableCollection<PriorityState> PriorityStates
         {
             get { return _priorityStates; }
@@ -101,6 +92,7 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("PriorityStates");
             }
         }
+        private ObservableCollection<Skill> _skills;
         public ObservableCollection<Skill> Skills
         {
             get { return _skills; }
@@ -110,6 +102,7 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("Skills");
             }
         }
+        private ObservableCollection<Contractor> _availableContractors;
         public ObservableCollection<Contractor> AvailableContractors
         {
             get { return _availableContractors; }
@@ -119,6 +112,9 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("AvailableContractors");
             }
         }
+
+
+        private ServiceRequest _selectedServiceRequest;
         public ServiceRequest SelectedServiceRequest
         {
             get { return _selectedServiceRequest; }
@@ -132,7 +128,7 @@ namespace BIT_DesktopApp.ViewModels
 
                 if (SelectedServiceRequest != null)
                 {
-                    Contractors availableContractors = new Contractors(SelectedServiceRequest.SkillCategory, SelectedServiceRequest.Suburb, SelectedServiceRequest.DateCreated);
+                    Contractors availableContractors = new Contractors(SelectedServiceRequest.ServiceRequestID, SelectedServiceRequest.SkillCategory, SelectedServiceRequest.Suburb, SelectedServiceRequest.DateCreated);
                     if (availableContractors.Count == 0 || availableContractors == null)
                     {
                         MessageBox.Show("There are no available Contractors for this job.");
@@ -141,6 +137,10 @@ namespace BIT_DesktopApp.ViewModels
                 }
             }
         }
+
+
+        // command for editing a Service Request
+        private RelayCommand _updateServiceRequest;
         public RelayCommand UpdateServiceRequest
         {
             get
@@ -153,6 +153,26 @@ namespace BIT_DesktopApp.ViewModels
             }
             set { _updateServiceRequest = value; }
         }
+        public void UpdateServiceRequestMethod()
+        {
+            try
+            {
+                string message = SelectedServiceRequest.UpdateServiceRequest();
+                MessageBox.Show(message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"There was a problem with updating Service Request ID: \"{SelectedServiceRequest.ServiceRequestID}\". Please try again or contact an Administrator.");
+            }
+            RefreshGrid();
+            EnableButtons = false;
+        }
+
+
+        private bool _enableUpdate;
+        private bool _enableFields;
+        private bool _enableButtons;
+        private bool _enableAdd;
         public bool EnableUpdate
         {
             get { return _enableUpdate; }
@@ -215,10 +235,13 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("EnableAdd");
             }
         }
+
+
         public string UnassignedTabHeader { get; set; }
         public string CompletedTabHeader { get; set; }
 
 
+        // search filter functionality
         private string _searchText;
         private string _searchFilter;
         private RelayCommand _searchCommand;
@@ -293,21 +316,7 @@ namespace BIT_DesktopApp.ViewModels
             ServiceRequests assignedServiceRequests = new ServiceRequests("Assigned", "Accepted", true);
             this.AssignedServiceRequests = new ObservableCollection<ServiceRequest>(assignedServiceRequests);
         }
-        public void UpdateServiceRequestMethod()
-        {
-            try
-            {
-                string message = SelectedServiceRequest.UpdateServiceRequest();
-                MessageBox.Show(message);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show($"There was a problem with updating Service Request ID: \"{SelectedServiceRequest.ServiceRequestID}\". Please try again or contact an Administrator.");
-            }
-            RefreshGrid();
-            EnableButtons = false;
-        }
-
+        
 
         public ServiceRequestViewModel()
         {

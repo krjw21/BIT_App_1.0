@@ -32,6 +32,7 @@ namespace BIT_WebApp.Pages
             }
         }
 
+        // creating a new service request - from the Client
         protected void btnNewServiceRequest_Click(object sender, EventArgs e)
         {
             if (calBookingDate.SelectedDate == null || ddlStartTime.SelectedValue == "Select" || ddlSkillCategory.SelectedValue == "Select" || ddlPriority.SelectedValue == "Select" || txtStreet.Text == "" || txtSuburb.Text == "" || ddlState.SelectedValue == "Select" || txtPostcode.Text == "")
@@ -60,7 +61,7 @@ namespace BIT_WebApp.Pages
                 }
                 else
                 {
-                    Response.Write("<script>alert('Booking request failed. Please try again.')</script>");
+                    Response.Write("<script>alert('Booking request failed. Please try again or contact a Co-ordinator.')</script>");
                 }
             }
         }

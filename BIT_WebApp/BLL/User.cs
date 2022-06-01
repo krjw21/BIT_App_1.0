@@ -20,8 +20,8 @@ namespace BIT_WebApp.BLL
             _db = new SQLHelper();
         }
 
-
-        public int CheckClient() // Method to check client login details
+        // Method to check Client login details
+        public int CheckClient() 
         {
             string sql = "SELECT Client_ID FROM Client WHERE Email = @Email AND Password = @Password";
             SqlParameter[] objParameters = new SqlParameter[2];
@@ -39,7 +39,9 @@ namespace BIT_WebApp.BLL
 
             return id;
         }
-        public int CheckContractor() // Method to check contractor login details
+
+        // Method to check Contractor login details
+        public int CheckContractor() 
         {
             {
                 string sql = "SELECT Contractor_ID FROM Contractor WHERE Email = @Email AND Password = @Password";
@@ -59,7 +61,9 @@ namespace BIT_WebApp.BLL
                 return id;
             }
         }
-        public int CheckCoordinator() // Method to check coordinator login details
+
+        // Method to check Coordinator login details
+        public int CheckCoordinator() 
         {
             string sql = "SELECT Coordinator_ID FROM Coordinator WHERE Email = @Email AND Password = @Password";
             SqlParameter[] objParameters = new SqlParameter[2];

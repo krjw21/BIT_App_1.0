@@ -29,8 +29,8 @@ namespace BIT_WebApp.BLL
             _db = new SQLHelper();
         }
 
-
-        public DataTable AssignedBookings() // SQL query to select all service requests assigned to the contractor
+        // SQL query to select all Service Requests assigned to a specific Contractor
+        public DataTable AssignedBookings() 
         {
             string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, c.Phone, cd.First_Name + ' ' + cd.Last_Name AS Coordinator, sr.Skill_Category AS Category, sr.Priority, sr.Job_Status AS [Job Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address " +
                 "FROM Service_Request AS sr " +
@@ -44,7 +44,9 @@ namespace BIT_WebApp.BLL
             DataTable serviceRequests = _db.ExecuteSQL(sql, objParameters);
             return serviceRequests;
         }
-        public DataTable AcceptedBookings() // SQL query to select all service requests accepted by the contractor
+
+        // SQL query to select all Service Requests accepted by a specific Contractor
+        public DataTable AcceptedBookings() 
         {
             string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, c.Phone, cd.First_Name + ' ' + cd.Last_Name AS Coordinator, sr.Skill_Category AS Category, sr.Priority, sr.Job_Status AS [Job Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address " +
                 "FROM Service_Request AS sr " +
@@ -58,7 +60,9 @@ namespace BIT_WebApp.BLL
             DataTable serviceRequests = _db.ExecuteSQL(sql, objParameters);
             return serviceRequests;
         }
-        public DataTable AllBookings() // SQL query to select service requests marked as "Completed" or "Rejected" by the contractor
+
+        // SQL query to select Service Requests marked as "Completed" or "Rejected" by a specific Contractor
+        public DataTable AllBookings() 
         {
             string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, c.Phone, cd.First_Name + ' ' + cd.Last_Name AS Coordinator, sr.Skill_Category AS Category, sr.Priority, sr.Job_Status AS [Job Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], CONVERT(NVARCHAR, sr.Date_Completed, 103) AS [Date Completed], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address, sr.Hours_Worked AS Hours, sr.Distance_Travelled AS KMs " +
                 "FROM Service_Request AS sr " +
@@ -72,7 +76,9 @@ namespace BIT_WebApp.BLL
             DataTable serviceRequests = _db.ExecuteSQL(sql, objParameters);
             return serviceRequests;
         }
-        public int AcceptBooking(int serviceRequestID) // SQL query to accept an assigned service request
+
+        // SQL query to accept an assigned Aervice Request
+        public int AcceptBooking(int serviceRequestID) 
         {
             int returnValue = 0;
             string sql = "UPDATE Service_Request SET Job_Status = 'Accepted' WHERE Service_Request_ID = @ServiceRequestID";
@@ -82,7 +88,9 @@ namespace BIT_WebApp.BLL
             returnValue = _db.ExecuteNonQuery(sql, objParameters);
             return returnValue;
         }
-        public int RejectBooking(int serviceRequestID) // SQL query to reject an assigned service request
+
+        // SQL query to reject an assigned Service Request
+        public int RejectBooking(int serviceRequestID) 
         {
             int returnValue = 0;
             string updateSQL = "UPDATE Service_Request SET Job_Status = 'Rejected' WHERE Service_Request_ID = @ServiceRequestID";
@@ -97,7 +105,9 @@ namespace BIT_WebApp.BLL
             int rejectValue = _db.ExecuteNonQuery(rejectSQL, objParameters2);
             return returnValue;
         }
-        public int CompleteBooking(int serviceRequestID, int hours, int distance) // SQL query to mark a service request as completed
+
+        // SQL query to mark a Service Request as "Completed"
+        public int CompleteBooking(int serviceRequestID, int hours, int distance) 
         {
             int returnValue = 0;
             string sql = "UPDATE Service_Request SET Job_Status = 'Completed', Hours_Worked = @HoursWorked, Distance_Travelled = @DistanceTravelled, Date_Completed = GETDATE() WHERE Service_Request_ID = @ServiceRequestID";
@@ -112,17 +122,23 @@ namespace BIT_WebApp.BLL
             return returnValue;
         }
 
-
-        public DataTable AvailableContractors(string skill, string suburb, DateTime date)
+        // SQL query to display all available Contractors for a specific Service Request
+        public DataTable AvailableContractors(int serviceRequestID, string skill, string suburb, DateTime date)
         {
-            string sql = "SELECT c.First_Name + ' ' + c.Last_Name AS FullName FROM Contractor AS c INNER JOIN Contractor_Skill AS csk ON c.Contractor_ID = csk.Contractor_ID AND (csk.Skill_Category = @Skill AND csk.Status = 1) INNER JOIN Contractor_Suburb AS csb ON c.Contractor_ID = csb.Contractor_ID AND csb.Suburb_Name = @Suburb INNER JOIN Contractor_Availability AS ca ON c.Contractor_ID = ca.Contractor_ID AND(ca.Day_Name = @Date AND ca.Start_Time IS NOT NULL)";
-            SqlParameter[] objParameters = new SqlParameter[3];
+            string sql = "SELECT c.First_Name + ' ' + c.Last_Name AS FullName FROM Contractor AS c " +
+                "INNER JOIN Contractor_Skill AS csk ON c.Contractor_ID = csk.Contractor_ID AND (csk.Skill_Category = @Skill AND csk.Status = 1) " +
+                "INNER JOIN Contractor_Suburb AS csb ON c.Contractor_ID = csb.Contractor_ID AND csb.Suburb_Name = @Suburb " +
+                "INNER JOIN Contractor_Availability AS ca ON c.Contractor_ID = ca.Contractor_ID AND(ca.Day_Name = @Date AND ca.Start_Time IS NOT NULL) " +
+                "WHERE c.Contractor_ID NOT IN (SELECT Contractor_ID FROM Rejected_Request WHERE Service_Request_ID = @ServiceRequestID)";
+            SqlParameter[] objParameters = new SqlParameter[4];
             objParameters[0] = new SqlParameter("@Skill", DbType.String);
             objParameters[0].Value = skill;
             objParameters[1] = new SqlParameter("@Suburb", DbType.String);
             objParameters[1].Value = suburb;
             objParameters[2] = new SqlParameter("@Date", DbType.String);
             objParameters[2].Value = date.ToString("dddd");
+            objParameters[3] = new SqlParameter("@ServiceRequestID", DbType.Int32);
+            objParameters[3].Value = serviceRequestID;
             DataTable serviceRequests = _db.ExecuteSQL(sql, objParameters);
             return serviceRequests;
         }

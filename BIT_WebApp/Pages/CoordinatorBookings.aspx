@@ -20,6 +20,8 @@
                                     <asp:GridView ID="gvBookings"
                                         CssClass="table table-striped table-bordered"
                                         runat="server" OnRowCommand="gvBookings_RowCommand" HeaderStyle-HorizontalAlign="Center" RowStyle-HorizontalAlign="Center">
+                                        <EmptyDataRowStyle HorizontalAlign="Center" Font-Size="14" />
+                                        <EmptyDataTemplate>There are currently no unassigned jobs.</EmptyDataTemplate>
                                         <Columns>
                                             <asp:TemplateField HeaderText="Find">
                                                 <ItemTemplate>
@@ -33,7 +35,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Assign">
                                                 <ItemTemplate>
-                                                    <asp:Button ID="btnAssign" runat="server" Height="30px" Width="70px" Text="Assign" CommandName="Assign" CommandArgument="<% #Container.DataItemIndex %>" />
+                                                    <asp:Button ID="btnAssign" runat="server" Height="30px" Width="70px" Text="Assign" CommandName="Assign" CommandArgument="<% #Container.DataItemIndex %>" OnClientClick="return confirm('Are you sure you want to assign this Contractor?');"/>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>

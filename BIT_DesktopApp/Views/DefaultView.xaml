@@ -7,24 +7,36 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DefaultView" FontFamily="Calibri Light">
-
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,50">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label FontSize="22" Foreground="#B8A5AE" Margin="0,0,0,30">Welcome to the BIT Field Support Services Management Application!</Label>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,0,0,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="../Images/clipboard_solid.png" Height="150" Width="150"/>
-            <TextBlock Grid.Column="1" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" FontSize="18" Foreground="#B8A5AE" Margin="0,0,30,0">Service Requests can be managed here. You can create, update, delete, and assign job tasks.</TextBlock>
-            <Image Grid.Column="2" Source="../Images/id_badge_solid.png" Height="150" Width="150"/>
-            <TextBlock Grid.Column="3" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" FontSize="18" Foreground="#B8A5AE" Margin="0,0,30,0">Manage BIT Services current roster of field contractors. Manage job tasks, skills, rosters, and payroll.</TextBlock>
+            <Image Grid.Column="0" Source="../Images/clipboard_solid.png" Height="120"/>
+            <TextBlock Grid.Column="1" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" FontSize="17" Foreground="#B8A5AE" Margin="0,0,30,0">Service Requests can be managed here. You can create, update, delete, and assign job tasks.</TextBlock>
+            <Image Grid.Column="2" Source="../Images/id_badge_solid.png" Height="120"/>
+            <TextBlock Grid.Column="3" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" FontSize="17" Foreground="#B8A5AE" Margin="0,0,30,0">Manage BIT Services current roster of field contractors. Manage job tasks, skills, rosters, and payroll.</TextBlock>
+        </Grid>
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="../Images/clipboard_solid.png" Height="120"/>
+            <TextBlock Grid.Column="1" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" FontSize="17" Foreground="#B8A5AE" Margin="0,0,30,0">Service Requests can be managed here. You can create, update, delete, and assign job tasks.</TextBlock>
+            <Image Grid.Column="2" Source="../Images/id_badge_solid.png" Height="120"/>
+            <TextBlock Grid.Column="3" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" FontSize="17" Foreground="#B8A5AE" Margin="0,0,30,0">Manage BIT Services current roster of field contractors. Manage job tasks, skills, rosters, and payroll.</TextBlock>
         </Grid>
     </Grid>
 </Page>

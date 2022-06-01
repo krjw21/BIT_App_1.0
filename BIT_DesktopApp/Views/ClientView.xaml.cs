@@ -32,40 +32,6 @@ namespace BIT_DesktopApp.Views
 
         }
 
-        private void btnUpdate_Checked(object sender, RoutedEventArgs e)
-        {
-            txtBusinessName.IsEnabled = true;
-            txtABN.IsEnabled = true;
-            txtFirstName.IsEnabled = true;
-            txtLastName.IsEnabled = true;
-            txtEmail.IsEnabled = true;
-            txtPhone.IsEnabled = true;
-            txtStreet.IsEnabled = true;
-            txtSuburb.IsEnabled = true;
-            txtState.IsEnabled = true;
-            txtPostcode.IsEnabled = true;
-            btnUpdate.Content = "Save";
-            btnDelete.IsEnabled = false;
-            btnAdd.IsEnabled = false;
-        }
-
-        private void btnUpdate_Unchecked(object sender, RoutedEventArgs e)
-        {
-            txtBusinessName.IsEnabled = false;
-            txtABN.IsEnabled = false;
-            txtFirstName.IsEnabled = false;
-            txtLastName.IsEnabled = false;
-            txtEmail.IsEnabled = false;
-            txtPhone.IsEnabled = false;
-            txtStreet.IsEnabled = false;
-            txtSuburb.IsEnabled = false;
-            txtState.IsEnabled = false;
-            txtPostcode.IsEnabled = false;
-            btnUpdate.Content = "Edit";
-            btnDelete.IsEnabled = true;
-            btnAdd.IsEnabled = true;
-        }
-
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             var newWindow = new AddClientView();

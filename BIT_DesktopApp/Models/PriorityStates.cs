@@ -10,6 +10,7 @@ namespace BIT_DesktopApp.Models
 {
     public class PriorityStates : List<PriorityState>
     {
+        // SQL query to display priorities in combobox
         public PriorityStates()
         {
             SQLHelper db = new SQLHelper();

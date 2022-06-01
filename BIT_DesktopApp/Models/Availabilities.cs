@@ -14,6 +14,7 @@ namespace BIT_DesktopApp.Models
         private SQLHelper _db;
 
 
+        // SQL query to display availabilities for a specific Contractor
         public Availabilities(int? contractorID)
         {
             _db = new SQLHelper();

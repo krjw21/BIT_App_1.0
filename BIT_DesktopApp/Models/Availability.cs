@@ -7,22 +7,19 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BIT_DesktopApp.Logs;
 using static BIT_DesktopApp.Logs.LogHelper;
 
 namespace BIT_DesktopApp.Models
 {
     public class Availability : INotifyPropertyChanged
     {
-        public static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-
         private int? _contractorID;
         private string _dayName;
         private string _startTime;
         private string _finishTime;
         private string _shiftType;
         private SQLHelper _db;
-
+        public static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
         {
@@ -119,6 +116,8 @@ namespace BIT_DesktopApp.Models
             _db = new SQLHelper();
         }
 
+
+        // SQL query to update a Contractor's availability
         public string UpdateAvailability()
         {
             string sql = "UPDATE Contractor_Availability SET Start_Time = @StartTime, Finish_Time = @FinishTime WHERE Day_Name = @DayName AND Contractor_ID = @ContractorID";

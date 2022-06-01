@@ -10,6 +10,7 @@ namespace BIT_DesktopApp.Models
 {
     public class JobStates : List<JobState>
     {
+        // SQL query to display job statuses in combobox
         public JobStates()
         {
             SQLHelper db = new SQLHelper();

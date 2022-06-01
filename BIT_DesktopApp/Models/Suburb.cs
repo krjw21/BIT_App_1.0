@@ -15,7 +15,6 @@ namespace BIT_DesktopApp.Models
         private string _postcode;
         private string _region;
         private SQLHelper _db;
-
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
         {

@@ -7,6 +7,7 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BIT_DesktopApp.Logs.LogHelper;
 
 namespace BIT_DesktopApp.Models
 {
@@ -25,7 +26,7 @@ namespace BIT_DesktopApp.Models
         private string _postcode;
         private string _password;
         private SQLHelper _db;
-
+        public static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
         {
@@ -144,8 +145,6 @@ namespace BIT_DesktopApp.Models
                 OnPropertyChanged("Password");
             }
         }
-
-
         public string Error { get { return null; } }
         public string this[string propertyName]
         {
@@ -245,6 +244,8 @@ namespace BIT_DesktopApp.Models
         {
             this.Password = "test";
         }
+
+        // SQL query to insert a new Contractor record
         public string InsertContractor()
         {
             GeneratePassword();
@@ -276,10 +277,18 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: New Contractor: \"{FirstName} {LastName}\" was inserted successfully.");
+                logger.Info($"SUCCESS: New Contractor: \"{FirstName} {LastName}\" was inserted successfully.");
+
                 return $"New Contractor: \"{FirstName} {LastName}\" was registered successfully.";
             }
+            Log(LogTarget.File, $"FAILURE: New Contractor: \"{FirstName} {LastName}\" insertion was unsuccessful.");
+            logger.Debug($"FAILURE: New Contractor: \"{FirstName} {LastName}\" insertion was unsuccessful.");
+
             return "Registration was not successful, please try again.";
         }
+
+        // SQL query to update an existing Contractor's details
         public string UpdateContractor()
         {
             string sql = "UPDATE Contractor SET First_Name = @FirstName, Last_Name = @LastName, DOB = @DOB, Email = @Email, Phone = @Phone, Street = @Street, Suburb = @Suburb, [State] = @State, Postcode = @Postcode WHERE Contractor_ID = @ContractorID";
@@ -309,10 +318,18 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: Updated details for Contractor: \"{FirstName} {LastName}\".");
+                logger.Info($"SUCCESS: Updated details for Contractor: \"{FirstName} {LastName}\".");
+
                 return $"Details were updated successfully for the Contractor: \"{FirstName} {LastName}\".";
             }
+            Log(LogTarget.File, $"FAILURE: Update details for Contractor: \"{FirstName} {LastName}\" unsuccessful.");
+            logger.Debug($"FAILURE: Update details for Contractor: \"{FirstName} {LastName}\" unsuccessful.");
+
             return "Update of the Contractor's details was not successful. Please try again.";
         }
+
+        // SQL query to deactivate an existing Contractor's record
         public string DeleteContractor()
         {
             string sql = "UPDATE Contractor SET [Status] = 0 WHERE Contractor_ID = @ContractorID";
@@ -323,10 +340,18 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: Contractor: \"{FirstName} {LastName}\" record deactivated.");
+                logger.Info($"SUCCESS: Contractor: \"{FirstName} {LastName}\" record deactivated.");
+
                 return $"Record has been deactivated for the Contractor: \"{FirstName} {LastName}\". Please contact an Administrator to revert or reinstate this record.";
             }
+            Log(LogTarget.File, $"FAILURE: Contractor: \"{FirstName} {LastName}\" record deactivation unsuccessful.");
+            logger.Debug($"FAILURE: Contractor: \"{FirstName} {LastName}\" record deactivation unsuccessful.");
+
             return "Contractor deactivation was unsuccessful. Please try again.";
         }
+
+        // SQL query to add a suburb preference for a specific Contractor
         public string AddSuburb(string suburb, string postcode)
         {
             string sql = "INSERT INTO Contractor_Suburb(Contractor_ID, Suburb_Name, Postcode) VALUES(@ContractorID, @Suburb, @Postcode)";
@@ -341,10 +366,18 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: New Suburb preference: \"{suburb}\" was added for Contractor: \"{FirstName} {LastName}\".");
+                logger.Info($"SUCCESS: New Suburb preference: \"{suburb}\" was added for Contractor: \"{FirstName} {LastName}\".");
+
                 return $"New Suburb preference: \"{suburb}\" was added for the Contractor: \"{FirstName} {LastName}\".";
             }
+            Log(LogTarget.File, $"FAILURE: New Suburb preference: \"{suburb}\" for Contractor: \"{FirstName} {LastName}\" unsuccessful.");
+            logger.Debug($"FAILURE: New Suburb preference: \"{suburb}\" for Contractor: \"{FirstName} {LastName}\" unsuccessful.");
+
             return "Suburb preference update was unsuccessful. Please try again.";
         }
+
+        // SQL query to rmove a suburb preference for a specific Contractor
         public string RemoveSuburb(string suburb, string postcode)
         {
             string sql = "DELETE FROM Contractor_Suburb WHERE Contractor_ID = @ContractorID AND Suburb_Name = @Suburb AND Postcode = @Postcode";
@@ -359,8 +392,14 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: Suburb preference: \"{suburb}\" for Contractor: \"{FirstName} {LastName}\" was deactivated.");
+                logger.Info($"SUCCESS: Suburb preference: \"{suburb}\" for Contractor: \"{FirstName} {LastName}\" was deactivated.");
+
                 return $"Suburb preference: \"{suburb}\" was removed for the Contractor: \"{FirstName} {LastName}\".";
             }
+            Log(LogTarget.File, $"FAILURE: Suburb preference: \"{suburb}\" deactivation for Contractor: \"{FirstName} {LastName}\" unsuccessful.");
+            logger.Debug($"FAILURE: Suburb preference: \"{suburb}\" deactivation for Contractor: \"{FirstName} {LastName}\" unsuccessful.");
+
             return "Suburb preference removal was unsuccessful. Please try again.";
         }
     }

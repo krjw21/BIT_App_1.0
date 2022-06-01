@@ -7,6 +7,7 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BIT_DesktopApp.Logs.LogHelper;
 
 namespace BIT_DesktopApp.Models
 {
@@ -24,7 +25,7 @@ namespace BIT_DesktopApp.Models
         private string _postcode;
         private string _password;
         private SQLHelper _db;
-
+        public static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
         {
@@ -130,8 +131,6 @@ namespace BIT_DesktopApp.Models
                 OnPropertyChanged("Password");
             }
         }
-
-
         public string Error { get { return null; } }
         public string this[string propertyName]
         {
@@ -230,6 +229,8 @@ namespace BIT_DesktopApp.Models
         {
             this.Password = "test";
         }
+
+        // SQL query to insert a new Coordinator record
         public string InsertCoordinator()
         {
             GeneratePassword();
@@ -261,10 +262,18 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: New Co-ordinator: \"{FirstName} {LastName}\" inserted successfully.");
+                logger.Info($"SUCCESS: New Co-ordinator: \"{FirstName} {LastName}\" inserted successfully.");
+
                 return $"New Co-ordinator: \"{FirstName} {LastName}\" was registered successfully.";
             }
+            Log(LogTarget.File, $"FAILURE: New Co-ordinator: \"{FirstName} {LastName}\" insertion unsuccessful.");
+            logger.Debug($"FAILURE: New Co-ordinator: \"{FirstName} {LastName}\" insertion unsuccessful.");
+
             return "Registration was not successful, please try again.";
         }
+
+        // SQL query to update an existing Coordinator's details
         public string UpdateCoordinator()
         {
             string sql = "UPDATE Coordinator SET First_Name = @FirstName, Last_Name = @LastName, DOB = @DOB, Email = @Email, Phone = @Phone, Street = @Street, Suburb = @Suburb, [State] = @State, Postcode = @Postcode WHERE Coordinator_ID = @CoordinatorID";
@@ -294,10 +303,18 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: Updated details for Co-ordinator: \"{FirstName} {LastName}\".");
+                logger.Info($"SUCCESS: Updated details for Co-ordinator: \"{FirstName} {LastName}\".");
+
                 return $"Details were updated successfully for the Co-ordinator: \"{FirstName} {LastName}\".";
             }
+            Log(LogTarget.File, $"FAILURE: Update details for Co-ordinator: \"{FirstName} {LastName}\" unsuccessful.");
+            logger.Debug($"FAILURE: Update details for Co-ordinator: \"{FirstName} {LastName}\" unsuccessful.");
+
             return "Update of the Co-ordinator's details was not successful. Please try again.";
         }
+
+        // SQL query to deactivate an existing Coordinator's record
         public string DeleteCoordinator()
         {
             string sql = "UPDATE Coordinator SET [Status] = 0 WHERE Coordinator_ID = @CoordinatorID";
@@ -308,8 +325,14 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: Co-ordinator: \"{FirstName} {LastName}\" record deactivated.");
+                logger.Info($"SUCCESS: Co-ordinator: \"{FirstName} {LastName}\" record deactivated.");
+
                 return $"Record has been deactivated for the Co-ordinator: \"{FirstName} {LastName}\". Please contact an Administrator to revert or reinstate this record.";
             }
+            Log(LogTarget.File, $"FAILURE: Co-ordinator: \"{FirstName} {LastName}\" record deactivation unsuccessful.");
+            logger.Debug($"FAILURE: Co-ordinator: \"{FirstName} {LastName}\" record deactivation unsuccessful.");
+
             return "Co-ordinator deactivation was unsuccessful. Please try again.";
         }
     }

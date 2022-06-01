@@ -20,6 +20,8 @@
                                 <asp:GridView ID="gvBookings"
                                     CssClass="table table-striped table-bordered"
                                     runat="server" HeaderStyle-HorizontalAlign="Center" RowStyle-HorizontalAlign="Center">
+                                    <EmptyDataRowStyle HorizontalAlign="Center" Font-Size="14" />
+                                    <EmptyDataTemplate>There are currently no active jobs.</EmptyDataTemplate>
                                 </asp:GridView>
                             </div>
                         </div>

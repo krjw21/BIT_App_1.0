@@ -20,7 +20,7 @@
                 <RowDefinition Height="0.9*"/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <Label FontSize="22" Margin="14,7,7,7">Client Management</Label>
+            <Label FontSize="22" Margin="14,7,7,7" FontFamily="Goudy Old Style">Client Management</Label>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <ComboBox x:Name="cmbSearchClient" Width="105" Margin="12,14,0,12" SelectedValue="{Binding SearchFilter}" SelectedValuePath="Content" VerticalContentAlignment="Center">
                     <ComboBoxItem Content="ID"/>

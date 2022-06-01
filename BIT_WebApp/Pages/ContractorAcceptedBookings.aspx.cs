@@ -44,6 +44,7 @@ namespace BIT_WebApp.Pages
             int rowIndex = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = gvBookings.Rows[rowIndex];
 
+            // marking a Service Request's job status as "Completed"
             if (e.CommandName == "Complete")
             {
                 bool success1 = int.TryParse(((TextBox)row.FindControl("txtHoursWorked")).Text.Trim(), out int hours);
@@ -51,10 +52,11 @@ namespace BIT_WebApp.Pages
                 if (success1 && success2)
                 {
                     currentContractor.CompleteBooking(Convert.ToInt32(row.Cells[3].Text), hours, distance);
+                    Response.Write($"<script>alert('Service Request ID: \"{row.Cells[3].Text}\" has been marked as completed with {hours}hr(s) worked and {distance}km(s) travlled.')</script>");
                 }
                 else
                 {
-                    Response.Write("<script>alert('Hours and KMs must have only numbers entered.')</script>");
+                    Response.Write("<script>alert('Only number values are accepted in the Hours and KMs fields.')</script>");
                 }
             }
 

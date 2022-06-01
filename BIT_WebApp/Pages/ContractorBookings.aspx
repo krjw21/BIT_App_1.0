@@ -20,15 +20,17 @@
                                 <asp:GridView ID="gvBookings"
                                     CssClass="table table-striped table-bordered"
                                     runat="server" OnRowCommand="gvBookings_RowCommand" HeaderStyle-HorizontalAlign="Center" RowStyle-HorizontalAlign="Center">
+                                    <EmptyDataRowStyle HorizontalAlign="Center" Font-Size="14" />
+                                    <EmptyDataTemplate>There are currently no assigned jobs.</EmptyDataTemplate>
                                     <Columns>
                                         <asp:TemplateField HeaderText="Accept">
                                             <ItemTemplate>
-                                                <asp:Button ID="btnAccept" runat="server" Height="30px" Width="70px" Text="Accept" CommandName="Accept" CommandArgument="<% #Container.DataItemIndex %>" />
+                                                <asp:Button ID="btnAccept" runat="server" Height="30px" Width="70px" Text="Accept" CommandName="Accept" CommandArgument="<% #Container.DataItemIndex %>" OnClientClick="return confirm('Are you sure you want to accept this job?');"/>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Reject">
                                             <ItemTemplate>
-                                                <asp:Button ID="btnReject" runat="server" Height="30px" Width="70px" Text="Reject" CommandName="Reject" CommandArgument="<% #Container.DataItemIndex %>" />
+                                                <asp:Button ID="btnReject" runat="server" Height="30px" Width="70px" Text="Reject" CommandName="Reject" CommandArgument="<% #Container.DataItemIndex %>" OnClientClick="return confirm('Are you sure you want to reject this job?');"/>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>

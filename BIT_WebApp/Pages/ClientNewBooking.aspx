@@ -129,7 +129,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <asp:Button ID="btnNewServiceRequest" CssClass="btn btn-success btn-block btn-lg" runat="server" Text="Request" OnClick="btnNewServiceRequest_Click" />
+                                        <asp:Button ID="btnNewServiceRequest" CssClass="btn btn-success btn-block btn-lg" runat="server" Text="Request" OnClientClick="return confirm('Are you sure you want to request a new booking?');" OnClick="btnNewServiceRequest_Click"/>
                                     </div>
                                 </div>
                             </div>

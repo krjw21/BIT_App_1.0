@@ -13,7 +13,7 @@ namespace BIT_DesktopApp.Models
     {
         private SQLHelper _db;
 
-
+        // SQL query to display suburb preferences for a specific Contractor
         public Suburbs(int? contractorID)
         {
             _db = new SQLHelper();

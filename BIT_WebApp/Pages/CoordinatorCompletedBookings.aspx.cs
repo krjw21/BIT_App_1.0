@@ -44,9 +44,11 @@ namespace BIT_WebApp.Pages
             int rowIndex = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = gvBookings.Rows[rowIndex];
 
+            // mark a Service Request's payment status as "Pending"
             if (e.CommandName == "Approve")
             {
                 currentCoordinator.ApproveBooking(Convert.ToInt32(row.Cells[1].Text));
+                Response.Write($"<script>alert('Service Request ID: \"{row.Cells[1].Text}\" has been approved for payment.')</script>");
             }
 
             gvBookings.DataSource = currentCoordinator.CompletedBookings().DefaultView;

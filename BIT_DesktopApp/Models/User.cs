@@ -22,7 +22,8 @@ namespace BIT_DesktopApp.Models
             _db = new SQLHelper();
         }
 
-        public int CheckUser() // Method to check user (Coordinator/Administrator) login details
+        // Method/SQL query to check user (Coordinator/Administrator) login details
+        public int CheckUser()
         {
             string sql = "SELECT Coordinator_ID, First_Name, Last_Name FROM Coordinator WHERE Email = @Email AND [Password] = @Password";
             SqlParameter[] objParameters = new SqlParameter[2];

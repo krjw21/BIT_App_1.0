@@ -44,13 +44,17 @@ namespace BIT_WebApp.Pages
             int rowIndex = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = gvBookings.Rows[rowIndex];
 
+            // marking a Service Request's job status as "Accepted"
             if (e.CommandName == "Accept")
             {
                 currentContractor.AcceptBooking(Convert.ToInt32(row.Cells[2].Text));
+                Response.Write($"<script>alert('Service Request ID: \"{row.Cells[2].Text}\" has been accepted.')</script>");
             }
+            // marking a Service Request's job status as "Rejected"
             else if (e.CommandName == "Reject")
             {
                 currentContractor.RejectBooking(Convert.ToInt32(row.Cells[2].Text));
+                Response.Write($"<script>alert('Service Request ID: \"{row.Cells[2].Text}\" has been rejected.')</script>");
             }
 
             gvBookings.DataSource = currentContractor.AssignedBookings().DefaultView;

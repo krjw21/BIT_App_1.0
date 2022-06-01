@@ -29,8 +29,8 @@ namespace BIT_WebApp.BLL
             _db = new SQLHelper();
         }
 
-
-        public DataTable UnassignedBookings() // SQL query to select all unassigned and rejected service requests
+        // SQL query to display all "Unassigned" and "Rejected" Service Requests
+        public DataTable UnassignedBookings() 
         {
             string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, c.Phone, sr.Skill_Category AS Category, sr.Priority, sr.Job_Status AS [Job Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address " +
                 "FROM Service_Request AS sr " +
@@ -39,7 +39,9 @@ namespace BIT_WebApp.BLL
             DataTable serviceRequests = _db.ExecuteSQL(sql);
             return serviceRequests;
         }
-        public DataTable CompletedBookings() // SQL query to select all completed service requests to approve for payment
+
+        // SQL query to display all "Completed" Service Requests
+        public DataTable CompletedBookings() 
         {
             string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, ct.First_Name + ' ' + ct.Last_Name AS Contractor, c.Phone, sr.Skill_Category AS Category, sr.Job_Status AS [Job Status], sr.Payment_Status AS [Payment Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], CONVERT(NVARCHAR, sr.Date_Completed, 103) AS [Date Completed], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address, sr.Hours_Worked AS Hours, sr.Distance_Travelled AS KMs " +
                 "FROM Service_Request AS sr " +
@@ -51,7 +53,9 @@ namespace BIT_WebApp.BLL
             DataTable serviceRequests = _db.ExecuteSQL(sql);
             return serviceRequests;
         }
-        public DataTable AllBookings() // SQL query to select all service requests
+
+        // SQL query to display all Service Requests
+        public DataTable AllBookings() 
         {
             string sql = "SELECT sr.Service_Request_ID AS ID, c.Business_Name AS Business, c.First_Name + ' ' + c.Last_Name AS Contact, cd.First_Name + ' ' + cd.Last_Name AS Coordinator, ct.First_Name + ' ' + ct.Last_Name AS Contractor, c.Phone, sr.Skill_Category AS Category, sr.Job_Status AS [Job Status], sr.Payment_Status AS [Payment Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], CONVERT(NVARCHAR, sr.Date_Completed, 103) AS [Date Completed], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address, sr.Hours_Worked AS Hours, sr.Distance_Travelled AS KMs " +
                 "FROM Service_Request AS sr " +
@@ -61,7 +65,9 @@ namespace BIT_WebApp.BLL
             DataTable serviceRequests = _db.ExecuteSQL(sql);
             return serviceRequests;
         }
-        public int ApproveBooking(int serviceRequestID) // SQL query to approve a service request for payment
+
+        // SQL query to approve a Service Request and set it's payment status as "Pending"
+        public int ApproveBooking(int serviceRequestID) 
         {
             int returnValue = 0;
             string sql = "UPDATE Service_Request SET Payment_Status = 'Pending' WHERE Service_Request_ID = @ServiceRequestID";
@@ -72,6 +78,7 @@ namespace BIT_WebApp.BLL
             return returnValue;
         }
 
+        // SQL query to assign a Contractor to a specific Service Request
         public int AssignBooking(int serviceRequestID, int coordinatorID, string contractorFName, string contractorLName)
         {
             int returnValue = 0;

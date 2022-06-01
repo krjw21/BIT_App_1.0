@@ -45,23 +45,37 @@ namespace BIT_WebApp.Pages
             currentCoordinator.CoordinatorID = Convert.ToInt32(Session["CoordinatorID"].ToString());
             int rowIndex = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = gvBookings.Rows[rowIndex];
+            int serviceRequestID = Convert.ToInt32(row.Cells[3].Text);
             DropDownList ddlContractors = (DropDownList)row.FindControl("ddlContractors");
 
+            // marking a Service Request's job status as "Assigned"
             if (e.CommandName == "Assign")
             {
-                // TODO message boxes to notify user
-                string[] contractorName = ddlContractors.SelectedValue.Split(' ');
-                currentCoordinator.AssignBooking(Convert.ToInt32(row.Cells[3].Text), currentCoordinator.CoordinatorID, contractorName[0], contractorName[1]);
+                if (ddlContractors.SelectedValue == "" || ddlContractors.SelectedValue == "- Select -")
+                {
+                    Response.Write("<script>alert('You must select a Contractor before assigning.')</script>");
+                }
+                else if (ddlContractors.SelectedValue == "None available.")
+                {
+                    Response.Write("<script>alert('There are no Contractors available for this job. Please contact the Client to organise an alternative session.')</script>");
+                }
+                else
+                {
+                    string[] contractorName = ddlContractors.SelectedValue.Split(' ');
+                    currentCoordinator.AssignBooking(serviceRequestID, currentCoordinator.CoordinatorID, contractorName[0], contractorName[1]);
+                    Response.Write($"<script>alert('Contractor: \"{ddlContractors.SelectedValue}\" has been assigned to this Service Request.')</script>");
+                }
                 gvBookings.DataSource = currentCoordinator.UnassignedBookings().DefaultView;
                 gvBookings.DataBind();
             }
+            // fill dropdownlist with list of available Contractors
             else if (e.CommandName == "Find")
             {
                 Contractor availableContractors = new Contractor();
                 string skill = row.Cells[7].Text;
                 string suburb = row.Cells[11].Text.ToString().Split(',')[1].Trim();
                 DateTime date = Convert.ToDateTime(row.Cells[10].Text);
-                ddlContractors.DataSource = availableContractors.AvailableContractors(skill, suburb, date);
+                ddlContractors.DataSource = availableContractors.AvailableContractors(serviceRequestID, skill, suburb, date);
                 ddlContractors.DataBind();
                 if(ddlContractors.Items.Count == 0)
                 {

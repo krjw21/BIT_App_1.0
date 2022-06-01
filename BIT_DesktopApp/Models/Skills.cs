@@ -11,6 +11,7 @@ namespace BIT_DesktopApp.Models
 {
     public class Skills : List<Skill>
     {
+        // SQL query to display ALL skill categories
         public Skills()
         {
             SQLHelper db = new SQLHelper();
@@ -22,6 +23,8 @@ namespace BIT_DesktopApp.Models
                 this.Add(skill);
             }
         }
+
+        // SQL query to display skills for a specific Contractor
         public Skills(int? contractorID)
         {
             SQLHelper db = new SQLHelper();

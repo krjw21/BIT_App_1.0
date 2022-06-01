@@ -13,6 +13,8 @@ namespace BIT_DesktopApp.Models
     {
         private SQLHelper _db;
 
+
+        // SQL query to display Service Requests in "History" tab
         public ServiceRequests()
         {
             _db = new SQLHelper();
@@ -31,7 +33,9 @@ namespace BIT_DesktopApp.Models
             }
         }
 
-        public ServiceRequests(string jobStatus) // query for retrieving list of "Completed" Service Requests with a Payment Status of "Unpaid" or "Declined".
+
+        // SQL query to display Service Requests in "Completed" tab with a job status of "Completed" and payment status of "Unpaid/Declined"
+        public ServiceRequests(string jobStatus)
         {
             _db = new SQLHelper();
             string sql = "SELECT sr.Service_Request_ID, sr.Client_ID, c.Business_Name, sr.Contractor_ID, sr.Coordinator_ID, ct.First_Name + ' ' + ct.Last_Name AS FullName, c.Business_Name, c.First_Name, c.Last_Name, sr.Skill_Category, prs.Priority, js.Job_Status, ps.Payment_Status, sr.Date_Created, sr.Date_Completed, sr.Street, sr.Suburb, sr.[State], sr.Postcode, sr.Hours_Worked, sr.Distance_Travelled " +
@@ -54,6 +58,11 @@ namespace BIT_DesktopApp.Models
             }
         }
 
+
+        // 1. searchToggle == true
+        // SQL query to display Service Requests with a job status of "Requested/Rejected" OR "Assigned/Accepted"
+        // 2. seachToggle == false
+        // SQL query to display Service Requests in "History" tab with added search filter
         public ServiceRequests(string jobStatusOrSearchText, string jobStatusOrSearchFilter, bool searchToggle)
         {
             if (searchToggle == true)
@@ -117,6 +126,8 @@ namespace BIT_DesktopApp.Models
             }
         }
 
+
+        // SQL query to display Service Requests in "Completed" tab with added search filter
         public ServiceRequests(string jobStatus, string searchText, string searchFilter)
         {
             _db = new SQLHelper();
@@ -159,6 +170,8 @@ namespace BIT_DesktopApp.Models
             }
         }
 
+
+        // SQL query to display Service Requests in "Requested/Rejected" OR "Assigned/Accepted" tabs with added search filter
         public ServiceRequests(string jobStatus1, string jobStatus2, string searchText, string searchFilter)
         {
             _db = new SQLHelper();

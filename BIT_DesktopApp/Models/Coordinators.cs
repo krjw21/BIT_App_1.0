@@ -12,6 +12,7 @@ namespace BIT_DesktopApp.Models
     {
         private SQLHelper _db;
 
+        // SQL query to display ALL Coordinators
         public Coordinators()
         {
             _db = new SQLHelper();
@@ -25,7 +26,7 @@ namespace BIT_DesktopApp.Models
             }
         }
 
-        // SQL query for filter results using the search bar
+        // SQL query to display Coordinators with added search filter
         public Coordinators(string searchText, string searchFilter)
         {
             _db = new SQLHelper();

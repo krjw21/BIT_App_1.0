@@ -22,7 +22,7 @@ namespace BIT_WebApp.DAL
             _connection = ConfigurationManager.ConnectionStrings[conn].ConnectionString;
         }
 
-
+        // For SELECT statements and queries
         public DataTable ExecuteSQL(string sql, SqlParameter[] parameters = null, bool storedProcedure = false)
         {
             DataTable dataTable = new DataTable();
@@ -69,6 +69,8 @@ namespace BIT_WebApp.DAL
                 objCommand.Parameters.Add(parameters[i]);
             }
         }
+
+        // For UPDATE, INSERT, DELETE statements and queries
         public int ExecuteNonQuery(string sql, SqlParameter[] parameters = null, bool storedProcedure = false)
         {
             int returnValue = -1;

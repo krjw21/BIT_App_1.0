@@ -12,6 +12,7 @@ namespace BIT_DesktopApp.Models
     {
         private SQLHelper _db;
 
+        // SQL query to display ALL Clients
         public Clients()
         {
             _db = new SQLHelper();
@@ -24,6 +25,8 @@ namespace BIT_DesktopApp.Models
                 this.Add(newClient);
             }
         }
+
+        // SQL query to display Clients with added search filter
         public Clients(string searchText, string searchFilter)
         {
             _db = new SQLHelper();

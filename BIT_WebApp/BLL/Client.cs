@@ -30,8 +30,8 @@ namespace BIT_WebApp.BLL
             _db = new SQLHelper();
         }
 
-
-        public DataTable AllBookings() // SQL query to select all active service requests for a client
+        // SQL query to select all active Service Requests for a Client
+        public DataTable AllBookings() 
         {
             string sql = "SELECT sr.Service_Request_ID AS ID, ct.First_Name + ' ' + ct.Last_Name AS Contractor, cd.First_Name + ' ' + cd.Last_Name AS Coordinator, sr.Skill_Category AS Category, sr.Priority, sr.Job_Status AS [Job Status], sr.Payment_Status AS [Payment Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address " +
                 "FROM Service_Request AS sr " +
@@ -45,7 +45,9 @@ namespace BIT_WebApp.BLL
             DataTable bookings = _db.ExecuteSQL(sql, objParameters);
             return bookings;
         }
-        public DataTable CompletedBookings() // SQL query to select service requests marked as "Completed" for a client
+
+        // SQL query to select Service Requests marked as "Completed" for a Client
+        public DataTable CompletedBookings() 
         {
             string sql = "SELECT sr.Service_Request_ID AS ID, ct.First_Name + ' ' + ct.Last_Name AS Contractor, cd.First_Name + ' ' + cd.Last_Name AS Coordinator, sr.Skill_Category AS Category, sr.Priority, sr.Job_Status AS [Job Status], sr.Payment_Status AS [Payment Status], CONVERT(NVARCHAR, sr.Date_Created, 103) AS [Date Created], CONVERT(NVARCHAR, sr.Date_Completed, 103) AS [Date Completed], sr.Street + ', ' + sr.Suburb + ', ' + sr.State + ' ' + sr.Postcode AS Address " +
                 "FROM Service_Request AS sr " +

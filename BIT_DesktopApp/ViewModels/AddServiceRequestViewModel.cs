@@ -11,14 +11,18 @@ namespace BIT_DesktopApp.ViewModels
 {
     public class AddServiceRequestViewModel
     {
-        private ObservableCollection<Client> _clients;
-        private ObservableCollection<PriorityState> _priorityStates;
-        private ObservableCollection<Skill> _skills;
-        private ServiceRequest _newServiceRequest;
-        private RelayCommand _addCommand;
         private string _coordinatorName;
+        public string CoordinatorName
+        {
+            get { return _coordinatorName; }
+            set
+            {
+                _coordinatorName = value;
+            }
+        }
 
 
+        private ObservableCollection<Client> _clients;
         public ObservableCollection<Client> Clients
         {
             get { return _clients; }
@@ -27,6 +31,7 @@ namespace BIT_DesktopApp.ViewModels
                 _clients = value;
             }
         }
+        private ObservableCollection<PriorityState> _priorityStates;
         public ObservableCollection<PriorityState> PriorityStates
         {
             get { return _priorityStates; }
@@ -35,6 +40,7 @@ namespace BIT_DesktopApp.ViewModels
                 _priorityStates = value;
             }
         }
+        private ObservableCollection<Skill> _skills;
         public ObservableCollection<Skill> Skills
         {
             get { return _skills; }
@@ -43,11 +49,18 @@ namespace BIT_DesktopApp.ViewModels
                 _skills = value;
             }
         }
+
+
+        private ServiceRequest _newServiceRequest;
         public ServiceRequest NewServiceRequest
         {
             get { return _newServiceRequest; }
             set { _newServiceRequest = value; }
         }
+
+
+        // command for adding a new Service Request
+        private RelayCommand _addCommand;
         public RelayCommand AddCommand
         {
             get
@@ -60,16 +73,6 @@ namespace BIT_DesktopApp.ViewModels
             }
             set { _addCommand = value; }
         }
-        public string CoordinatorName
-        {
-            get { return _coordinatorName; }
-            set
-            {
-                _coordinatorName = value;
-            }
-        }
-
-
         public void AddServiceRequestMethod()
         {
             try

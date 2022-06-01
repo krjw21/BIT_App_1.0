@@ -7,6 +7,7 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BIT_DesktopApp.Logs.LogHelper;
 
 namespace BIT_DesktopApp.Models
 {
@@ -32,7 +33,7 @@ namespace BIT_DesktopApp.Models
         private int? hoursWorked;
         private int? distanceTravelled;
         private SQLHelper _db;
-
+        public static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
         {
@@ -206,8 +207,6 @@ namespace BIT_DesktopApp.Models
                 OnPropertyChanged("DistanceTravelled");
             }
         }
-
-
         public string Error { get { return null; } }
         public string this[string propertyName]
         {
@@ -351,6 +350,7 @@ namespace BIT_DesktopApp.Models
         }
 
         
+        // SQL query to insert a new Service Request record
         public string InsertServiceRequest()
         {
             string sql = "INSERT INTO Service_Request(Client_ID, Coordinator_ID, Skill_Category, [Priority], Job_Status, Payment_Status, Date_Created, Street, Suburb, [State], Postcode) VALUES((SELECT Client_ID FROM Client WHERE Business_Name = @BusinessName), @CoordinatorID, @SkillCategory, @Priority, 'Requested', 'Unpaid', @DateCreated, @Street, @Suburb, @State, @Postcode)";
@@ -377,10 +377,18 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: New Service Request for Client: \"{BusinessName}\" was requested successfully.");
+                logger.Info($"SUCCESS: New Service Request for Client: \"{BusinessName}\" was requested successfully.");
+
                 return $"New Service Request for the Client: \"{BusinessName}\" was requested successfully.";
             }
+            Log(LogTarget.File, $"FAILURE: New Service Request for Client: \"{BusinessName}\" was unsuccessful.");
+            logger.Debug($"FAILURE: New Service Request for Client: \"{BusinessName}\" was unsuccessful.");
+
             return "New Service Request was not successful, please try again.";
         }
+
+        // SQL query to update an existing Service Request's details
         public string UpdateServiceRequest()
         {
             string sql = "UPDATE Service_Request " +
@@ -431,8 +439,14 @@ namespace BIT_DesktopApp.Models
             int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
             if (rowsAffected >= 1)
             {
+                Log(LogTarget.File, $"SUCCESS: Updated details for Service Request ID: \"{ServiceRequestID}\".");
+                logger.Info($"SUCCESS: Updated details for Service Request ID: \"{ServiceRequestID}\".");
+
                 return $"Details were updated successfully for Service Request ID: \"{ServiceRequestID}\".";
             }
+            Log(LogTarget.File, $"FAILURE: Update details for Service Request ID: \"{ServiceRequestID}\" unsuccessful.");
+            logger.Debug($"FAILURE: Update details for Service Request ID: \"{ServiceRequestID}\" unsuccessful.");
+
             return "Update of the Service Request's details was not successful, please try again.";
         }
     }

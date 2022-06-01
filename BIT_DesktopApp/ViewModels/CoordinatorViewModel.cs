@@ -12,15 +12,6 @@ namespace BIT_DesktopApp.ViewModels
 {
     public class CoordinatorViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Coordinator> _coordinators;
-        private Coordinator _selectedCoordinator;
-        private RelayCommand _updateCoordinator;
-        private RelayCommand _deleteCommand;
-        private bool _enableUpdate;
-        private bool _enableFields;
-        private bool _enableButtons;
-        private bool _enableAdd;
-
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string prop)
         {
@@ -30,6 +21,8 @@ namespace BIT_DesktopApp.ViewModels
             }
         }
 
+
+        private ObservableCollection<Coordinator> _coordinators;
         public ObservableCollection<Coordinator> Coordinators
         {
             get { return _coordinators; }
@@ -39,6 +32,9 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("Coordinators");
             }
         }
+
+
+        private Coordinator _selectedCoordinator;
         public Coordinator SelectedCoordinator
         {
             get { return _selectedCoordinator; }
@@ -51,6 +47,10 @@ namespace BIT_DesktopApp.ViewModels
                 EnableUpdate = false;
             }
         }
+
+
+        // command for editing a Coordinator
+        private RelayCommand _updateCoordinator;
         public RelayCommand UpdateCoordinator
         {
             get
@@ -63,6 +63,24 @@ namespace BIT_DesktopApp.ViewModels
             }
             set { _updateCoordinator = value; }
         }
+        public void UpdateCoordinatorMethod()
+        {
+            try
+            {
+                string message = SelectedCoordinator.UpdateCoordinator();
+                MessageBox.Show(message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"There was a problem with updating Co-ordinator: \"{SelectedCoordinator.FirstName} {SelectedCoordinator.LastName}\". Please try again or contact an Administrator.");
+            }
+            RefreshGrid();
+            EnableButtons = false;
+        }
+
+
+        // command for deleting (deactivating) a Coordinator
+        private RelayCommand _deleteCommand;
         public RelayCommand DeleteCommand
         {
             get
@@ -75,6 +93,33 @@ namespace BIT_DesktopApp.ViewModels
             }
             set { _deleteCommand = value; }
         }
+        public void DeleteCoordinatorMethod()
+        {
+            MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete this Co-ordinator: \"{SelectedCoordinator.FirstName} {SelectedCoordinator.LastName}\"?", "Delete Confirmation", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    try
+                    {
+                        string message = SelectedCoordinator.DeleteCoordinator();
+                        MessageBox.Show(message);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show($"There was a problem with deleting this Co-ordinator: \"{SelectedCoordinator.FirstName} {SelectedCoordinator.LastName}\". Please try again or contact an Administrator.");
+                    }
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+            RefreshGrid();
+        }
+
+
+        private bool _enableUpdate;
+        private bool _enableFields;
+        private bool _enableButtons;
+        private bool _enableAdd;
         public bool EnableUpdate
         {
             get { return _enableUpdate; }
@@ -139,6 +184,7 @@ namespace BIT_DesktopApp.ViewModels
         }
 
 
+        // search filter functionality
         private string _searchText;
         private string _searchFilter;
         private RelayCommand _searchCommand;
@@ -185,47 +231,13 @@ namespace BIT_DesktopApp.ViewModels
             }
         }
 
+
         public void RefreshGrid()
         {
             Coordinators allCoordinators = new Coordinators();
             this.Coordinators = new ObservableCollection<Coordinator>(allCoordinators);
         }
-        public void UpdateCoordinatorMethod()
-        {
-            try
-            {
-                string message = SelectedCoordinator.UpdateCoordinator();
-                MessageBox.Show(message);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show($"There was a problem with updating Co-ordinator: \"{SelectedCoordinator.FirstName} {SelectedCoordinator.LastName}\". Please try again or contact an Administrator.");
-            }
-            RefreshGrid();
-            EnableButtons = false;
-        }
-        public void DeleteCoordinatorMethod()
-        {
-            MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete this Co-ordinator: \"{SelectedCoordinator.FirstName} {SelectedCoordinator.LastName}\"?", "Delete Confirmation", MessageBoxButton.YesNo);
-            switch (result)
-            {
-                case MessageBoxResult.Yes:
-                    try
-                    {
-                        string message = SelectedCoordinator.DeleteCoordinator();
-                        MessageBox.Show(message);
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show($"There was a problem with deleting this Co-ordinator: \"{SelectedCoordinator.FirstName} {SelectedCoordinator.LastName}\". Please try again or contact an Administrator.");
-                    }
-                    break;
-                case MessageBoxResult.No:
-                    break;
-            }
-            RefreshGrid();
-        }
-
+        
 
         public CoordinatorViewModel()
         {

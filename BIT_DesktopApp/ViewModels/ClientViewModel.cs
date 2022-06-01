@@ -49,6 +49,7 @@ namespace BIT_DesktopApp.ViewModels
         }
 
 
+        // command for editing a Client
         private bool _enableUpdate;
         private RelayCommand _updateClient;
         public bool EnableUpdate
@@ -114,6 +115,7 @@ namespace BIT_DesktopApp.ViewModels
         }
 
 
+        // command for deleting (deactivating) a Client
         private RelayCommand _deleteCommand;
         public RelayCommand DeleteCommand
         {
@@ -183,6 +185,7 @@ namespace BIT_DesktopApp.ViewModels
         }
 
 
+        // search filter functionality
         private string _searchText;
         private string _searchFilter;
         private RelayCommand _searchCommand;

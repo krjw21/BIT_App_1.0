@@ -11,14 +11,15 @@ namespace BIT_DesktopApp.ViewModels
     public class AddContractorViewModel
     {
         private Contractor _newContractor;
-        private RelayCommand _addCommand;
-
-
         public Contractor NewContractor
         {
             get { return _newContractor; }
             set { _newContractor = value; }
         }
+
+
+        // command for adding a new Contractor
+        private RelayCommand _addCommand;
         public RelayCommand AddCommand
         {
             get
@@ -31,9 +32,6 @@ namespace BIT_DesktopApp.ViewModels
             }
             set { _addCommand = value; }
         }
-
-
-
         public void AddContractorMethod()
         {
             try

@@ -20,6 +20,8 @@
                                 <asp:GridView ID="gvBookings"
                                     CssClass="table table-striped table-bordered"
                                     runat="server" OnRowCommand="gvBookings_RowCommand" HeaderStyle-HorizontalAlign="Center" RowStyle-HorizontalAlign="Center">
+                                    <EmptyDataRowStyle HorizontalAlign="Center" Font-Size="14" />
+                                    <EmptyDataTemplate>There are currently no accepted jobs.</EmptyDataTemplate>
                                     <Columns>
                                         <asp:TemplateField HeaderText="Hours">
                                             <ItemTemplate>
@@ -33,7 +35,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Action">
                                             <ItemTemplate>
-                                                <asp:Button ID="btnComplete" runat="server" Height="30px" Width="90px" Text="Complete" CommandName="Complete" CommandArgument="<% #Container.DataItemIndex %>" />
+                                                <asp:Button ID="btnComplete" runat="server" Height="30px" Width="90px" Text="Complete" CommandName="Complete" CommandArgument="<% #Container.DataItemIndex %>" OnClientClick="return confirm('Are you sure you want to mark this job as completed?');"/>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>

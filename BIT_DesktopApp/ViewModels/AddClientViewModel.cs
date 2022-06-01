@@ -11,14 +11,15 @@ namespace BIT_DesktopApp.ViewModels
     public class AddClientViewModel
     {
         private Client _newClient;
-        private RelayCommand _addCommand;
-
-
         public Client NewClient
         {
             get { return _newClient; }
             set { _newClient = value; }
         }
+
+
+        // command for adding a new Client
+        private RelayCommand _addCommand;
         public RelayCommand AddCommand
         {
             get
@@ -31,8 +32,6 @@ namespace BIT_DesktopApp.ViewModels
             }
             set { _addCommand = value; }
         }
-
-
         public void AddClientMethod()
         {
             try

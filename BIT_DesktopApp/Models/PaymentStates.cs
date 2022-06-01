@@ -10,6 +10,7 @@ namespace BIT_DesktopApp.Models
 {
     public class PaymentStates : List<PaymentState>
     {
+        // SQL query to display payment statuses in combobox
         public PaymentStates()
         {
             SQLHelper db = new SQLHelper();

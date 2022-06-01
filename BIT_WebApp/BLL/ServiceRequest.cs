@@ -33,7 +33,7 @@ namespace BIT_WebApp.BLL
             _db = new SQLHelper();
         }
 
-
+        // SQL query to insert a new Service Request record
         public int InsertBooking()
         {
             int returnValue = 0;
