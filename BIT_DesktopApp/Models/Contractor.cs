@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -222,6 +222,13 @@ namespace BIT_DesktopApp.Models
         public Contractor()
         {
             _db = new SQLHelper();
+        }
+        public Contractor(bool createHelper = true)
+        {
+            if (createHelper)
+            {
+                _db = new SQLHelper();
+            }
         }
         public Contractor(DataRow dr)
         {

@@ -674,5 +674,13 @@ namespace BIT_DesktopApp.ViewModels
             Skills allSkills = new Skills();
             this.AllSkills = new ObservableCollection<Skill>(allSkills);
         }
+
+
+        // Unit/Integration Test Method
+        public virtual ObservableCollection<Contractor> GetContractors()
+        {
+            Contractors allContractors = new Contractors();
+            return new ObservableCollection<Contractor>(allContractors);
+        }
     }
 }

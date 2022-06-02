@@ -13,10 +13,10 @@ namespace BIT_TestProject
     // 3 test cases - Contractor
     // 3 test cases - Client
     // 3 test cases - Job
+
     [TestClass]
     public class ClientTests
     {
-
         // Unit Testing: Testing a part of a code that can be represented as a unit and cannot be decomposed further
         // Integrated Testing: Where you integrate one more layer of your application and test the two layers together
         // End-to-End Testing: Overall system testing and user acceptance testing

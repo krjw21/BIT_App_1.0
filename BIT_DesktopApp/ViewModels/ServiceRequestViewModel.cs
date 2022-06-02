@@ -335,5 +335,13 @@ namespace BIT_DesktopApp.ViewModels
             Skills skills = new Skills();
             this.Skills = new ObservableCollection<Skill>(skills);
         }
+
+
+        // Unit/Integration Test Method
+        public virtual ObservableCollection<ServiceRequest> GetServiceRequests()
+        {
+            ServiceRequests allServiceRequests = new ServiceRequests();
+            return new ObservableCollection<ServiceRequest>(allServiceRequests);
+        }
     }
 }
