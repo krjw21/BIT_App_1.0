@@ -306,12 +306,12 @@ namespace BIT_DesktopApp.ViewModels
             ServiceRequests completedServiceRequests = new ServiceRequests("Completed");
             this.CompletedServiceRequests = new ObservableCollection<ServiceRequest>(completedServiceRequests);
             int completedCount = CompletedServiceRequests.Count;
-            CompletedTabHeader = $"Completed *{completedCount}";
+            CompletedTabHeader = $"Completed *{completedCount}*";
 
             ServiceRequests unassignedServiceRequests = new ServiceRequests("Requested", "Rejected", true);
             this.UnassignedServiceRequests = new ObservableCollection<ServiceRequest>(unassignedServiceRequests);
             int unassignedCount = UnassignedServiceRequests.Count;
-            UnassignedTabHeader = $"Requested/Rejected *{unassignedCount}";
+            UnassignedTabHeader = $"Requested/Rejected *{unassignedCount}*";
 
             ServiceRequests assignedServiceRequests = new ServiceRequests("Assigned", "Accepted", true);
             this.AssignedServiceRequests = new ObservableCollection<ServiceRequest>(assignedServiceRequests);

@@ -29,7 +29,7 @@ namespace BIT_DesktopApp
         {
             User user = new User();
             User.Email = txtEmail.Text;
-            User.Password = txtPassword.Text;
+            User.Password = txtPassword.Password;
 
             int userID;
             if (User.Email == "administrator@email.com")

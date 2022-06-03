@@ -20,30 +20,32 @@
         <Label Content="Inspire &amp; Innovate" HorizontalAlignment="Center" Margin="0,100" FontSize="16" FontFamily="Goudy Old Style" Foreground="#98878F"></Label>
         <Border Grid.Column="1" Background="#040315" Margin="75,200,75,50" CornerRadius="10">
             <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1.5*"/>
-                        <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="0.6*"/>
-                        <RowDefinition Height="0.6*"/>
-                        <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Image Source="\Images\login_icon.png" Width="100" VerticalAlignment="Top" Margin="0,20,0,0"/>
-                    <Label Content="Login" Grid.Row="1" HorizontalAlignment="Center" FontSize="22" FontWeight="Normal" FontFamily="Goudy Old Style"></Label>
-                    <TextBox x:Name="txtEmail" Grid.Row="2" Margin="20,10" Text="Email" VerticalContentAlignment="Center" GotFocus="txtEmail_GotFocus" ></TextBox>
-                    <TextBox x:Name="txtPassword" Grid.Row="3" Margin="20,10" Text="Password" VerticalContentAlignment="Center" GotFocus="txtPassword_GotFocus"></TextBox>
-                    <StackPanel Grid.Row="4" Orientation="Horizontal">
-                        <CheckBox Margin="20,5"></CheckBox>
-                        <Label Content="Remember Me" Margin="-20,0,0,0"></Label>
-                    </StackPanel>
-                    <Button x:Name="btnLogin" Grid.Row="5" Margin="100,25" Content="Login" Click="btnLogin_Click">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="5"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                </Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image Source="\Images\login_icon.png" Width="100" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                <Label Content="Login" Grid.Row="1" HorizontalAlignment="Center" FontSize="22" FontWeight="Normal" FontFamily="Goudy Old Style"></Label>
+                <Label Content="Username:" Grid.Row="2" Margin="15,-10,10,10"></Label>
+                <TextBox x:Name="txtEmail" Grid.Row="2" Margin="20,12" VerticalContentAlignment="Center" GotFocus="txtEmail_GotFocus" ></TextBox>
+                <Label Content="Password:" Grid.Row="3" Margin="15,-10,10,10"></Label>
+                <PasswordBox x:Name="txtPassword" Grid.Row="3" Margin="20,12" PasswordChar="*" VerticalContentAlignment="Center" GotFocus="txtPassword_GotFocus"></PasswordBox>
+                <StackPanel Grid.Row="4" Orientation="Horizontal">
+                    <CheckBox Margin="20,5"></CheckBox>
+                    <Label Content="Remember Me" Margin="-20,0,0,0"></Label>
+                </StackPanel>
+                <Button x:Name="btnLogin" Grid.Row="5" Margin="100,25" Content="Login" Click="btnLogin_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
         </Border>
     </Grid>
 </Window>
