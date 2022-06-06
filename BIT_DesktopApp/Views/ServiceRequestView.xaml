@@ -144,11 +144,11 @@
             </Grid.ColumnDefinitions>
             <!-- First Two Columns data -->
             <Label Content="Request ID:" Grid.Row="0" Grid.Column="0" Margin="0,2" HorizontalAlignment="Right"/>
-            <TextBox x:Name="txtServiceRequestID" Text="{Binding SelectedServiceRequest.ServiceRequestID}" Grid.Row="0" Grid.Column="1" Margin="5,5,200,5" IsEnabled="False"/>
-            <Label Content="Business Name:" Grid.Row="1" Grid.Column="0" Margin="0,2" HorizontalAlignment="Right"/>
-            <TextBox x:Name="txtBusinessName" Text="{Binding SelectedServiceRequest.BusinessName}" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="False"/>
+            <TextBox x:Name="txtServiceRequestID" Text="{Binding SelectedServiceRequest.ServiceRequestID}" Grid.Row="0" Grid.Column="1" Margin="5,5,230,5" VerticalContentAlignment="Center" IsEnabled="False"/>
+            <Label Content="Business Name:" Grid.Row="1" Grid.Column="0" Margin="0,2" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="txtBusinessName" Text="{Binding SelectedServiceRequest.BusinessName}" Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" IsEnabled="False"/>
             <Label Content="Contact Name:" Grid.Row="2" Grid.Column="0" Margin="0,2" HorizontalAlignment="Right"/>
-            <TextBox x:Name="txtContactName" Text="{Binding SelectedServiceRequest.ContactName}" Grid.Row="2" Grid.Column="1" Margin="5" IsEnabled="False"/>
+            <TextBox x:Name="txtContactName" Text="{Binding SelectedServiceRequest.ContactName}" Grid.Row="2" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" IsEnabled="False"/>
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -157,22 +157,22 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Date Created:" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                <DatePicker x:Name="dpDateCreated" SelectedDate="{Binding SelectedServiceRequest.DateCreated}" Grid.Column="1" Margin="5,2,0,2" IsEnabled="{Binding EnableFields}"/>
+                <DatePicker x:Name="dpDateCreated" SelectedDate="{Binding SelectedServiceRequest.DateCreated}" Grid.Column="1" Margin="5,2,0,2" VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
                 <Label Content="Date Completed:" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                <DatePicker x:Name="dpDateCompleted" SelectedDate="{Binding SelectedServiceRequest.DateCompleted}" Grid.Column="3" Margin="5,2,0,2" IsEnabled="{Binding EnableFields}"/>
+                <DatePicker x:Name="dpDateCompleted" SelectedDate="{Binding SelectedServiceRequest.DateCompleted}" Grid.Column="3" Margin="5,2,0,2" VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
             </Grid>
             <Label Content="Job Status:" Grid.Row="4" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-            <ComboBox x:Name="cmbJobStatus" ItemsSource="{Binding JobStates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="JobStatus" Text="{Binding SelectedServiceRequest.JobStatus}" Grid.Row="4" Grid.Column="1" Margin="5,5,150,5" IsEnabled="{Binding EnableFields}"/>
+            <ComboBox x:Name="cmbJobStatus" ItemsSource="{Binding JobStates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="JobStatus" Text="{Binding SelectedServiceRequest.JobStatus}" Grid.Row="4" Grid.Column="1" Margin="5,5,170,5"  VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
             <Label Content="Payment Status:" Grid.Row="5" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-            <ComboBox x:Name="cmbPaymentStatus" ItemsSource="{Binding PaymentStates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="PaymentStatus" Text="{Binding SelectedServiceRequest.PaymentStatus}" Grid.Row="5" Grid.Column="1" Margin="5,5,150,5" IsEnabled="{Binding EnableFields}"/>
+            <ComboBox x:Name="cmbPaymentStatus" ItemsSource="{Binding PaymentStates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="PaymentStatus" Text="{Binding SelectedServiceRequest.PaymentStatus}" Grid.Row="5" Grid.Column="1" Margin="5,5,170,5" VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
             <Border Grid.Column="2" Grid.RowSpan="6" BorderBrush="#B8A5AE" BorderThickness="1,0,0,0" Margin="2"/>
             <!-- Last Two Columns data -->
             <Label Content="Assigned Contractor:" Grid.Row="0" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-            <ComboBox x:Name="cmbAssignedContractor" ItemsSource="{Binding AvailableContractors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" Text="{Binding SelectedServiceRequest.FullName}" Grid.Row="0" Grid.Column="3" Margin="5,5,50,5" IsEnabled="{Binding EnableFields}" IsEditable="True"/>
+            <ComboBox x:Name="cmbAssignedContractor" ItemsSource="{Binding AvailableContractors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" Text="{Binding SelectedServiceRequest.FullName}" Grid.Row="0" Grid.Column="3" Margin="5,5,100,5" IsEnabled="{Binding EnableFields}" VerticalContentAlignment="Center" IsEditable="True"/>
             <Label Content="Street:" Grid.Row="1" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-            <TextBox x:Name="txtStreet" Text="{Binding SelectedServiceRequest.Street}" Grid.Row="1" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
+            <TextBox x:Name="txtStreet" Text="{Binding SelectedServiceRequest.Street}" Grid.Row="1" Grid.Column="3" Margin="5" VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
             <Label Content="Suburb:" Grid.Row="2" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-            <TextBox x:Name="txtSuburb" Text="{Binding SelectedServiceRequest.Suburb}" Grid.Row="2" Grid.Column="3" Margin="5" IsEnabled="{Binding EnableFields}"/>
+            <TextBox x:Name="txtSuburb" Text="{Binding SelectedServiceRequest.Suburb}" Grid.Row="2" Grid.Column="3" Margin="5" VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
             <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.3*"/>
@@ -181,9 +181,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="State:" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                <TextBox x:Name="txtState" Text="{Binding SelectedServiceRequest.State}" Grid.Column="1" Margin="5,5,35,5" IsEnabled="{Binding EnableFields}"/>
+                <TextBox x:Name="txtState" Text="{Binding SelectedServiceRequest.State}" Grid.Column="1" Margin="5,5,50,5" VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
                 <Label Content="Postcode:" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                <TextBox x:Name="txtPostcode" Text="{Binding SelectedServiceRequest.Postcode}" Grid.Column="3" Margin="5,5,50,5" IsEnabled="{Binding EnableFields}"/>
+                <TextBox x:Name="txtPostcode" Text="{Binding SelectedServiceRequest.Postcode}" Grid.Column="3" Margin="5,5,60,5" VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
             </Grid>
             <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
@@ -193,9 +193,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Priority:" Grid.Column="0" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                <ComboBox x:Name="cmbPriority" ItemsSource="{Binding PriorityStates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Priority" Text="{Binding SelectedServiceRequest.Priority}" Grid.Column="1" Margin="5,5,20,5" IsEnabled="{Binding EnableFields}"/>
+                <ComboBox x:Name="cmbPriority" ItemsSource="{Binding PriorityStates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Priority" Text="{Binding SelectedServiceRequest.Priority}" Grid.Column="1" Margin="5,5,20,5" VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
                 <Label Content="Hours:" Grid.Column="2" Margin="2,2,0,2" HorizontalAlignment="Right"/>
-                <TextBox x:Name="txtHoursWorked" Text="{Binding SelectedServiceRequest.HoursWorked}" Grid.Column="3" Margin="5,5,60,5" IsEnabled="{Binding EnableFields}"/>
+                <TextBox x:Name="txtHoursWorked" Text="{Binding SelectedServiceRequest.HoursWorked}" Grid.Column="3" Margin="5,5,65,5" VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
             </Grid>
             <Grid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
@@ -205,9 +205,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Skill Category:" Grid.Column="0" Margin="47,2,0,2" HorizontalAlignment="Right" Width="77"/>
-                <ComboBox x:Name="cmbSkillCategory" ItemsSource="{Binding Skills, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="SkillCategory" Text="{Binding SelectedServiceRequest.SkillCategory}" Grid.Column="1" Margin="5,5,0,5" IsEnabled="{Binding EnableFields}"/>
+                <ComboBox x:Name="cmbSkillCategory" ItemsSource="{Binding Skills, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="SkillCategory" Text="{Binding SelectedServiceRequest.SkillCategory}" Grid.Column="1" Margin="5,5,0,5" VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
                 <Label Content="KMs:" Grid.Column="2" Margin="5,2,0,2" HorizontalAlignment="Right" Width="34"/>
-                <TextBox x:Name="txtDistanceTravelled" Text="{Binding SelectedServiceRequest.DistanceTravelled}" Grid.Column="3" Margin="5,5,60,5" IsEnabled="{Binding EnableFields}"/>
+                <TextBox x:Name="txtDistanceTravelled" Text="{Binding SelectedServiceRequest.DistanceTravelled}" Grid.Column="3" Margin="5,5,65,5" VerticalContentAlignment="Center" IsEnabled="{Binding EnableFields}"/>
             </Grid>
         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3">

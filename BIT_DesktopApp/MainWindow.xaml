@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BIT_DesktopApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1100" MinWidth="1100" MaxWidth="1100" MinHeight="600" MaxHeight="600" FontFamily="Calibri Light">
+        Title="MainWindow" Height="600" Width="1100" MinWidth="1100" MaxWidth="1100" MinHeight="600" MaxHeight="600" FontFamily="Calibri Light" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="MainWindowButton" TargetType="{x:Type Button}">
             <Setter Property="Foreground" Value="#B39EA8"/>
@@ -53,7 +53,7 @@
     <Window.Background>
         <ImageBrush ImageSource="\Images\gradient-background.png"></ImageBrush>
     </Window.Background>
-    <Grid>
+    <Grid Margin="0,5,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
@@ -83,7 +83,7 @@
         </Border>
         <Label Grid.Row="1" VerticalAlignment="Bottom" Foreground="#B39EA8" Margin="10,0,0,5" FontSize="14">BIT Pty Ltd. © 2022</Label>
         <Grid Grid.Row="0" Grid.Column="1">
-            <TextBlock x:Name="tbCompanyName" Text="BIT Field Support Services" TextAlignment="Center" Foreground="#B39EA8" FontSize="38" Margin="10" TextDecorations="{x:Null}" FontFamily="Goudy Old Style"/>
+            <TextBlock x:Name="tbCompanyName" Text="BIT Field Support Services" TextAlignment="Center" Foreground="#B39EA8" FontSize="36" Margin="10" TextDecorations="{x:Null}" FontFamily="Goudy Old Style"/>
             <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Right" Margin="20" Background="Transparent" BorderThickness="0,0,0,1" Foreground="#B8A5AE" FontFamily="Goudy Old Style" FontSize="18" Click="btnLogout_Click">
             </Button>
         </Grid>

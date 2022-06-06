@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BIT_DesktopApp"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="650" Width="450" FontFamily="Calibri Light">
+        Title="LoginWindow" Height="650" Width="400" MaxHeight="650" MaxWidth="400" FontFamily="Calibri Light" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Control.Foreground" Value="#B8A5AE"/>
@@ -18,7 +18,7 @@
         <Image Source="\Images\space_network.jpg" Width="900" Margin="15" />
         <Image Source="\Images\BIT_Logo_Extended_Transparent.png" Width="290" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,-73"/>
         <Label Content="Inspire &amp; Innovate" HorizontalAlignment="Center" Margin="0,100" FontSize="16" FontFamily="Goudy Old Style" Foreground="#98878F"></Label>
-        <Border Grid.Column="1" Background="#040315" Margin="75,200,75,50" CornerRadius="10">
+        <Border Grid.Column="1" Background="#040315" Margin="60,200,60,50" CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1.5*"/>
@@ -31,9 +31,9 @@
                 <Image Source="\Images\login_icon.png" Width="100" VerticalAlignment="Top" Margin="0,20,0,0"/>
                 <Label Content="Login" Grid.Row="1" HorizontalAlignment="Center" FontSize="22" FontWeight="Normal" FontFamily="Goudy Old Style"></Label>
                 <Label Content="Username:" Grid.Row="2" Margin="15,-10,10,10"></Label>
-                <TextBox x:Name="txtEmail" Grid.Row="2" Margin="20,12" VerticalContentAlignment="Center" GotFocus="txtEmail_GotFocus" ></TextBox>
+                <TextBox x:Name="txtEmail" Grid.Row="2" Margin="20,13" VerticalContentAlignment="Center" GotFocus="txtEmail_GotFocus" ></TextBox>
                 <Label Content="Password:" Grid.Row="3" Margin="15,-10,10,10"></Label>
-                <PasswordBox x:Name="txtPassword" Grid.Row="3" Margin="20,12" PasswordChar="*" VerticalContentAlignment="Center" GotFocus="txtPassword_GotFocus"></PasswordBox>
+                <PasswordBox x:Name="txtPassword" Grid.Row="3" Margin="20,13" PasswordChar="*" VerticalContentAlignment="Center" GotFocus="txtPassword_GotFocus"></PasswordBox>
                 <StackPanel Grid.Row="4" Orientation="Horizontal">
                     <CheckBox Margin="20,5"></CheckBox>
                     <Label Content="Remember Me" Margin="-20,0,0,0"></Label>

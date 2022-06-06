@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BIT_DesktopApp.Views"
         mc:Ignorable="d"
-        Title="AddClientView" Height="320" Width="700" FontFamily="Calibri Light">
+        Title="AddClientView" Height="320" Width="700" FontFamily="Calibri Light" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Control.Foreground" Value="#B8A5AE"/>
