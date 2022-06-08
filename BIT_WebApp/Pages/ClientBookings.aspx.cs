@@ -16,6 +16,8 @@ namespace BIT_WebApp.Pages
             {
                 if (Session["ClientID"] != null)
                 {
+                    txtLoginName.InnerText = $"Welcome back {Session["ClientName"]},";
+
                     LinkButton login = (LinkButton)Master.FindControl("lbtnLogin");
                     LinkButton newBooking = (LinkButton)Master.FindControl("lbtnNewBooking");
                     LinkButton completedBookings = (LinkButton)Master.FindControl("lbtnAllBookings");

@@ -12,7 +12,7 @@
                             <div class="row">
                                 <div class="col">
                                     <center>
-                                        <h3 class="login-labels">New Service Request Booking:</h3>
+                                        <h3 class="login-labels" style="font-family: 'Goudy Old Style'; font-size: 30px">New Service Request Booking:</h3>
                                     </center>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                                 <div class="col-8">
                                     <label class="login-labels">Booking Date:</label>
                                     <div class="form-group">
-                                        <asp:Calendar ID="calBookingDate" runat="server"></asp:Calendar>
+                                        <asp:Calendar ID="calBookingDate" runat="server" BackColor="#D0D2DB"></asp:Calendar>
                                     </div>
                                 </div>
                                 <div class="col-4">

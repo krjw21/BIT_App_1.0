@@ -29,16 +29,19 @@ namespace BIT_WebApp
             if (clientID > 0)
             {
                 Session.Add("ClientID", clientID);
+                Session.Add("ClientName", user.FullName);
                 Response.Redirect("ClientBookings.aspx");
             }
             else if (contractorID > 0)
             {
                 Session.Add("ContractorID", contractorID);
+                Session.Add("ContractorName", user.FullName);
                 Response.Redirect("ContractorBookings.aspx");
             }
             else if (coordinatorID > 0)
             {
                 Session.Add("CoordinatorID", coordinatorID);
+                Session.Add("CoordinatorName", user.FullName);
                 Response.Redirect("CoordinatorBookings.aspx");
             }
             else

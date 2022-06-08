@@ -37,6 +37,7 @@ namespace BIT_DesktopApp
         {
             InitializeComponent();
             contentFrame.Navigate(new DefaultView());
+            tbLoginName.Text = $"Welcome back, {User.Name}";
             if(User.Email != "administrator@email.com")
             {
                 btnCoordinator.Visibility = Visibility.Hidden;
@@ -78,9 +79,24 @@ namespace BIT_DesktopApp
             User.Email = String.Empty;
             User.Password = String.Empty;
 
-            this.Hide();
-            new LoginWindow().Show();
-            this.Close();
+            MessageBoxResult result = MessageBox.Show($"Are you sure you want to logout?", "Logout Confirmation", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    try
+                    {
+                        this.Hide();
+                        new LoginWindow().Show();
+                        this.Close();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show($"There was a problem with logging out. Please try again or contact an Administrator.");
+                    }
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
         }
     }
 }

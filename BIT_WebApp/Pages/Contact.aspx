@@ -10,7 +10,7 @@
                             <div class="row">
                                 <div class="col">
                                     <center>
-                                        <h3 class="login-labels">Enquiry Form:</h3>
+                                        <h3 class="login-labels" style="font-family: 'Goudy Old Style'; font-size: 32px">Enquiry Form:</h3>
                                     </center>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="col-6" id="contact">
-                    <div class="os-header">
+                    <div class="os-header" style="font-family: 'Goudy Old Style'; font-size: 30px">
                         Head Office
                     </div>
                     <div class="os-content">
