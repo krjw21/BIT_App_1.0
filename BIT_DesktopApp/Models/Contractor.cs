@@ -257,7 +257,7 @@ namespace BIT_DesktopApp.Models
         {
             GeneratePassword();
 
-            string sql = "INSERT INTO Contractor(First_Name, Last_Name, DOB, Email, Phone, Street, Suburb, [State], Postcode, Password, [Status]) VALUES(@FirstName, @LastName, @DOB, @Email, @Phone, @Street, @Suburb, @State, @Postcode, @Password, 1)";
+            string sqlContractor = "INSERT INTO Contractor(First_Name, Last_Name, DOB, Email, Phone, Street, Suburb, [State], Postcode, Password, [Status]) VALUES(@FirstName, @LastName, @DOB, @Email, @Phone, @Street, @Suburb, @State, @Postcode, @Password, 1)";
 
             SqlParameter[] objParameters = new SqlParameter[10];
             objParameters[0] = new SqlParameter("@FirstName", DbType.String);
@@ -281,7 +281,7 @@ namespace BIT_DesktopApp.Models
             objParameters[9] = new SqlParameter("@Password", DbType.String);
             objParameters[9].Value = this.Password;
 
-            int rowsAffected = _db.ExecuteNonQuery(sql, objParameters);
+            int rowsAffected = _db.ExecuteNonQuery(sqlContractor, objParameters);
             if (rowsAffected >= 1)
             {
                 Log(LogTarget.File, $"SUCCESS: New Contractor: \"{FirstName} {LastName}\" was inserted successfully.");

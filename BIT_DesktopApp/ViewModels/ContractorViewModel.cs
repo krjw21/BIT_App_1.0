@@ -98,7 +98,7 @@ namespace BIT_DesktopApp.ViewModels
                 OnPropertyChanged("SelectedContractor");
                 EnableButtons = true;
                 EnableSuburbRemove = false;
-                EnableSuburbUpdate = false;
+                //EnableSuburbUpdate = false;
                 EnableSuburbFields = false;
                 EnableFields = false;
                 EnableUpdate = false;

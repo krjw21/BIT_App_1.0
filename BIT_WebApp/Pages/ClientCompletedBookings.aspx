@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid" style="margin: 100px 0 100px 0; background-color: #040315">
         <center>
-            <div id="txtLoginName" runat="server" style="color: #B8A5AE; font-style:italic; font-size: 28px; font-weight: bold; margin-bottom: -5px; margin-top: -10px; font-family: 'Goudy Old Style'"></div>
+            <div id="txtLoginName" runat="server" style="color: #B8A5AE; font-style:italic; font-size: 28px; font-weight: bold; margin-bottom: -5px; font-family: 'Goudy Old Style'"></div>
             <div style="color: #B8A5AE; font-size: 26px; margin-bottom: 10px; font-family: 'Goudy Old Style'">Here are your completed bookings:</div>
         </center>
         <div class="row">
